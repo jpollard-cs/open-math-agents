@@ -68,7 +68,14 @@ extern "C" int check_holes(int base,int n,const int* ds,int count,const std::uin
         int period=d<0?120:d;
         std::vector<Mask> row(period);
         for(int r=0;r<period;r++)for(int j=0;j<base;j++){
-            bool hit=d<0?(j%24==r%24||j%40==r%40):j%d==r;
+            bool hit;
+            switch (d) {
+                case -1: hit = j%24==r%24 || j%40==r%40; break;
+                case -2: hit = j%8==r%8 && (j%3!=r%3 || j%5==r%5); break;
+                case -3: hit = j%8==r%8 && j%3!=r%3; break;
+                case -4: hit = j%40==r%40 && j%3!=r%3; break;
+                default: hit = j%d==r;
+            }
             if(hit)row[r].w[j/64]|=1ULL<<(j%64);
         }
         solver.rows.push_back(std::move(row));

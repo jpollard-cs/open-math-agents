@@ -87,3 +87,7 @@ python check_cap96.py
 lean Size28Second.lean
 lean Size31Upper.lean
 ```
+
+## Sizes 31 through 33
+
+The [new census and proof](minima-31-33.md) give $m(31)=96$ and $m(32)=m(33)=108$. There are precisely two minimizing 31-element sets. The note links the residue witnesses, Lean proofs of coverage and cardinality, and the exhaustive decision procedure for freely reassigned residues.
