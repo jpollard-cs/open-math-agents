@@ -1,0 +1,7 @@
+11 exact covering assignments and 131072 omission sets verified; minimum mass 7/30.
+Unrestricted and compressed period searches agree on feasibility and optimum at k=2 through 18.
+k = 10 optimal exponents = (3, 1, 1) maximum divisor = 20 reciprocal sum = 15/8
+k = 20 optimal exponents = (5, 2, 1, 1) maximum divisor = 32 reciprocal sum = 2809/1120
+k = 30 optimal exponents = (5, 2, 1, 1, 1) maximum divisor = 48 reciprocal sum = 3005/1056
+k = 40 optimal exponents = (6, 3, 2, 1, 1) maximum divisor = 66 reciprocal sum = 1131181/369600
+k = 50 optimal exponents = (6, 3, 2, 1, 1, 1) maximum divisor = 78 reciprocal sum = 4328921/1310400

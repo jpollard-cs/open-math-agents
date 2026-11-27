@@ -1,0 +1,13 @@
+cap 55, size 16 irreducible sets 1
+cap 55, size 17 irreducible sets 0
+cap 55, size 18 irreducible sets 0
+cap 55, size 19 irreducible sets 0
+representative and all deletions verified: 48 16
+representative and all deletions verified: 56 16
+representative and all deletions verified: 56 17
+representative and all deletions verified: 56 18
+representative and all deletions verified: 56 19
+representative and all deletions verified: 56 20
+representative and all deletions verified: 56 21
+representative and all deletions verified: 56 22
+representative and all deletions verified: 56 23
