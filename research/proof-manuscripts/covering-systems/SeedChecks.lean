@@ -43,7 +43,9 @@ theorem s5_deletions : deletionCheck 8 15 s5 = true := by native_decide
 
 /-- Maximum number of outstanding binary slots this job can pay for in one offset. -/
 def potential (needs : List Nat) (t w : Nat) : Nat :=
-  ((List.range t).map fun r =>
+  if t == needs.length then min w (needs.foldl max 0)
+  else if t == 1 then (needs.map (fun n => min n w)).foldl Nat.add 0
+  else ((List.range t).map fun r =>
     (needs.enum.map fun v => if v.1 % t == r then min v.2 w else 0).foldl Nat.add 0).foldl max 0
 
 /-- A branch can be discarded if the sum of individual best possible gains
