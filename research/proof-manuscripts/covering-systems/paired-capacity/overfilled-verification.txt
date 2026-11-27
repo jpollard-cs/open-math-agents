@@ -1,0 +1,9 @@
+left (2, 2) right values 3 rows (2, 2) maximum 2 profiles 441
+left (3, 2) right values 3 rows (2, 2) maximum 2 profiles 945
+left (2, 3) right values 3 rows (2, 2) maximum 2 profiles 945
+left (2, 2) right values 4 rows (2, 2) maximum 1 profiles 1296
+left (2, 2) right values 3 rows (1, 2) maximum 1 profiles 126
+left (2, 2) right values 3 rows (2, 1) maximum 1 profiles 126
+left (2, 2) right values 6 rows (4, 4) maximum 2 profiles 628849
+632728 distinct pairs of activation profiles checked; 126 tight profiles audited.
+30 distinct moduli, maximum 440 period 18480 least private count 4 and the right-prime projections of all packet rows audited.
