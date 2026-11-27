@@ -125,9 +125,9 @@ def checks():
             yes += 1
             direct += verify(cs, m, 100000)
     print(f"2..500: {yes} constructors, {direct} complete-period scans")
-    for h in (9, 27):
+    for h in (9, 25, 27):
         for q in range(5, h):
-            if factors(q) != {q: 1}:
+            if factors(q) != {q: 1} or (h == 25 and q in (5, 7)):
                 continue
             c, w = finite_bound(h, q)
             assert (c, w) == subset_bound(h, q)

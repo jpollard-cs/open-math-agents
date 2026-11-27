@@ -48,12 +48,17 @@ The minimum of the empty set is infinity. In a cover of LCM \(q^B V\) with \(q\n
 \]
 This minimum is an effective finite calculation. Replace \(V\) by its gcd with the LCM of all \(q\)-coprime integers at most \(h\). This retains \(h\) and every tested divisor of \(V\), and can only lower the cost.
 
-Here are nine cases of equality, valid for **every** \(b\ge1\). The minimum cardinality is \(1+b(q-1)+C\).
+Here are fourteen cases of equality, valid for **every** \(b\ge1\). The minimum cardinality is \(1+b(q-1)+C\).
 
 | \(h\) | \(q\) | minimizing \(V\) | \(C\) |
 |---:|---:|---:|---:|
 |9|5|18|5|
 |9|7|72|7|
+|25|11|300|12|
+|25|13|600|13|
+|25|17|8400|20|
+|25|19|25200|22|
+|25|23|61261200|60|
 |27|5|54|7|
 |27|7|54|7|
 |27|11|216|9|
@@ -106,7 +111,7 @@ Codex produced the argument and programs at Jordan Pollard's request. The genera
 
 The accompanying Lean file \(\texttt{SurvivingFiber.lean}\) checks the surviving-row inequality, the geometric budget for arbitrary depth, and the finite-set conclusion that any grid satisfying the written incidence bounds has an uncovered point. The CRT incidence bounds and Theorem 2 as a whole have written proofs. The Python checks also verify the small-divisor counts for auxiliary factors 6 and 8 through \(a=12\) and construct the equality witnesses through \(a=8,\ b=3\).
 
-The first construction with \(W=\operatorname{lcm}(h,1,\ldots,q-1)\) can use more classes than necessary. Section 3 gives a smaller candidate \(V\), but primes in its factorization may lack enough admissible earlier multipliers to support the construction. Section 5 resolves this obstruction at every power of 7 for \(h=25\). A next case with a definite gap is \(m=25\cdot11^b\). Theorem 1 gives existence, while Theorem 2 excludes defect three. The question is which larger auxiliary periods yield the exact minimum. The original extrema at a prescribed cardinality are a separate optimization.
+The first construction with \(W=\operatorname{lcm}(h,1,\ldots,q-1)\) can use more classes than necessary. Section 3 gives a smaller candidate \(V\), but primes in its factorization may lack enough admissible earlier multipliers to support the construction. The table and section 5 together determine the minimum for every \(h=25\), every largest prime \(q>5\), and every \(b\ge1\), with impossibility for \(q>25\). A remaining question is to recognize when the divisor-count lower bound is sharp without constructing a cover, and whether sharpness can change with \(b\) at fixed \(h,q\). The original extrema at a prescribed cardinality are a separate optimization.
 
 - [Formal Conjectures, Erdős #1189, especially part (ii)](https://google-deepmind.github.io/formal-conjectures/src/FormalConjectures/ErdosProblems/%C2%AB1189%C2%BB/)
 - [Z.-W. Sun, *On covering numbers*, Theorem 1.1, Lemma 2.1, and Theorem 1.4](https://arxiv.org/pdf/math/0601017)
