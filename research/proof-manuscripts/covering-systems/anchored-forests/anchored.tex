@@ -1,0 +1,122 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,amsmath,amssymb,amsthm,mathtools,microtype,hyperref}
+\usepackage[margin=1in]{geometry}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\DeclareMathOperator{\lcm}{lcm}
+\title{Single uncovered residues on prime trees and the four-fifths scale for irreducible covers}
+\author{Codex, at the request of Jordan Pollard\\\small AI-authored research manuscript for review}
+\date{27 November 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+For each sufficiently large exact size $k$ we construct an irreducible covering set whose largest modulus is smaller than the best grouped-digit placement by a constant times the four-fifths power of that grouped optimum. The sum of reciprocals can simultaneously approach the zero-defect optimum to any fixed additive accuracy. The construction routes a single uncovered tuple through a forest of prime coordinates. The order of the size surplus under a cap is sharp for these forests, even at arbitrary depth. Their reciprocal optimum agrees with the zero-defect optimum up to $o(1)$, with a sharp local penalty for the mass of excess-producing edges. The sharp unrestricted minimum largest modulus and unrestricted reciprocal coefficient remain open.
+\end{abstract}
+
+\section{Statements}
+A set of distinct integers greater than one is a covering set if one residue class per modulus can cover $\mathbb Z$. It is irreducible if every proper subset fails for \emph{all} residue assignments. Write $m(k)$ for the least largest modulus at size $k$. Write $m_g(k)$ for this minimum in the grouped class: after reserving the largest row, partition the prime-digit positions $(p,j)$ of the period into blocks $C$. A block takes at most $\prod_{(p,j)\in C}p-1$ rows, each divisible by $\lcm_{(p,j)\in C}p^j$. A full placement assigns every nonreserved row once. More generally $h(A)$ is the least number left unassigned, optimizing over these partitions. Write $R_0(k)$ for the maximum reciprocal sum at size $k$ when the period $L=\prod p^{e_p}$ attains the Zn\'am--Simpson lower bound $k=1+\sum e_p(p-1)$. Let $F(z)=\sum_{p\le z}(p-1)$ over primes, and use natural logarithms.
+\begin{theorem}\label{main}
+For every $\epsilon>0$ there is $c_\epsilon>0$ such that for every sufficiently large $k$ there is an irreducible $A$ of $k$ distinct moduli satisfying
+\[
+ \max A\le m_g(k)-c_\epsilon m_g(k)^{4/5},
+ \qquad \sum_{n\in A}1/n\ge R_0(k)-\epsilon.
+\]
+Every unrestricted minimizer at large $k$ has $h(A)\gg k^{4/5}/(\log k)^{1/5}$.
+\end{theorem}
+\noindent The preceding paired-prime construction gave a three-fourths-power saving against the zero-defect minimum, and an upper bound $F(\sqrt X)+O(X^{3/4}/\log X)$ for the number of placed rows under cap $X$, even in an incompletely placed irreducible set. Here the comparison is with the entire grouped class. We retain the actual prime sum since replacing it by a truncated logarithmic-integral expansion obscures the smaller powers.
+
+\section{A hole that can carry the whole period}
+Give every vertex $w$ of a finite rooted tree a different prime $p_w$ and a positive integer $a_w$, with $a_r=1$ at the root. Give every parent-to-child edge $e=(x,y)$ a positive integer $v_e$. Require $a_x+\sum_{e=(x,y)}v_e\le p_x$. Rows are initially indexed and may have repeated moduli. At $x$ put $p_x-a_x-\sum_{e=(x,y)}v_e$ rows of modulus $p_x$. At edge $e=(x,y)$ put
+\[
+                   t_e=(v_e+1)a_y-1
+\]
+rows of modulus $p_xp_y$. Finally add one distinguished row of modulus $\prod_w p_w$.
+\begin{lemma}\label{tree}
+The ordinary rows can leave exactly one tuple uncovered and always leave at least one. After deleting any ordinary row, every assignment leaves at least two tuples uncovered. Thus adding the distinguished full-period row gives an irreducible indexed cover. Its number of ordinary rows is
+\[
+          \sum_w(p_w-1)+\sum_{e=(x,y)}v_e(a_y-1).
+\]
+\end{lemma}
+\begin{proof}
+Identify residues with the product of prime coordinates by CRT. A digit at $x$ is feasible if some assignment of the subtree coordinates below it avoids all its ordinary rows, including those at $x$. This is an assertion about points of the grid for a fixed assignment of the row residues. Unaries each rule out at most one digit. If there are $m_y$ feasible digits at $y$, eliminating one value at $x$ through child $y$ costs $m_y$ edge rows, distinct for different eliminated values. By induction $m_y\ge a_y$, so at most $\lfloor t_e/a_y\rfloor=v_e$ values can be lost through that child. The choices in different subtrees are independent. Even after deletions at least $a_x$ feasible digits remain.
+
+We prove a second assertion inductively. If exactly $a_x$ digits are feasible and one of these has a unique completion below $x$, all ordinary rows of this subtree are present. Indeed all unary slots and all $v_e$ exclusions at each child must be used, without overlap. At the unique-completion digit each child has precisely one available completion. Leaving only one of its $m_y$ feasible digits there costs at least $m_y-1$ additional edge rows. Together these demands cost $(v_e+1)m_y-1\ge t_e$. Equality is forced, all $t_e$ rows are present, $m_y=a_y$, and the one surviving child digit has a unique completion in its own subtree. Induction proves the assertion. At a leaf the two statements follow from its unary rows. At the root they imply the necessity claims.
+
+For an assignment attaining the bounds, prescribe $a_x$ feasible digits, one marked, at every vertex. Use the unary rows at $x$ on distinct unwanted values and allocate all remaining unwanted values, in disjoint groups of $v_e$, to its children. For each of the $v_e$ values assigned to $y$, forbid all $a_y$ feasible child digits by pair rows. At the marked value of $x$, forbid all of them except the marked child digit. These instructions consume exactly $t_e$ rows. Induction verifies all the prescribed digits are feasible, each unwanted digit is eliminated and the marked digit has a unique completion. Counting the ordinary rows gives the displayed sum.
+\end{proof}
+
+In a sequence of substitutions, one can attach independent such trees in succession while retaining the full period. Suppose the old period is $L$, its distinguished row is $0\bmod L$ after translation, and all tree primes are new. Dress each repeated ordinary internal modulus $n$ with any divisor $d\mid L$, giving $dn$, with old condition $0\bmod d$ and the specified internal condition. Give the new distinguished row modulus $L\prod_w p_w$. All old holes are covered. Conversely any reassignment on a sublist has a hole of the old ordinary rows. Above every such hole the active new rows must cover the entire independent internal grid. Lemma~\ref{tree} forces every new row active, including the distinguished row. The latter forces all old holes into one class modulo $L$. Contracting that class and using old irreducibility proves that all old rows survive. This recovers the coprime substitution of the earlier papers; the retained singleton is critical here. The previous nonpunctured overfilled packets could not carry two right primes on one row.
+
+\section{Prime scales and exact sizes}
+Fix a large prime $z$, set $X_z=z(z+1)$, $P=z^{2/5}$ and $Q=z^{4/5}=P^2$. Let $0<\delta<1/4$ be fixed. Choose at least $c\delta P/\log z$ parent primes in $[P,(1+\delta)P]$. At each parent $p$ assign $W_p=\lfloor p/2\rfloor$ different child primes in $[Q,(1+\delta)Q]$. Use no child twice. The prime number theorem in each fixed relative interval allows this, by taking the absolute $c>0$ sufficiently small and choosing exactly $\lfloor 2c\delta P/\log z\rfloor$ parents, for example after decreasing $c$. The total number $J$ of children satisfies $J\asymp\delta Q/\log z$. If $\theta$ denotes the sum of reciprocals of all designated parent and child primes, then $\theta\ll\delta/\log z$ with an absolute implied constant for sufficiently large $z$ at each fixed $\delta$.
+
+Use stars with all $v_e=1$, and independently take $1\le a_q\le B=\lfloor Q/100\rfloor$ at each child. A star has $p-1-W_p$ parent unary rows, $q-a_q$ unary rows on $q$, $2a_q-1$ rows on $pq$ and its distinguished singleton. Relative to ordinary first positions the extra count is exactly $\sum_q(a_q-1)$.
+
+First prepare all nondesignated primes $r\le 4Q$ in increasing order, with all positions $r^j\le z+1$. For each position take $r-1$ side rows $r^j d$, with different $d$ dividing the preceding period on primes strictly smaller than $r$, and keep a distinguished full-period row. Use all available $d<r$, supplementing through $2r$ when needed. Before the first omitted prime all $d<r$ are available. Subsequently at most $2r\theta$ numbers through $2r$ use an omitted prime, and at most $2\pi(2r)$ have a prime factor at least $r$. All others divide the prepared period, since $2r\le8Q<z+1$ eventually. There are therefore at least $r-1$ choices uniformly. Every side modulus fits because $(z+1)8Q<X_z$ eventually. The one-digit covering refinement with repeated powers is the standard full-period step: for old period $L$ the ratio $r^jd/\gcd(r^jd,L)=r$ and the full-period continuation covers the last lift. Each side row is indispensable since all $r$ lifts must be covered.
+
+Next perform all star substitutions. For the parent and child unary groups choose distinct cofactors at most $3Q$, per group. For each edge group choose distinct cofactors at most $3B$. Among integers up to either bound $T$, at most $T\theta$ have any designated prime factor. Every other integer is an available divisor of the prepared period. Thus all supplies suffice. Unary moduli are $O(Q^2)=o(X_z)$, and pair moduli are at most $(1+\delta)^2PQ\cdot3B<X_z$. Within each group the moduli differ by cofactor. Different groups in the stars have different supports on the entire set of designated primes. Earlier ordinary rows have empty designated support.
+
+Install the higher positions of all designated primes up through $z+1$ using $r^j d$ for $d<r$. Only parents can have higher positions, and every missing higher designated power exceeds every parent, so all the required $d$ are already available. Their new prime-power valuations distinguish them from prior rows and from one another (within the parent band, $d<r$). All remaining first and higher positions, up to the last prime $z$, now use their usual $d<r$. At the last prime replace the previous distinguished row by the $z$ permanent moduli $zd$ with $d=1,\ldots,z-1,z+1$. Their cofactor lcm is the entire preceding period, as can be seen from the maximal prime powers through $z+1$. The missing integer $z$ is prime. Distinctness and arbitrary-reassignment irreducibility follow from the lifting proof in the companion paper. This step keeps the huge distinguished periods out of the final set.
+
+Put $L(z)=1+\sum_{r^j\le z+1}(r-1)$ over primes $r$ and $j\ge1$ (the first position of $z$ is included). At cap $X_z$ the construction realizes \emph{every} integer in
+\[
+               [L(z),\,L(z)+(B-1)J].
+\]
+In particular the upper endpoint is at least $F(z)+c_\delta z^{8/5}/\log z$. Also $L(z)=F(z)+O(z\log z)$, and the increments of $L(z)$ at successive large primes are $O(z\log z)$ by the same bound and the single new prime. Consecutive intervals overlap. For an arbitrary large cap $X$ take $z$ the largest prime with $X_z\le X$. The prime number theorem gives $z\sim\sqrt X$, and at most one prime between $z$ and $\sqrt X$ can be lost. Thus $F(z)=F(\sqrt X)+O(\sqrt X)$. The construction reaches all sufficiently large sizes through $F(\sqrt X)+c'_\delta X^{4/5}/\log X$. Smaller fixed admissible sizes fit for sufficiently large $X$.
+
+For reciprocal weight compare with $U_z=\sum_{r^j\le z+1} H_{r-1}/r^j$. The missing ideal cofactors $d<r$ at any nondesignated position during preparation cost at most $\theta(1+\log r)/r^j$, by summing first over designated prime divisors of $d$. Summing this over the positions costs $O(\theta\log z)$ because $\sum_{r\le z}(1+\log r)/(r-1)=O(\log z)$ over primes. Discarding the entire first-position contribution at the designated primes costs another $O(\theta\log z)$. All later ideal cofactors are present. The previous exact-size zero-defect estimate gives $R_0(k)=U_z+o(1)$ uniformly for $k\sim F(z)$: the two summation cutoffs are asymptotic, and the difference in first-position mass is $o(1)$ by partial summation, with an absolutely convergent higher-position tail. Taking $\delta$ sufficiently small gives the desired additive accuracy on every one of the displayed intervals.
+
+\section{A converse for forests}
+Consider disjoint trees on distinct prime vertices used as above, and ordinary digit positions for the remaining stage choices. Allow arbitrary dressings or refinements of the permanent tree rows with a single multiple of their respective support, provided the final moduli are distinct and within cap $X$. The counted class uses one permanent row per ordinary tree row and $r-1$ per other position, with one extra terminal row for the whole construction. All positions on a given prime are used at most once. Denote by $K_T(X)$ its greatest attainable size and by $A_T(X)$ the largest $K$ for which every size from $5$ through $K$ is attained. The class includes ordinary one-digit constructions for the small sizes.
+\begin{theorem}\label{cap}
+Both $K_T(X)-F(\sqrt X)$ and $A_T(X)-F(\sqrt X)$ have order $X^{4/5}/\log X$.
+\end{theorem}
+\begin{proof}
+The lower bound was just constructed (the earlier ordinary construction supplies all admissible small sizes). Every prime in the period of an irreducible set has at least $p$ multiples: after deleting those rows the others miss an entire $p$-fibre, and each deleted row meets at most one of its points when the top $p$-adic digit varies, using specifically the rows with maximal $p$-exponent. Thus $p\le\sqrt X$. For an ordinary highest position $p^j$ we likewise have $p\,p^j\le X$, and all higher positions together contribute $O(X^{2/3}\log X)$. Hence only the edge surplus in Lemma~\ref{tree} needs bounding. Write $p$ for the parent and $q$ for the child. Since there are $t_e$ distinct multiples of $pq$, the conditions include
+\[
+  \sum_{e:\,\mathrm{parent}=p}v_e\le p,\quad
+  a_q\le q,\quad
+  v_ea_q\le X/(pq).
+\]
+A child has only one incoming edge throughout the forest.
+
+For $p\le X^{1/5}$, $a_q\le\min(q,X/(pq))\le\sqrt{X/p}$. Summing $p\sqrt{X/p}$ over these parent primes gives $O(X^{4/5}/\log X)$. For parents $p\ge X^{21/100}$ sum first over children; since each has at most one such parent their total contribution is at most $X^{79/100}\sum_{q\le\sqrt X}1/q=o(X^{4/5}/\log X)$. For all intermediate parents use dyadic bins $p\asymp H$ and $q\asymp J'$. When $J'<X^{3/10}$ the contributions per bin are $O(H^2J')=O(X^{72/100})$, and when $J'>X^{48/100}$ they are $O(HX/J')=O(X^{73/100})$. Dyadic endpoint factors only change constants. In the middle range prime counts give the per-bin upper bound
+\[
+ \frac{C}{\log X}\min\{H^2J',\,HX/J',\,X/H\}.
+\]
+The first two terms come from summing $v_e$ at each parent and bounding $a_q$; the third sums at most one $v_ea_q$ for each child. At $J'=\sqrt{X/H}$ the common value of the first two terms is $(X/H)(H/X^{1/5})^{5/2}$. Moving the child scale by a factor two away from that scale decreases the smaller term by a factor of two. Summing the capped sequence costs at most $C(X/H)(1+\log^+(H/X^{1/5}))/\log X$. Dyadically summing in $H\ge X^{1/5}/2$ proves the claimed order.
+\end{proof}
+
+\section{Consequences for unrestricted minimizers}
+At cap $X=m_g(k)$ the grouped bound gives $k\le F(\sqrt X)+O(X^{3/4}/\log X)$. Set $Y=X-\eta X^{4/5}$. Brun--Titchmarsh on the interval $[\sqrt Y,\sqrt X]$ of length asymptotic to $\eta X^{3/10}/2$ gives $F(\sqrt X)-F(\sqrt Y)\ll\eta X^{4/5}/\log X$, with an absolute implied constant for sufficiently large $X$ at each fixed $\eta$. Choose $\eta$ sufficiently small for the accuracy $\epsilon$ above. The constructive cap intervals through $F(\sqrt Y)+c'_\delta Y^{4/5}/\log Y$ then include $k$. Any interval chosen to realize this large $k$ has $k\sim F(z)$, so it attains the reciprocal estimate as well. This proves the first statement of Theorem~\ref{main}.
+
+For the final statement take $z$ to be the first sufficiently large prime with $F(z)+c_\delta z^{8/5}/\log z\ge k$, using a constant strictly smaller than the constructive surplus constant. If $z'$ is its predecessor, then $z'/z\to1$ and $F(z)-F(z')=z-1$. Hence $k-F(z)\gg z^{8/5}/\log z$. In particular $k>L(z)$ and we can realize $k$ at cap $z(z+1)$. Any unrestricted minimizer has at most this cap; the arithmetic grouped placement upper bound therefore limits its placed rows to $F(z)+O(z^{3/2}/\log z)$. The number left over is $\gg z^{8/5}/\log z\asymp k^{4/5}/(\log k)^{1/5}$, where $k\sim F(z)\sim z^2/(2\log z)$. Reserving one row changes the bound by at most one. This completes the proof.
+
+\section{The reciprocal coefficient and the price of extra edges}
+There is a complementary restriction on the same forest construction. For each prime position of the ordinary core or forest write
+\[
+        \Phi=\sum_{(p,j)}\frac{H_{p-1}}{p^j}.
+\]
+For an edge $(p,q)$ call its rows excess-producing when $a_q\ge2$, and let $S_E$ denote the reciprocal sum of those actual distinct moduli. Let $n_*$ be the extra terminal row. In a terminal one-digit closure take the largest row among that digit's rows as the extra one.
+\begin{theorem}\label{weight}
+Throughout the forest model, $S+S_E/11\le\Phi+1/n_*$. The constant $1/11$ is sharp for the local first-position inequality on an actual dressed star. In the full-period constructions with the terminal convention just specified, $S+S_E/11\le R_0(k)+o(1)$ uniformly as $k\to\infty$. The supremum of $S$ there is $R_0(k)+o(1)$ at every sufficiently large exact size. Any sequence in this model with $S\ge R_0(k)-o(1)$ has $S_E=o(1)$.
+\end{theorem}
+\begin{proof}
+At a vertex $p$ put its unary rows and all outgoing edge rows with $a_q=1$ together. They are distinct multiples of $p$, and there are exactly $p-a_p-\sum_{q:a_q\ge2}v_{pq}$ of them. Thus the vertex's ideal first-position allowance $H_{p-1}/p$ exceeds their actual mass by at least
+\[
+  \frac{a_p-1+\sum_{q:a_q\ge2}v_{pq}}{p^2}.
+\]
+Every nonroot has a single incoming edge. For an excess-producing edge put $v=v_{pq}$, $a=a_q$, $m=v(a-1)$. The total allowance saved at its two ends is at least $v/p^2+(a-1)/q^2\ge2\sqrt m/(pq)$. The actual mass is at most $H_{(v+1)a-1}/(pq)$ by distinctness. Since $(v+1)a-1=m+v+(a-1)\le3m$, it is at most $(11/6)\sqrt m/(pq)$. Indeed $H_{3m}\le H_3\sqrt m$ by induction: its increment is at most $3/(3m+1)\le H_3/(\sqrt{m+1}+\sqrt m)$. The last bound follows from $3m+1\ge4\sqrt m$ and $3(\sqrt2+1)<4H_3$. So the saved allowance exceeds the actual row mass by at least one eleventh of that mass. The ordinary higher positions satisfy the ideal bound directly.
+
+For locally sharp examples let $p<q$ be consecutive odd primes with $p\to\infty$. Use a single edge with $a_p=1,v=1,a_q=2$. Dress the $p-2$ parent rows by $1,\ldots,p-2$, the $q-2$ child rows by $\{1,\ldots,q-1\}\setminus\{p\}$, and the three edge rows by $1,2,3$. For large $p$, $q<2p$, so these are external cofactors if the other primes and the required powers are installed first. The row moduli are distinct. The two vertex allowances lose $1/[p(p-1)]+1/(pq)$ before inserting the three rows of mass $H_3/(pq)$. As $q/p\to1$, the ratio of net loss to inserted mass tends to $1/11$.
+
+For the uniform asymptotic, the digit budget obeys $\sum_{(p,j)}(p-1)\le k-1$, by the edge count. The ratios $H_{p-1}/[p(p-1)]$ decrease with $p$ (use $H_p=H_{p-1}+1/p$). The fractional knapsack bound therefore maximizes first-position mass by selecting primes in order up to the last affordable one, plus at most the next term, which is $o(1)$. All higher-position contributions together are bounded by the convergent constant $\sum_p H_{p-1}/[p(p-1)]$. The exact-size zero-defect baseline attains this upper expression up to $o(1)$ by the earlier reciprocal estimate. The final full-period singleton grows with $k$; in a terminal digit closure the lcm of its rows contains the entire period, so its largest row also grows uniformly since $k$ distinct integers divide that period. This proves the upper bound. The earlier all-size ordinary digit construction in the class supplies the matching lower bound up to $o(1)$. Neither the local sharpness nor the class-level conclusion determines the unrestricted reciprocal coefficient.
+\end{proof}
+
+\paragraph{Verification.} The companion \texttt{ForestFibre.lean} proves the bottom-up compulsory-row invariant from arbitrary unary and pair labels for each node and arbitrary finite children. \texttt{forest\_check.py} independently enumerates residue patterns, runs exact-size arithmetic schedules, and verifies an explicit 29-modulus cover on a full period of 18,480. \texttt{Integer29.lean} independently proves coverage of every integer, the exact size and maximum, and failure of every deletion with arbitrary integer residues. All three new modules passed a separate kernel replay on Lean 4.33.1. The analytic estimates are written proofs.
+
+\paragraph{Sources and status.}
+The original question is Erd\H os--Graham, \href{https://www.erdosproblems.com/1189}{Erd\H os Problem 1189}. We use the distinct-modulus, arbitrary-reassignment definition. See R.~J. Simpson, \emph{Regular coverings of the integers by arithmetic progressions} (1985), Z.-W. Sun, \emph{On covering numbers} (2007), and E. \"Ozt\"urk, \href{https://www.researchgate.net/publication/413884122}{\emph{Irreducible covering systems: the largest modulus, the maximal reciprocal sum, and exact values for at most nineteen moduli}} (2026). The baseline estimates and grouped upper bound used here are from the earlier AI-authored \href{https://github.com/jpollard-cs/open-math-agents/blob/ab0f3109122c689eed2e0723f74ed8232d74318b/research/proof-manuscripts/covering-systems/paired-capacity/paired-cap.pdf}{paired-capacity manuscript} and its cited reciprocal paper. The prime number theorem, Chebyshev estimates and the Brun--Titchmarsh inequality are classical inputs. The asymptotic results here are written proofs. The verification notes in this directory specify exactly which finite and general lemmas were checked. Independent human review and priority confirmation are pending.
+\end{document}
