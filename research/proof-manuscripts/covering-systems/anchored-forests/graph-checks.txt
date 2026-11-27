@@ -1,0 +1,1 @@
+143 connected simple graph types through six vertices and 269 connected loopless multigraph types through four vertices at multiplicity at most three; every prediction matched

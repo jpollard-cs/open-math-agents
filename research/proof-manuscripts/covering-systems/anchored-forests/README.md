@@ -58,3 +58,7 @@ LEAN_PATH=. leanchecker -v PathSeparator BinaryProfiles DiamondGain
 [Cycle counts and independent sums](cycle-finite.txt) · [Interpolation checks](interpolation-checks.txt)
 
 The direct attempt to replace the chord with arbitrarily many internally disjoint paths fails. A unique continuation through a separating digit forces every endpoint pair differing in both coordinates to extend. The next unrestricted questions are the size of the full-period supremum, the loss on passing from arbitrary covers to full-period prefixes, and blocks that share multiple coordinates. The minimum for general k and the sharp unrestricted reciprocal coefficient remain open.
+
+[Classification for arbitrary binary residual graphs](binary-graphs.md) proves that with two residual digits at every prime and arbitrary parallel pair rows, every one-hole component has a theta core with at least one direct branch and optional pendant trees. The reciprocal gain stays bounded for all such graphs. The multigraph proof credits the related universal satisfiability theorem of Karve and Hirani.
+
+The independent exhaustive graph comparison covers 143 connected simple types and 269 connected multigraph types. Run `python binary_graph_check.py` from this directory. [Results](graph-checks.txt)
