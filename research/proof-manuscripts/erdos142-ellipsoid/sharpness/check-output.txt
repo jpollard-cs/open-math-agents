@@ -1,0 +1,4 @@
+inverse epsilon, half steps, weighted triples, grid symbols, certified second difference, certified oscillation
+800, 2, 4371, 2446, 3.98084375, 1.990421875
+1600, 4, 20489, 8816, 15.96146875, 7.980734375
+3200, 8, 88005, 33316, 63.92271875, 31.961359375
