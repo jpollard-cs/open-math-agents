@@ -1,0 +1,17 @@
+Lean (version 4.33.1, x86_64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)
+'Checked21.everyDeletion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Checked21.sizeAndMax' does not depend on any axioms
+'Checked21.modulusSet' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Checked21.validModuli' does not depend on any axioms
+'CofactorCost.belowTen' does not depend on any axioms
+'CofactorCost.attained' does not depend on any axioms
+replaying RectangleContraction
+replaying IrreducibleSubstitution
+replaying ResidueContraction
+replaying IntegerSubstitution
+replaying Chain
+replaying FinitePackets
+replaying IndexedDecisions
+replaying Checked21
+replaying ModulusSet21
+replaying CofactorCost

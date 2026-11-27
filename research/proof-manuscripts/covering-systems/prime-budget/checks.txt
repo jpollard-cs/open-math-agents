@@ -1,0 +1,15 @@
+94 cap/prime pairs independently optimized by complete cofactor-LCM enumeration
+p=11 T=12 K=28 Q=2520 M=132
+p=11 T=16 K=21 Q=240 M=176
+p=11 T=22 K=20 Q=120 M=220
+p=11 T=44 K=18 Q=72 M=396
+p=17 T=34 K=30 Q=1440 M=544
+p=31 T=62 K=52 Q=30240 M=1860
+p=61 T=122 K=104 Q=4324320 M=7320
+p=101 T=202 K=167 Q=2205403200 M=20200
+p=503 T=1006 K=845 Q=1115656021528558814304000 M=503000
+size 1000 prescribed prime 401 cap 999693 attained maximum 741449
+size 5000 prescribed prime 2003 cap 24999443 attained maximum 10097123
+size 10000 prescribed prime 4001 cap 99996993 attained maximum 43482868
+size 1000 simultaneous primes (281, 307) attained maximum 295027
+size 5000 simultaneous primes (1151, 1171, 1201) attained maximum 3511724

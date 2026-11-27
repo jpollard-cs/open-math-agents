@@ -1,0 +1,14 @@
+\newpage
+\head{6. Between the near-linear and quadratic caps}
+The argument gives a continuous range of sharp unrestricted extremal results for the period prime, including cases where it grows sublinearly in cardinality. For $1<\sigma<2$,
+\[
+ \max_{|A|=k,\;M\le k^\sigma} P
+      \sim \sqrt{(1-\log\sigma) k^\sigma}.
+\]
+All maxima here run over genuine irreducible sets. At the smaller cap $M\le\lambda k\log k$ with fixed $\lambda>1$, the corresponding maximum is asymptotic to $\sqrt{\lambda k\log k}$.
+
+For the power-cap upper bound set $X=k^\sigma$. If $p=P$ exceeds $\sqrt{\rho(\sigma)X}$ by a fixed factor, then $p\asymp\sqrt X$, since always $p^2\le M$. Choose a fixed $\alpha>\rho(\sigma)$ strictly below $p^2/X$ on this subsequence, and enlarge the cofactor cap to $\lceil p/\alpha\rceil$. In (3) the resulting $\beta$ is greater than $1/\sigma$, so $k\ge K(p,T)\ge p^{2\beta-o(1)}$ is impossible. Here $\rho(\sigma)=1-\log\sigma$.
+
+For the lower bound fix $0<t<\sqrt{\rho(\sigma)}$, take a prime $p\sim t\sqrt X$ and $T=\lfloor X/p\rfloor$. Choose $\beta'<1/\sigma$ so that $\rho(1/\beta')>t^2$. Use precisely the base period $Q_0$ on page 4, with cutoff $y=T^{\beta'}$. Its cost is $o(k)$ and at least $p$ divisors survive through $T$. The old primes are $o(p)$. For padding to exact size use optional digits at old primes $q\le\sqrt T$ and all new primes $q>y$. This omits at most the one interval $(\sqrt T,y]$. If the interval is present, the available preceding costs sum to $(1+o(1))T/\log T$, which exceeds $2y$. Hence the first cost beyond the gap is at most one plus this sum. Subsequent costs obey the same completeness induction as on page 5. If the interval is absent there is no gap. All selected top powers are at most $T$. The omitted costs total $O(y^2)=o(k)$, so the largest prime of the first eligible prefix reaching $r=k-p-b(Q_0)\sim k$ is $(1+o(1))\sqrt{k\log k}$, which is $o(p)$. Every new prime has $p$ earlier cofactors through $T$; every old prime still meets the squarefree criterion. The construction has $k$ rows and maximum at most $pT$. Let $t$ tend to $\sqrt{\rho(\sigma)}$.
+
+For $X=\lambda k\log k$ fix $1/\sqrt\lambda<t<1$ and choose $\beta'<1$ with $\rho(1/\beta')>t^2$. Exactly the same bounds hold with $y^2=o(k)$. The largest padding prime is now $(1+o(1))\sqrt{k\log k}<p$. This last strict inequality suffices in place of $o(p)$ for new primes; the old primes remain $o(p)$. The proof realizes every sufficiently large $k$. Taking $t$ up to one attains the elementary upper bound. These estimates are compatible with earlier unrestricted constructions having $M\le(1+o(1))k\log k$. The question of whether the unrestricted minimum can be significantly smaller requires information about simultaneous essentiality beyond a single prescribed prime.
