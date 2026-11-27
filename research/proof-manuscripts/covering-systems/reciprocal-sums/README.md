@@ -18,3 +18,5 @@ The Python programs use only the standard library. Run them in a writable direct
 The modulus cap and the cardinality are different bounds. The list through cap 47 is exhaustive for sets with largest modulus at most 47. For each cardinality represented in that list, its smallest listed maximum is also the unrestricted minimum at that cardinality. All general estimates in the manuscript are mathematical arguments; numerical sum columns are rounded and illustrative.
 
 The PDF is accompanied by editable LaTeX source. A standard TeX Live installation with pdfLaTeX and the packages listed in the preamble can compile it.
+
+The [defect-dependent upper bound](./defect-tradeoff.md) quantifies the extra classes required for an unrestricted gain above the one-half coefficient. Run `python check_defect.py` for the rational finite checks.
