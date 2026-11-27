@@ -2,3 +2,4 @@ Exhaustive packets: 138 ordered site pairs: 1245
 All realized differences and forced moduli agreed.
 Top moduli 2,6,18 cover every pair from 0,1,2 modulo 9, and never all three together.
 Joint two-prime criterion vs full 12-cell enumeration: 1716 count vectors.
+Interval criterion: 45 direct choices; exact inverse: 1720 prime/length pairs.

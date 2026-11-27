@@ -48,3 +48,27 @@ For necessity allocate the incompatible single-digit rows between the sites acco
 For sufficiency use the compatible P rows on a common initial segment of column values, up to saturation. Allocate i of the other P rows to x and the rest to y, extending the initial segment at each site. Ignore extras after saturation. Perform the same construction on row values. The two rectangles of missing cells now intersect in *exactly* min(U,U′)min(V,V′) cells because each coordinate's missing sets are nested. Use a compatible PQ row at each of as many common cells as possible, up to g. The remaining slots may serve individual outstanding cells even if they happen to be compatible. The inequality gives enough distinct rows. Digit and exterior residues can be prescribed independently for an individual row by the prime-power coordinate representation. This proves the exact criterion, including empty or unequal rectangles.
 
 For example, take p=5,q=7 with two P rows, three Q rows and seven PQ rows over a single base point. Their total densities on that fibre sum to 36/35, and both primes pass the separate necessary count of top rows. Yet the two uncovered coordinate sets have sizes at least three and four, so twelve individual cells must be filled and seven cannot suffice. The formula covers the two-site case as well. It gives a finite decision procedure of O((b+1)(d+1)) arithmetic tests once the row types are counted. It does not decide the unrestricted optimization over whole modulus sets.
+
+## Exact cost of a run of uncovered base sites
+
+There is also a closed form when we prescribe many sites and the top moduli are distinct. For a nonempty finite set H of base sites put v_i=max_a |H∩(a mod e_i)|. If at most p indices have v_i>1, all lifts of all the sites can be covered by the top rows if and only if
+$$
+ \sum_{i=1}^t v_i\ge p|H|.
+$$
+This is an incidence count for necessity: each row uses a single digit. For sufficiency give different digits to the indices with v_i>1 and choose a maximizing base residue for each. The cells covered in this way are all different. Every remaining row can be assigned to any one still empty site-digit pair. There are enough such rows by the inequality.
+
+For an interval of ℓ distinct consecutive integers modulo the base period one has v_i=1+⌊(ℓ−1)/e_i⌋. If the e_i are distinct and ℓ≤p+1, at most ℓ−1≤p of them exceed one in multiplicity v_i. Thus the exact test is
+$$
+ t+\sum_i\left\lfloor\frac{\ell-1}{e_i}\right\rfloor\ge p\ell.
+$$
+The hypothesis that the period has at least ℓ residues matters.
+
+Here is the sharp inverse for a prime p of exponent one and 1≤ℓ≤p. Among all distinct top moduli, the fewest that can fill every lift of a run of length ℓ is
+$$
+ t_*=p\ell-\sum_{n=1}^{\ell-1}\tau_{\rm div}(n),
+$$
+where τ_div counts positive divisors. The least possible maximum of these top moduli is exactly
+$$
+ p\left(t_*+\left\lfloor\frac{t_*-1}{p-1}\right\rfloor\right).
+$$
+Indeed the greatest extra incidence is Σ_{e≤ℓ−1}⌊(ℓ−1)/e⌋=Σ_{n<ℓ}τ_div(n). All these e are prime to p and fit within the first t_* positive integers not divisible by p (use t_*≥pℓ−(ℓ−1)^2≥ℓ). Take exactly those first t_* as cofactors, with their LCM as the base period. They attain the count and minimize the largest cofactor by distinctness. The last cofactor is the t_*-th positive nonmultiple of p, as displayed. At ℓ=2 the minimum is 2p²+p. This gives a sharp local cap obstruction for genuine covers whose complementary congruences leave consecutive holes. The attaining construction fills the prescribed fibres; it does not claim that the whole integer covering set is irreducible.

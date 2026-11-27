@@ -1,6 +1,6 @@
 """Brute-force all residue and digit assignments, independent of the pair formula."""
-from itertools import product, combinations_with_replacement
-from math import gcd, lcm, prod
+from itertools import combinations, combinations_with_replacement
+from math import gcd, lcm, isqrt
 
 
 def actual(e, p):
@@ -57,10 +57,6 @@ def run():
     print('Top moduli 2,6,18 cover every pair from 0,1,2 modulo 9, and never all three together.')
 
 
-if __name__ == '__main__':
-    run()
-
-
 def joint(two_p, two_q, counts):
     a,b,c,d,g,h = counts
     t = g+h
@@ -106,5 +102,31 @@ def joint_brute():
     print('Joint two-prime criterion vs full 12-cell enumeration:',tests,'count vectors.')
 
 
+def check_runs():
+    checks=0
+    for p,allowed in [(2,(1,3,5)),(3,(1,2,4)),(5,(1,2))]:
+        for t in range(1,len(allowed)+1):
+            for es in combinations(allowed,t):
+                base,filled=actual(es,p)
+                for width in range(1,min(base,p+1)+1):
+                    available=sum(1+(width-1)//d for d in es)
+                    brute=any(all(x in s for x in range(width)) for s in filled)
+                    assert (available>=p*width)==brute
+                    checks+=1
+    inverse=0
+    for p in range(2,130):
+        if any(p%q==0 for q in range(2,isqrt(p)+1)):
+            continue
+        for width in range(1,p+1):
+            cost=p*width-sum((width-1)//d for d in range(1,width))
+            T=cost+(cost-1)//(p-1)
+            assert T-T//p==cost and T-1-(T-1)//p==cost-1
+            assert cost+sum((width-1)//d for d in range(1,min(T,width-1)+1) if d%p)==p*width
+            inverse+=1
+    print('Interval criterion:',checks,'direct choices; exact inverse:',inverse,'prime/length pairs.')
+
+
 if __name__ == '__main__':
+    run()
     joint_brute()
+    check_runs()
