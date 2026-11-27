@@ -1,0 +1,5 @@
+Sole size-36 candidate contains a 33-modulus cover, period 30240.
+Size 34, maximum 150, covering period 50400.
+Size 35, maximum 150, covering period 50400.
+Size 36, maximum 150, covering period 151200.
+Size 37, maximum 150, covering period 151200.

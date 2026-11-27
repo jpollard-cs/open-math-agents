@@ -24,3 +24,5 @@ The [defect-dependent upper bound](./defect-tradeoff.md) quantifies the extra cl
 The [finite extension](./finite-extension.md) gives the exact unrestricted minima through 23 classes, including eight new cardinalities. Its witness file contains actual residues for each new entry.
 
 The [cap-60 enumeration](./finite-60.md) proves $m(24)=m(25)=60$, with covering residues and one-modulus deletion checks. The [grouped-digit note](./grouped-digits.md) gives sharp reciprocal sums and the asymptotic minimum largest modulus for the class it describes, plus necessary conditions for improving either bound without a structural restriction.
+
+The [critical-cap theorem](critical-cap.md) gives the inverse-logarithmic-integral expansion for the grouped minimum, a necessary condition on every cover reaching $k\log k$, and a sharp lower bound on the proportion of moduli above any fixed fraction of the largest.
