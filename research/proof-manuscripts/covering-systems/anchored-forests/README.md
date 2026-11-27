@@ -33,3 +33,28 @@ leanchecker -v ForestFibre StarCoordinates Integer29
 ForestFibre.joinValid proves the bottom-up invariant for arbitrary row labels at a node and any finite number of children. Integer29.covering and Integer29.after_deletion apply to actual integers, with complete freedom to reassign every surviving residue. The size, distinct and maximum declarations check 29 distinct moduli with maximum 176. This is a demonstration of period transfer. The known minimum at size 29 is 84. The analytic theorems have written proofs and await independent review.
 
 The graph on the primes is a forest in the main converse. Dense interactions with cycles, particularly those that retain a small set of compulsory continuations after each deletion, deserve separate investigation.
+
+## Cyclic constructions and the unrestricted reciprocal sum
+
+[Four-page proof](cycles.pdf) · [Source and two-terminal converse](cycles.md) · [Full-period transfer principle](transfer.md) · [Cycles sharing one coordinate](joined-cycles.md) · [Interpolation and its exact equality case](interpolation.md)
+
+At every sufficiently large exact size the unrestricted reciprocal maximum exceeds the zero-defect optimum by a fixed additive amount. The lower limit of the difference is at least 0.000704743307. Simultaneously one may retain the four-fifths improvement in the largest modulus if the desired reciprocal gain is any fixed amount below that number. A single cyclic quartet of primes gives a positive exact rational gain, independently checked in Lean. The sharp leading coefficient remains open.
+
+For full-period covers the limiting additive excess is the supremum of explicit finite-prefix gains, possibly infinite. It is finite and positive for the class of cycles joined at one coordinate. The sharp row surplus for those cycles has order X^(3/4)/log X. Product-degree interpolation certificates have a sharp cap surplus of order X^(4/5)/log X and reciprocal ceiling R₀(k)+o(1). The four-prime cycle lies outside that certificate class.
+
+The general proofs are written. [cycle-lean.txt](cycle-lean.txt) records the separate replay of the separator inequality, the binary truth tables and the first quartet's full rational gain. Run the additional checks as follows.
+
+~~~sh
+python cyclic_check.py
+python diamond_gain.py
+python independent_gain.py
+python interpolation_check.py
+lean -o PathSeparator.olean PathSeparator.lean
+lean -o BinaryProfiles.olean BinaryProfiles.lean
+lean -o DiamondGain.olean DiamondGain.lean
+LEAN_PATH=. leanchecker -v PathSeparator BinaryProfiles DiamondGain
+~~~
+
+[Cycle counts and independent sums](cycle-finite.txt) · [Interpolation checks](interpolation-checks.txt)
+
+The direct attempt to replace the chord with arbitrarily many internally disjoint paths fails. A unique continuation through a separating digit forces every endpoint pair differing in both coordinates to extend. The next unrestricted questions are the size of the full-period supremum, the loss on passing from arbitrary covers to full-period prefixes, and blocks that share multiple coordinates. The minimum for general k and the sharp unrestricted reciprocal coefficient remain open.

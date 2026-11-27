@@ -1,0 +1,2 @@
+3 variables 64 allocations 41 attain a single hole; checked all deletion types
+4 variables 400 allocations 221 attain a single hole; checked all deletion types

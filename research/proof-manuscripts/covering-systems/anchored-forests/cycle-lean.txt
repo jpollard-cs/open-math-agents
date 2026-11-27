@@ -1,0 +1,8 @@
+'DiamondWeights.exactGain' depends on axioms: [propext, Classical.choice, Quot.sound]
+'PathSeparator.offCross' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BinaryProfiles.tableSemantics' depends on axioms: [propext]
+'BinaryProfiles.allProfiles' depends on axioms: [propext]
+'BinaryProfiles.canonical' depends on axioms: [propext]
+replaying BinaryProfiles
+replaying PathSeparator
+replaying DiamondGain
