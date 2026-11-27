@@ -1,4 +1,4 @@
-# Optimal periods, prime squares, and exact minima at 26 and 27 moduli
+# Optimal periods, prime squares, and exact minima through 30 moduli
 
 Codex (OpenAI), at Jordan Pollard’s request. Public research manuscript for review, 27 November 2026.
 
@@ -6,7 +6,7 @@ Codex (OpenAI), at Jordan Pollard’s request. Public research manuscript for re
 
 For the relaxed period problems the largest prime raised to power $j$ has different sharp thresholds for maximizing reciprocal mass and minimizing the largest selected divisor. Section 2 proves both thresholds for every fixed $j$, along with the sharp cost of the cutoff in either calculation. The two arithmetic objectives eventually require different periods.
 
-At size 26 the minimum largest modulus is 70. The finite search finds exactly one extremal modulus set. Two decision procedures check the positive example and the impossibility of a cover after every deletion with all residues freely reassigned. The residue assignment also has a stand-alone Lean check for every integer. At size 27 the minimum is 72, with exactly three extremal sets. Size 28 requires at least 84. The unrestricted sharp reciprocal coefficient and the general minimum largest modulus remain open.
+At size 26 the minimum largest modulus is 70. The finite search finds exactly one extremal modulus set. Two decision procedures check the positive example and the impossibility of a cover after every deletion with all residues freely reassigned. The residue assignment also has a stand-alone Lean check for every integer. At size 27 the minimum is 72, with exactly three extremal sets. Both sizes 28 and 29 require exactly 84. The 29-element optimum is unique. Size 30 requires exactly 96. The unrestricted sharp reciprocal coefficient and the general minimum largest modulus remain open.
 
 ## Reproduce the checks
 
@@ -47,4 +47,28 @@ For a faster check of the binary decisions one can build the optional C++ residu
 ```sh
 g++ -std=c++20 -O3 -shared -fPIC holecheck.cpp -o holecheck.so
 python unpruned_binary.py example27.json
+```
+
+## The cap-84 witnesses
+
+Use `size28.py` or the compiled `reverse80.py` to exclude smaller maxima at size 28. `size29.py` uses the recorded reversed 35-case output. `size28_84.py` includes the successful 28-element witness among the sets with exactly four of the five added moduli. Full classification of the 28-element minimizers is not asserted. Build `holecheck.so` as above for the cap-84 scripts.
+
+```sh
+python reverse80.py > size28-reverse.txt
+python size29.py > size29-results.txt
+python size28_84.py > search28_84.txt
+python witness84.py examples28_84.json
+python witness84.py size29-yes.json
+python binary84.py examples28_84.json
+python binary84.py size29-yes.json
+```
+
+At cap 90 there are exactly two 30-set candidates remaining after subset tests. Both fail to cover. Run `size30.py` with the previous results in place, or compile `maskcombine.cpp` and run `quick30.py` to evaluate the two whole-set decisions first. The constructive bound at 96 replaces a modulus 48 in the 29-set by 32 and 96.
+
+```sh
+g++ -std=c++20 -O3 -fPIC -shared maskcombine.cpp -o maskcombine.so
+python quick30.py
+lean Size28.lean
+lean Size29.lean
+lean Size30.lean
 ```

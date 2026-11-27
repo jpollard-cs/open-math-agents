@@ -14,7 +14,7 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-We compute the divisor optimization $U(k)$ in Section 8 of \"Ozt\"urk's paper to additive $o(1)$, including the second-order and constant terms. This identifies exactly how much the period constraint can prove about the maximal reciprocal sum of an irreducible covering set. A construction attains the defect-dependent leading bound for every defect exponent once reducible covers are admitted. We determine the sharp threshold for every fixed prime exponent in an optimizing compressed period. We determine the minimum largest modulus at cardinality 26: it is 70, with a unique extremal set. At size 27 it is 72, with three extremal sets, and size 28 requires at least 84. Independent finite searches confirm the earlier ten values at sizes 16 through 25. The sharp leading coefficient for irreducible sets and the general exact minimum remain open.
+We compute the divisor optimization $U(k)$ in Section 8 of \"Ozt\"urk's paper to additive $o(1)$, including the second-order and constant terms. This identifies exactly how much the period constraint can prove about the maximal reciprocal sum of an irreducible covering set. A construction attains the defect-dependent leading bound for every defect exponent once reducible covers are admitted. We determine the sharp threshold for every fixed prime exponent in an optimizing compressed period. We determine the minimum largest modulus at cardinality 26: it is 70, with a unique extremal set. At sizes 27 through 30 the exact minima are 72, 84, 84 and 96, respectively. Independent finite searches confirm the earlier ten values at sizes 16 through 25. The sharp leading coefficient for irreducible sets and the general exact minimum remain open.
 \end{abstract}
 
 \section{The price of the period}
@@ -166,7 +166,8 @@ The source, finite certificates and output accompany this note.
 
 \input{size26.tex}
 \input{next-minima.tex}
-\paragraph{Status and remaining question.} The unrestricted exact function $m(k)$ and sharp coefficient of $R(k)$ are still undetermined. Is it possible for a positive-defect irreducible family to collect a positive multiple of $\log k$ from moduli $n$ with largest prime factor at most $\sqrt n$, beyond what is lost in its nonsmooth rows? The reducible construction shows why just a period budget and slot matching cannot rule this out. The unresolved case at size 28 next permits a tenth 7-divisible modulus, 84. These are AI-authored written and computational arguments, pending external review.
+\input{cap84.tex}
+\paragraph{Status and remaining question.} The unrestricted exact function $m(k)$ and sharp coefficient of $R(k)$ are still undetermined. Is it possible for a positive-defect irreducible family to collect a positive multiple of $\log k$ from moduli $n$ with largest prime factor at most $\sqrt n$, beyond what is lost in its nonsmooth rows? The reducible construction shows why just a period budget and slot matching cannot rule this out. At size 31 the lower bound is 96. A new candidate there must account for the interaction of repeated 48-rows after contracting the highest binary digit. These are AI-authored written and computational arguments, pending external review.
 \begin{thebibliography}{9}
 \bibitem{problem} \href{https://www.erdosproblems.com/1189}{Erd\H os problem 1189}, cardinality formulation. The underlying period bound is due to Zn\'am and Simpson.
 \bibitem{ozturk} E. \"Ozt\"urk, \href{https://doi.org/10.13140/RG.2.2.16138.63684}{Irreducible covering systems: the largest modulus, the maximal reciprocal sum, and exact values for at most nineteen moduli}, 2026. Its finite reciprocal maxima concern a different extremum from the minimum largest modulus studied here.
