@@ -75,3 +75,5 @@ This answers the distinction between two quantifiers in the [polyomino packing f
 ![Three optimal packings of the same T pentomino with different period groups](t-periods.svg)
 
 The independent verifier `t_families.py` counts primitive extrema directly on every HNF torus of order kwh, anchoring one copy, placing the two masks, and computing the full translation stabilizer. For (w,h)=(2,2),(3,2),(3,3),(4,2) and 1≤k≤6 it agrees in all 24 cases with the word count. The exact outputs are in `t_families.txt`.
+
+`TDiff.lean` gives a kernel-checked proof of the exact forbidden-translation formula for every integer w,h≥2. Its axiom audit contains only the standard axioms `propext`, `Classical.choice` and `Quot.sound`. The density and period classification above have written proofs and independent finite checks.
