@@ -10,6 +10,7 @@ Here $\log_j$ denotes the $j$-fold iterated natural logarithm. The proof also bo
 | Manuscript | Contents |
 | --- | --- |
 | [Long intervals with negligible factorial divisor growth](large-jump.pdf) · [source](large-jump.md) | The main bound, translated multiplicity, and the limit of this congruence construction |
+| [The full logarithmic window](logarithmic-window.pdf) · [source](logarithmic-window.md) | For the exact window $\lfloor\log n\rfloor$, the ratio approaches one with a power saving in $\log n$. The argument quantifies the tradeoff as the window grows. |
 | [A largest-prime-factor criterion](part-one-criterion.pdf) · [source](part-one-criterion.md) | A prior equivalent formulation of part (i) and its consequence for the largest prime factor of a binomial coefficient on these intervals |
 | [Frequency of doubling in short windows](critical-law.pdf) · [source](critical-law.md) | An unconditional error estimate below the logarithmic scale, and a limiting law at the logarithmic scale conditional on a uniform prime-tuples conjecture |
 | [Small gains at many starts](flat-windows.pdf) · [source](flat-windows.md) | A covering argument giving sharper decay at shorter windows |

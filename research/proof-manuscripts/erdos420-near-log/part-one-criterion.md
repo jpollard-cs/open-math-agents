@@ -21,7 +21,7 @@ $$
 
 **Proof.** If $m=sp$ with $p>\sqrt m$, the contribution of $p$ to $\log(D(m)/D(m-1))$ is exactly $\log(1+1/s)$, since $v_p((m-1)!)=s-1$ and $v_p(m)=1$. For $m\ge16$, all prime factors $p\le\sqrt m$ together contribute at most $2/\sqrt m$. Indeed, each contribution is at most $p v_p(m)/m$, and the maximum of $t/\log t$ on $[2,\sqrt m]$ is attained at the right endpoint. Summing $v_p(m)\log p$ gives $\log m$.
 
-In particular, if $1\le S\le\sqrt n$ and $(n,n+h]$ contains no prime multiple $sp$ with $s\le S$, then
+In particular, if $S$ is an integer with $1\le S\le\sqrt n$ and $(n,n+h]$ contains no prime multiple $sp$ with $s\le S$, then
 $$
 G(n,h)\le h\log\left(1+\frac1{S+1}\right)+\frac{2h}{\sqrt n}.
 \tag{1}
