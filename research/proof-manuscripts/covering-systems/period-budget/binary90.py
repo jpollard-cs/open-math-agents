@@ -8,7 +8,7 @@ from math import lcm
 from crosscheck import decide as old
 import json,sys
 U=C.c_uint64
-lib=C.CDLL(str(Path(__file__).resolve().parent/'bisect.so'))
+lib=C.CDLL(str(Path(__file__).resolve().parent/'maskcombine.so'))
 lib.combinations180.argtypes=[C.POINTER(U),C.c_int,C.POINTER(U),C.c_int,C.POINTER(C.c_int)]
 lib.combinations180.restype=C.POINTER(U)
 lib.free120.argtypes=[C.POINTER(U)]

@@ -51,7 +51,7 @@ python unpruned_binary.py example27.json
 
 ## The cap-84 witnesses
 
-Use `size28.py` or the compiled `reverse80.py` to exclude smaller maxima at size 28. `size29.py` uses the recorded reversed 35-case output. `size28_84.py` includes the successful 28-element witness among the sets with exactly four of the five added moduli. Full classification of the 28-element minimizers is not asserted. Build `holecheck.so` as above for the cap-84 scripts.
+Use `size28.py` or the compiled `reverse80.py` to exclude smaller maxima at size 28. `size29.py` uses the recorded reversed 35-case output. `size28_84.py` includes the successful 28-element witness among the sets with exactly four of the five added moduli. The [completed census](cap84-census.md) lists both 28-element minimizers, including the one with all five new moduli. Build `holecheck.so` as above for the cap-84 scripts.
 
 ```sh
 python reverse80.py > size28-reverse.txt
@@ -71,4 +71,19 @@ python quick30.py
 lean Size28.lean
 lean Size29.lean
 lean Size30.lean
+```
+
+The [size-31 analysis](cap96-fibres.md) reduces the next minimum to 96, 105, or 108. Its residue construction and the second size-28 example have stand-alone Lean files.
+
+Reproduce the completed size-28 census, independent digit order at sizes 28 and 29, and the size-31 mask audit with the commands below. Both native libraries are built from the sources in this directory.
+
+```sh
+g++ -std=c++20 -O3 -fPIC -shared holecheck.cpp -o holecheck.so
+g++ -std=c++20 -O3 -fPIC -shared maskcombine.cpp -o maskcombine.so
+python classify28.py
+python binary90.py all-five-extremizers-28.json
+python binary90.py size29-yes.json
+python check_cap96.py
+lean Size28Second.lean
+lean Size31Upper.lean
 ```
