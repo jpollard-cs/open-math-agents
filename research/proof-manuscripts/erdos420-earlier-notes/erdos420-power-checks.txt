@@ -1,0 +1,3 @@
+4,337,280 same-cardinality subset-pair exponent tests on 12 individually specified starts.
+720 independent gcd-and-integer-root spot checks, and 74,787 smooth-part factorization checks.
+All finite tests passed. The asymptotic statement is proved in the note.
