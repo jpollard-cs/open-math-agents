@@ -59,3 +59,21 @@ Here are uniform estimates for the small primes. A gcd class mod $B$ has countin
 Moreover $0\le C_H-1-g_{B(p)}\ll_H(1+J(p))2^{-J(p)}$ by the geometric tail formula for the stopped exponents and their entropies. The sum of these errors weighted by $1/p$ also converges, by partial summation and $J(p)=c_H\log\log p+O(1)$.
 
 At most $O(y^2(1+\log y)^2)=o(k)$ rows have been spent through $y$; indeed each prime contributes at most $p\sum_{s\mid B(p)}s\le p B(p)^2$. The largest exterior prime $x$ reached is again asymptotic to a positive $H$-dependent constant times $\sqrt{k\log k}$ by the fixed-block size estimate. The partial final block and the budget are handled as on page 10, since $B(p)^2 p=o(x)$ throughout the small-prime range. In the large-prime range the missing local second-order mass is bounded by $O_H(\sum_{y<p\le x}1/p)=O_H(1)$ because $\log x/\log y$ is bounded. Summing the block estimates therefore yields (7) at the prescribed size. For the empty set $H$ use the prior construction directly. An explicit constant with an $o(1)$ remainder and the second-order term for genuine irreducible covers with nonempty $H$ are separate questions.
+
+\newpage
+\head{7. Allowing each cover to choose its own hubs}
+Both optimizations remain sharp when only the number of central primes is prescribed. Let $r$ be fixed and $H_r$ the first $r$ primes. In (4) and (7), allow any labeling whose graph has vertex cover number at most $r$, with the hubs chosen afresh at each size or cap. Then the exact leading counting coefficient is $C_{H_r}$, and the reciprocal expansion is
+\[
+ \tfrac12\log k+(\tfrac12+\gamma+C_{H_r}-1)\log\log k+O_r(1)
+\]
+under the conditions of (7). The lower constructions with $H=H_r$ apply directly. In particular a single hub chosen without restriction has the binary-hub constants. These are the exact relaxation optima. They are upper bounds for the corresponding irreducible optima.
+
+Here is the uniformity needed in taking this maximum. For $|H|\le r$ one has $v\ge\prod_{h\in H_r}(1-1/h)>0$, the inclusion-exclusion errors in counts are $O(2^r)$, and $|\mathcal T\cap[1,X]|\le(1+\log_2 X)^r$. Moreover
+\[
+ \sum_{s\in\mathcal T}s^{-1/2}\le (1-2^{-1/2})^{-r}.
+\]
+Consequently the normalized tail for $s>K$ in the proof of (4) tends to zero as $K\to\infty$, uniformly in $H$ and large $X$: for $s\le X^{1/4}$ use $(1+\log s)/s\ll K^{-1/4}s^{-1/2}$ for $s>K$, and beyond $X^{1/4}$ use the original power saving. For each fixed $s\le K$, the prime number theorem in (5) is uniform for $v$ in the indicated compact interval: all cutoff endpoints are comparable to $\sqrt X$ with constants depending only on $K,r$. Omitting exterior primes that happen to be in $H$ can only decrease the upper bound. Thus the upper bound $K_H(X)\le [C_H+o_r(1)]X/\log X$ is uniform.
+
+For the reciprocal upper bound, inclusion-exclusion for the harmonic sum through $u$ has error $O_r(1/u)$ even when some divisors of $\prod H$ exceed $u$. For such a divisor $d$, the formal main term $(\log(u/d)+\gamma)/d$ is $O(1/u)$, since $(1+\log t)/t$ is bounded for $t\ge1$. Counting inversion is uniform since $v$ is bounded below. Thus the remainder in the expansion for $A_H(j)$ is $O_r(1/j)$. All the convergent prime-power and $\mathcal T$ tails on page 9 are likewise $O_r(1)$ by the half-power sum above. This proves a uniform $O_r(1)$ in the upper half of (7).
+
+Finally $f(h)=-\log(1-1/h)+2\log h/(h-1)$ is strictly decreasing for $h>1$. The second term decreases because $1-1/h<\log h$. Hence the maximum $C_H$ occurs for precisely $H_r$ among sets of size at most $r$. For $r\ge1$ every other choice loses at least $f(p_r)-f(p_{r+1})>0$. It follows that a sequence within $o(X/\log X)$ of the optimal count, or within $o(\log\log k)$ of the optimal reciprocal sum, must use precisely the first $r$ hub primes in every witnessing set of at most $r$ hubs, eventually. The stability assertion concerns the stated relaxations.
