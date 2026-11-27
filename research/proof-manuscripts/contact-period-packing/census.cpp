@@ -35,7 +35,7 @@ bool tiles(const std::vector<Cell>& cells) {
 }
 
 struct Census {
-    int a, b, order, size;
+    int a, b, order, size, copies, missing;
     Mask full;
     std::vector<std::vector<int>> add, sub, automorphisms, containing;
     std::vector<Mask> translates;
@@ -46,8 +46,8 @@ struct Census {
         return mod(k*(x/b),a)*b + mod(k*(x%b),b);
     }
 
-    Census(int first, int second) : a(first), b(second), order(a*b),
-        size((order-3)/4), full(bit(order)-1),
+    Census(int first, int second, int copies_per_period, int hole_count) : a(first), b(second), order(a*b),
+        size((order-hole_count)/copies_per_period), copies(copies_per_period), missing(hole_count), full(bit(order)-1),
         add(order, std::vector<int>(order)), sub(add) {
         for (int i=0; i<order; ++i) for (int j=0; j<order; ++j) {
             add[i][j] = mod(i/b+j/b,a)*b + mod(i%b+j%b,b);
@@ -76,6 +76,37 @@ struct Census {
             best = std::min(best,translated);
         }
         return best;
+    }
+
+    bool has_competing_packing(const std::vector<Cell>& cells) const {
+        for (int copies_out : {1,2}) {
+            // At least the tested density requires index/copies_out <= order/copies.
+            for (int n=copies_out*size; n*copies<=copies_out*order; ++n) {
+                for (int w=1; w<=n; ++w) if (n%w==0) {
+                    int h=n/w;
+                    for (int shear=0; shear<w; ++shear) {
+                        auto pos = [&](int x,int y) {
+                            int row=mod(y,h);
+                            return row*w+mod(x-(y-row)/h*shear,w);
+                        };
+                        Mask image=0;
+                        bool injective=true;
+                        for (auto [x,y]:cells) {
+                            Mask v=bit(pos(x,y));
+                            if (image & v) { injective=false; break; }
+                            image |= v;
+                        }
+                        if (!injective) continue;
+                        if (copies_out==1) return true;
+                        Mask diff=0;
+                        for (auto [x,y]:cells) for (auto [z,v]:cells)
+                            diff |= bit(pos(x-z,y-v));
+                        if (diff!=bit(n)-1) return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     void check_lifts(Mask cells) {
@@ -115,8 +146,9 @@ struct Census {
             else ++flat;
             // In the inconsistent case the cylinder theorem handles all lifts.
             // Independently test this particular spanning-tree lift as well.
-            if (!tiles(lift)) {
-                std::cerr<<"Failed tiling test for group "<<a<<" x "<<b
+            bool ok = (copies==4 ? tiles(lift) : inconsistent || has_competing_packing(lift));
+            if (!ok) {
+                std::cerr<<"Failed target test for group "<<a<<" x "<<b
                          <<", steps "<<g<<","<<h<<" and cells ";
                 for (auto [x,y]:lift) std::cerr<<"("<<x<<","<<y<<") ";
                 std::cerr<<"\n";
@@ -128,7 +160,7 @@ struct Census {
     void solve(Mask occupied, Mask starts, int holes) {
         ++nodes;
         if (occupied==full) {
-            if (holes!=3) return;
+            if (holes!=missing) return;
             ++leaves;
             std::vector<int> points;
             for (int i=0;i<order;++i) if (starts & bit(i)) points.push_back(i);
@@ -143,27 +175,37 @@ struct Census {
             if (options<least) { least=options; chosen=x; }
             if (least==0) break;
         }
-        if (holes<3) solve(occupied|bit(chosen),starts,holes+1);
+        if (holes<missing) solve(occupied|bit(chosen),starts,holes+1);
         for (int j:containing[chosen]) if (!(occupied & translates[j]))
             solve(occupied|translates[j],starts|bit(j),holes);
     }
 
+    void process(const std::vector<int>& centers) {
+        Mask mask=0;
+        for (int x:centers) mask|=bit(x);
+        if (center_orbit.count(mask)) return;
+        normalize(centers,true);
+        ++motifs;
+        if (copies==3) {
+            int x=centers[1], y=centers[2];
+            // A subgroup of order three already gives a one-copy lattice.
+            if (add[x][y]==0 && add[x][x]==y) return;
+        }
+        translates.assign(order,0);
+        containing.assign(order,{});
+        for (int z=0;z<order;++z) for (int d:centers) {
+            int v=add[z][d];
+            translates[z]|=bit(v);
+            containing[v].push_back(z);
+        }
+        solve(1,0,1);
+    }
+
     void run() {
-        for (int e=1;e<order;++e) for (int i=e+1;i<order;++i)
-            for (int j=i+1;j<order;++j) {
-                if (center_orbit.count(1|bit(e)|bit(i)|bit(j))) continue;
-                std::vector<int> centers={0,e,i,j};
-                normalize(centers,true);
-                ++motifs;
-                translates.assign(order,0);
-                containing.assign(order,{});
-                for (int z=0;z<order;++z) for (int d:centers) {
-                    int v=add[z][d];
-                    translates[z]|=bit(v);
-                    containing[v].push_back(z);
-                }
-                solve(1,0,1); // translate the cell set to put a hole at zero
-            }
+        for (int e=1;e<order;++e) for (int i=e+1;i<order;++i) {
+            if (copies==3) process({0,e,i});
+            else for (int j=i+1;j<order;++j) process({0,e,i,j});
+        }
         std::cout<<"group="<<a<<"x"<<b<<" size="<<size<<" motifs="<<motifs
                  <<" leaves="<<leaves<<" cellorbits="<<cell_types.size()
                  <<" winding="<<winding<<" flat="<<flat<<" nodes="<<nodes<<std::endl;
@@ -172,7 +214,10 @@ struct Census {
 
 int main(int argc,char** argv) {
     int end=argc>1?std::atoi(argv[1]):127;
-    if (end<7 || end>127) return 2;
-    for (int n=7;n<=end;n+=4) for (int a=1;a*a<=n;++a)
-        if (n%(a*a)==0) Census(a,n/a).run();
+    int copies=argc>2?std::atoi(argv[2]):4;
+    int holes=argc>3?std::atoi(argv[3]):3;
+    if (end>127 || end<copies+holes) return 2;
+    if (!((copies==4 && holes==3) || (copies==3 && holes>=1 && holes<=5))) return 2;
+    for (int n=copies+holes;n<=end;n+=copies) for (int a=1;a*a<=n;++a)
+        if (n%(a*a)==0) Census(a,n/a,copies,holes).run();
 }

@@ -40,9 +40,17 @@ Finally enumerate all generating pairs of step images, up to negating either and
 
 The complete enumeration found 9,984 center motifs over 35 group types, 2,602 cell-set orbits counted across those groups, 26,459 inconsistent and 31,339 consistent connected step-pair cases. Every tested lift had a determinant-s tiling. The computer proves only the stated finite range. An independent Python check starts from all connected grid shapes up to eight cells and directly excludes all four-copy, three-hole packings for each shape lacking a lattice tiling. It also tests the fixed-period optimizer and small exact independent-set counts on finite cylinder segments.
 
+## Three copies near a tiling
+
+A second finite theorem tests the competing packings directly. For every size from 1 to 22, every packing with three centers per period and **one to five holes** is matched or beaten by some packing of the same polyomino using one or two centers per period. This covers all period lattices at each listed size and defect. It places no restrictions on the defects or periods of the competitors.
+
+Use the same exact-cover search with a three-element center set. A center subgroup of order three lifts to one lattice, so it can be discharged immediately. A winding cycle in the induced cell graph is handled by the cylinder theorem. For every remaining connected lift test all HNF lattices of indices from k s through floor(k (3s+h)/3), where k=1 or 2 and h is the hole count. Reject a lattice if the cells collide in its quotient. For k=2 a second translate is possible exactly when the projected difference set misses a quotient element, which can then be used as the shift. These are all the competitors that could match or beat the given density. Every tested lift passed.
+
+The same geometric test works for clusters. If a packing consists of translates of a fixed connected cluster of r disjoint copies of P and this cluster touches its translate by a period, the theorem constructs a lattice packing of the **cluster** at least as dense. Expanding the cluster recovers a packing with at most r copies of P per fundamental domain. Thus, for example, a four-center parallelogram assembled from two identical edge-connected pairs can be discarded in a search for a strict advantage over all two-copy packings as soon as either pair touches its own period translate.
+
 ## Reproduce and continue
 
-Compile and run the C++20 census with `g++ -O3 -std=c++20 census.cpp -o census && ./census`. The output should match `census.txt`. Run `python3 verify.py` for the separate small tests in `independent.txt`. The small checker uses no nonstandard dependencies.
+Compile and run the C++20 census with `g++ -O3 -std=c++20 census.cpp -o census && ./census`. The output should match `census.txt`. For h from 1 through 5, run `./census $((66+h)) 3 $h` and compare with the corresponding hole-count log. Run `python3 verify.py` for the separate small tests in `independent.txt`. The small checker uses no nonstandard dependencies.
 
 The original question asks whether some polyomino requires more than two translates per lattice for maximal packing density. The fixed-period theorem and the four-copy census leave this open. A three-hole four-copy example above size 31 remains possible, as does a counterexample with a lower density and a different motif. Random growth at prescribed densities, including elongated shapes and local mutation to eliminate competing lattices, yielded no verified example. A promising next search can discard every inconsistent lift immediately and use centered cell-set symmetry or parallelogram centers to reduce exact covering searches at larger orders.
 

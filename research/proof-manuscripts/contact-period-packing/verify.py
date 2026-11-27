@@ -23,21 +23,32 @@ def residues(shape, lattice):
     a,b,shear = lattice
     return {((x - (y//b)*shear) % a, y % b) for x,y in shape}
 
-def four_pack(shape):
-    n = 4*len(shape)+3
+def pack(shape, copies, n):
+    """Work directly with every HNF quotient and a clique of admissible shifts."""
     for lat in periods(n):
         a,b,_ = lat
         image = residues(shape, lat)
         if len(image) != len(shape):
             continue
+        if copies==1:
+            return True
         diff = residues([(x-u,y-v) for x,y in image for u,v in image],lat)
         acceptable = [(x,y) for x in range(a) for y in range(b) if (x,y) not in diff]
-        for j,p in enumerate(acceptable):
-            near = [q for q in acceptable[j+1:]
-                    if not (residues([(q[0]-p[0],q[1]-p[1])],lat) & diff)]
-            for u,v in combinations(near,2):
-                if not (residues([(u[0]-v[0],u[1]-v[1])],lat) & diff):
+        def extend(options, need):
+            if need==0:
+                return True
+            for j,(x,y) in enumerate(options):
+                if len(options)-j<need:
+                    break
+                if need==1:
                     return True
+                near=[(u,v) for u,v in options[j+1:]
+                      if not (residues([(u-x,v-y)],lat) & diff)]
+                if extend(near,need-1):
+                    return True
+            return False
+        if extend(acceptable,copies-1):
+            return True
     return False
 
 def row_checks(shape):
@@ -89,7 +100,12 @@ if __name__ == '__main__':
             checks += row_checks(shape)
             if all(len(residues(shape,l))<size for l in periods(size)):
                 nontiles+=1
-                assert not four_pack(shape)
+                assert not pack(shape,4,4*size+3)
+                for holes in (3,4,5):
+                    order=3*size+holes
+                    if not any(pack(shape,k,n) for k in (1,2)
+                               for n in range(k*size,k*order//3+1)):
+                        assert not pack(shape,3,order)
         print(size,len(shapes),nontiles,checks,flush=True)
         if size!=8:
             shapes=add_cell(shapes)
