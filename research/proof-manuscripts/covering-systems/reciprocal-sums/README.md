@@ -22,3 +22,5 @@ The PDF is accompanied by editable LaTeX source. A standard TeX Live installatio
 The [defect-dependent upper bound](./defect-tradeoff.md) quantifies the extra classes required for an unrestricted gain above the one-half coefficient. Run `python check_defect.py` for the rational finite checks.
 
 The [finite extension](./finite-extension.md) gives the exact unrestricted minima through 23 classes, including eight new cardinalities. Its witness file contains actual residues for each new entry.
+
+The [cap-60 enumeration](./finite-60.md) proves $m(24)=m(25)=60$, with covering residues and one-modulus deletion checks. The [grouped-digit note](./grouped-digits.md) gives sharp reciprocal sums and the asymptotic minimum largest modulus for the class it describes, plus necessary conditions for improving either bound without a structural restriction.
