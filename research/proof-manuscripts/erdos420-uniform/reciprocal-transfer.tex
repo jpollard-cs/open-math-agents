@@ -1,0 +1,116 @@
+\documentclass[10pt]{article}
+\usepackage[letterpaper,margin=.9in]{geometry}
+\usepackage{amsmath,amssymb,xcolor,hyperref}
+\pdfmapfile{+cm.map}\pdfmapfile{+cmextra.map}\pdfmapfile{+symbols.map}
+\hypersetup{colorlinks=true,urlcolor=blue!55!black,pdftitle={Seventeen upper prime ranges in the four-ninths factorial sieve},pdfauthor={Jordan Pollard, with OpenAI Codex}}
+\setlength{\parindent}{0pt}\setlength{\parskip}{4.5pt}
+\newcommand{\ee}{\mathrm{e}}
+\begin{document}
+{\LARGE\bfseries Seventeen upper prime ranges in the\\[2pt] four-ninths factorial sieve}\par\medskip
+Jordan Pollard\hfill November 27, 2026\\
+{\small OpenAI Codex developed the formalization and prepared this note.}
+
+\textbf{Result.} For a factorial window of length $h=\lfloor n^{4/9}\rfloor$, the upper 17 of the project's 48 prescribed prime ranges satisfy their stated bounds for all sufficiently large $n$. The proof below gives explicit cancellation for the reciprocal phases throughout the range governed by the exponent pair $(1/2,1/2)$.
+\section*{An explicit finite Fourier bound}
+Let $\psi(y)=y-\lfloor y\rfloor-1/2$ and $\ee(y)=\exp(2\pi i y)$. Fix integers $x\ge0$, $t\ge1$ and real endpoints $0\le u\le v$. Write $D=\{m\in\mathbb N:u<m\le v,\ t\mid m\}$ and $N=|D|$. The finite Selberg sieve for the four-ninths factorial window needs a bound on $R=\sum_{m\in D}\psi(x/m)$. Define $S(j)=\sum_{m\in D}\ee(jx/m)$. Suppose there are $0<k<1$ and $E,F\ge0$ such that $|S(j)|\le E j^k+F/j$ for every integer $j\ge1$. For each integer $H\ge1$,
+\begin{equation}
+ |R|\le \frac N{2H}
+       +\frac12\left(\frac1k+\frac1{1-k}\right)E H^k+F .
+ \tag{1}
+\end{equation}
+The constant is independent of the denominators of the phases. This matters when $m$ ranges over many distinct integers. The inequality also covers $m\mid x$, where $\psi(x/m)=-1/2$.
+
+\subsection*{Proof}
+Choose an integer $Q=HL$ divisible by every $m\in D$; for example $L=2\lfloor v\rfloor!$. Each $x/m$ is represented modulo one by a residue $a_m$ on the grid $\mathbb Z/Q\mathbb Z$. Denote the grid sawtooth by $g(a)=a/Q-1/2$ for $0\le a<Q$. The pointwise inequality $g(a+j)\le g(a)+j/Q$ remains true at jumps, with addition taken modulo $Q$. Apply it to the $L$ shifts $0\le j<L$ in each direction to obtain
+\[
+ \frac1L\sum_{j<L}g(a+j)-\frac{L-1}{2Q}
+ \ \le\ g(a)\ \le\
+ \frac1L\sum_{j<L}g(a-j)+\frac{L-1}{2Q}.
+\]
+Finite Fourier inversion factors either average over $m$ into the Fourier coefficient of $g$, the geometric average of the shifts, and $S(j)$. With the Fourier coefficient normalized by $1/Q$, its value at zero is $-1/(2Q)$. Thus the zero mode and the shift error cost at most $NL/(2Q)=N/(2H)$ together.
+
+For a nonzero residue represented by $j$, let $r=\min(j,Q-j)$ and $w=\ee(j/Q)$. Summing a geometric progression gives the absolute value of the normalized sawtooth coefficient as $1/(Q|1-w|)$. Since $|1-w|=2\sin(\pi r/Q)\ge4r/Q$, this is at most $1/(4r)$. The shift average has absolute value at most
+\[
+ \min\left(1,\frac{2}{L|1-w|}\right)\le\min(1,H/r).
+\]
+The two frequencies at distance $r$ have conjugate sums, and a middle frequency contributes only once. It remains to sum $\tfrac12\min(1,H/r)(E r^k+F/r)/r$. For $r\le H$, integration gives $\sum r^{k-1}\le H^k/k$. For $r>H$, it gives $H\sum r^{k-2}\le H^k/(1-k)$. Finally, $\sum_{r\ge1}r^{-2}\le2$. Substitution proves (1).
+
+\newpage
+\section*{Cancellation on a multiplicative interval}
+Write $e(y)=\exp(2\pi i y)$. For $Y>0$, $1\le M\le A$ and $B\le3M$, the elementary second-derivative estimate we use is
+\begin{equation}
+ \left|\sum_{A\le j\le B}e(Y/j)\right|\le335\left(\sqrt{Y/M}+M^2/Y\right).
+ \tag{2}
+\end{equation}
+To see this, write $d_j=Y/(j(j+1))$ for the magnitude of the successive phase change. The $d_j$ decrease. A discrete first-derivative estimate costs at most $1+1/\eta$ on any consecutive run whose phase increments remain in $[k+\eta,k+1-\eta]$ for a single integer $k$. Indeed
+\[
+ K(a)=\tfrac12(1+i\cot(\pi a)),\qquad (1-e(a))K(a)=1 .
+\]
+Summation by parts now telescopes the total variation of $K$ along the run by monotonicity of the cotangent. Its endpoint values are bounded using $\sin(\pi\eta)\ge2\eta$ for $0<\eta\le1/2$.
+
+For $M\le j<k\le3M$, the identity for $d_j-d_k$ gives $d_j-d_k\ge(k-j)\sigma$ with $\sigma=2Y/(3M+1)^3$. Thus at most $1+2\eta/\sigma$ indices have their gap in the $\eta$-neighborhood of a given integer. There are at most $Y/M^2+\eta+1$ relevant integer centers, and at most that many safe runs. Together these bounds give
+\[
+ \left|\sum e(Y/j)\right|\le(Y/M^2+\eta+1)
+     (2+2\eta/\sigma+1/\eta).
+\]
+If $M^2/2<Y<M^3$, choose $\eta=\sqrt{Y/M}/M$. The first factor is at most $5Y/M^2$ and the second at most $67/\eta$. When $\eta>1/2$ the safe runs are empty. For $Y\le M^2/2$ all increments lie in a single low-frequency strip and the first-derivative estimate applies directly, with minimum gap at least $Y/(B(B+1))$ for a nonempty interval. For $Y\ge M^3$ the number of summands is at most $3M$. This proves (2).
+
+\subsection*{Application to the sieve remainder}
+In $u<m\le v\le3u$ with $t\mid m$ and $1\le t\le u$, put $m=tq$, $M=\lfloor u/t\rfloor+1$, $Y=jx/t$. Equation (2) supplies the hypotheses of (1) with
+\[
+ k=1/2,\qquad E=335\sqrt{x/u},\qquad F=1340u^2/(xt).
+\]
+There are at most $3u/t$ terms. Choosing $H=\lceil(N/E)^{2/3}\rceil$ when $0<E\le N$, or using $|R|\le N/2$ when $E>N$, gives $|R|\le 4N^{1/3}E^{2/3}+F$. Since $4(3\cdot335^2)^{1/3}\le280$, we obtain the unconditional estimate
+\begin{equation}
+ |R|\le280(x/t)^{1/3}+1340u^2/(xt)\qquad(x>0).
+ \tag{3}
+\end{equation}
+Inserting (3) at $x=n$ and $x=n+h$ into the finite Selberg bound gives, for $z\ge1$, $z^2\le u$, $n\ge1$,
+\[
+ T(u,v)\le\frac{h\log(v/u)}{\log(z+1)}+\frac{2hz^2}{u}
+    +3150(n+h)^{1/3}z^{4/3}
+    +2680\frac{u^2}{n}(1+\log z)^3 .
+\]
+Here $T$ counts pairs $(i,p)$ with $n<i\le n+h$ and $u<p\le v$ a prime divisor of $i$.
+
+\newpage
+\section*{The seventeen upper ranges}
+Take the 16 equal intervals from $29/54$ to $50009/90000$ and the preceding interval $(691/1296,29/54]$ on the exponent scale. The preceding interval also has coefficient twelve: its assigned formula is $1/(19/54-b/2)$ at the right endpoint $b=29/54$. The 16 widths are $5027/4320000$ and the preceding width is $5/1296$, all less than $1/250$. For $c=4/9$ the target is
+\[
+ T(n^a,n^b)\le \bigl(12(b-a)+10^{-6}\bigr)\lfloor n^c\rfloor
+\]
+eventually in $n$, simultaneously over these 17 fixed intervals.
+
+Choose $\gamma=1/12-10^{-6}$ and $z=\lfloor n^\gamma\rfloor$. Partition $(n^a,n^b]$ at successive doubles of $n^a$, clipping the last interval at $n^b$. The logarithmic main terms add to $h\log(n^b/n^a)/\log(z+1)\le h(b-a)/\gamma$. Geometric summation of the inverse and square endpoint terms and the $O(1+\log n)$ number of blocks bound the total error by a constant times
+\[
+ (1+\log n)^4\left(
+    n^{c+2\gamma-a}+n^{1/3+4\gamma/3}+n^{2b-1}\right).
+\]
+All three exponents are strictly less than $c$. The smallest guaranteed saving is $c-(1/3+4\gamma/3)=1/750000$, which suffices to absorb the logarithms. Hence the error is eventually at most $h/(4\cdot10^6)$. Reducing the sieve level costs less than three quarters of the allowance, since $(1/\gamma-12)(b-a)<3/(4\cdot10^6)$. Taking the largest threshold among the 17 intervals proves their simultaneous assertion.
+
+\subsection*{What the other two ranges need}
+For $k,\ell$ equal to $(1/6,2/3)$ or $(1/14,11/14)$, equation (1) requires positive-frequency estimates of the form
+\[
+ |S(j)|\ll j^k x^k v^{\ell-2k} t^{k-\ell}+v^2/(jxt)
+\]
+on the multiplicative blocks $(v,ev]$. The first-derivative and differencing lemmas provide ingredients for these estimates. Completing their application to all shifts would address the other 31 bands.
+\subsection*{Why all three published estimates matter}
+In Lemma 3 of the paper cited below, put $c=4/9$, $b=1-c+10^{-4}$ and
+\[
+ \theta_{k,\ell}(a)=
+ \frac{2(1+k-\ell)}{c(1+k)-k+(k-\ell)a}.
+\]
+The sieve needs $c+\int_c^b a\,\theta(a)\,da<1$. The best pointwise estimate furnished by any subset of the three pairs uses their lower envelope. Each function $a\,\theta_{k,\ell}(a)$ is increasing on this interval, so its lower envelope is increasing as well. Left and right rectangle sums on 256 equal subintervals give the following rigorous comparisons by rational arithmetic.
+\begin{center}
+\begin{tabular}{ll}
+Available pairs & Bound for $c+\int_c^b a\min\theta_{k,\ell}(a)\,da$\\[3pt]
+All three & $<0.994572$\\
+Omit $(1/14,11/14)$ & $>1.002460$\\
+Omit $(1/6,2/3)$ & $>1.026483$\\
+Omit $(1/2,1/2)$ & $>1.000172$\\
+\end{tabular}
+\end{center}
+Repartitioning the exponent interval cannot make a two-pair lower envelope pass this test. Different prime-count estimates could give a different conclusion. The four-ninths estimate is a published result; Erd\H{o}s 420(i) asks for a stronger polylogarithmic bound.
+
+{\small\textbf{References.} P. Erd\H{o}s, S. W. Graham, A. Ivi\'c and C. Pomerance, \emph{On the number of divisors of $n!$} (1996), Lemma 3, equations (16)--(19). \href{https://math.dartmouth.edu/~carlp/factorial.pdf}{Paper}. S. W. Graham and G. Kolesnik, \emph{Van der Corput's Method of Exponential Sums}, Cambridge University Press (1991), Chapters 2--4.}
+\end{document}
