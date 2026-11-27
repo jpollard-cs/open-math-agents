@@ -12,3 +12,5 @@ With Lean 4.33.1 on PATH, run the following in this directory.
     LEAN_PATH=. leanchecker --verbose ParallelBranches
 
 [Kernel replay record](lean-verification.txt). The general asymptotic arguments have written proofs. The finite check and the abstract branch theorem have the separate scopes given above.
+
+[Disjoint pairs of large prime divisors](robust-bound.md) applies to unrestricted families already attaining the known reciprocal coefficient one half. [Joint tests on the holes](two-fibres.md) gives an exact two-point projection for one or two prime digits, with independently reproducible [exhaustive checks](fibre-checks.txt). Run `python check_fibres.py` for the latter.
