@@ -1,0 +1,197 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.93in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,graphicx}
+\usepackage[colorlinks=true,linkcolor=black,urlcolor=blue,citecolor=black]{hyperref}
+\pdfmapfile{+cm.map}\pdfmapfile{+cmextra.map}\pdfmapfile{+symbols.map}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newcommand{\EE}{\mathbb E_X}
+\newcommand{\PP}{\mathbb P_X}
+\newcommand{\dd}{\mathrm d}
+\newcommand{\NN}{\mathbb N}
+\newcommand{\floor}[1]{\lfloor #1\rfloor}
+\title{Adjacent changes in the divisor counts of moving factorials}
+\author{Codex (OpenAI), at the request of Jordan Pollard}
+\date{November 27, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+For a moving factorial endpoint $\lfloor\beta n\rfloor$, record the logarithmic gain in its divisor count from one starting integer to the next. We compute the joint first-order distribution of these gains for every finite list of positive real slopes. Two such sequences have a positive limiting Pearson correlation exactly when the ratio of their slopes is rational. For the ratio of the divisor counts of $\lfloor\beta n\rfloor!$ and $n!$, the limiting mean absolute change after logarithmic scaling is continuous at every irrational slope, discontinuous at every rational slope, and nowhere differentiable on $(1,\infty)$. We also compute the two-sided law of changes for monotone sublinear windows at lags $o(\log n)$. These are written proofs building on published prime estimates; priority and human review are pending.
+\end{abstract}
+
+\section{Rational and irrational endpoint speeds}
+Let $D(k)=\tau(k!)$, $W(k)=\log(D(k)/D(k-1))$ for $k\ge1$, and
+\[
+ a_d=\log(1+1/d),\quad \kappa=\sum_{d\ge1}a_d/d,\quad
+ S=\sum_{d\ge1}a_d^2/d.
+\]
+Take $n$ uniformly among the integers $X\le n<2X$, $X$ integral, and put $L=\log X$. A factorial endpoint moving at speed $\beta>0$ has one-step log gain
+\[
+ U_\beta(n)=\log\frac{D(\floor{\beta(n+1)})}{D(\floor{\beta n})}.
+\]
+For instance, $U_1(n)=W(n+1)$. For $\beta>1$, the one-step log change of the moving factorial ratio $D(\floor{\beta n})/D(n)$ is $U_\beta(n)-U_1(n)$.
+
+\begin{theorem}\label{joint}
+Fix $\beta_1,\ldots,\beta_k>0$. Form the countable set $\Lambda=\bigcup_j\{d/\beta_j:d\in\mathbb N,\ d\ge1\}$. For $\lambda\in\Lambda$ define a vector $v_\lambda$ whose $j$-th entry is $a_{\lambda\beta_j}$ when $\lambda\beta_j$ is integral, and zero otherwise. For every Lipschitz function $\Phi:\mathbb R^k\to\mathbb R$ with $\Phi(0)=0$,
+\[
+ \lim_{X\to\infty} L\,\EE\Phi\big(U_{\beta_1}(n),\ldots,U_{\beta_k}(n)\big)
+ =\sum_{\lambda\in\Lambda}\frac{\Phi(v_\lambda)}{\lambda}.
+\]
+The series converges absolutely. This is a first-order intensity formula. Without the multiplier $L$ the gains tend to zero in probability.
+\end{theorem}
+
+\begin{proof}
+We give details of the cofactor truncation and of the coincident jumps. Theorem 2 of Erd\H os, Graham, Ivi\'c and Pomerance (EGIP) \cite{EGIP} gives $W(m)=a_{m/P^+(m)}+O(m^{-1/2})$, where $P^+(m)$ is the largest prime factor. The logarithm preserves the stated error since the ratios are at least one. On any interval $cX\le m\le CX$ with $0<c<C$ fixed, replace $W(m)$ by $a_d$ if $m=dp$ with $d\le K$ and $p$ prime, and zero otherwise. Write this approximation as $w_K(m)$. For fixed $K$ such a representation is unique for large $X$, since $p>\sqrt m$. Uniformly in fixed $K$ in the sense of a limsup, the total absolute error is
+\begin{equation}\label{tail}
+ \sum_{cX\le m\le CX}|W(m)-w_K(m)|\ll_{c,C} \sqrt X + X/(K L).
+\end{equation}
+Indeed, terms with $m/P^+(m)>\sqrt{CX}$ contribute $O(\sqrt X)$ in total. For the rest with cofactor $d>K$ use $a_d\le1/d$ and the prime counting upper bound $\pi(CX/d)\ll_C X/(dL)$ for $d\le\sqrt{CX}$. The one-step errors add another $O(\sqrt X)$. For each endpoint each integer enters at most once. After multiplication by $L/X$, the replacement costs $O_\Phi(1/K)+o(1)$.
+
+For the truncated process a prime $p$ at cofactor $d$ enters endpoint $j$ precisely when $n<(d/\beta_j)p\le n+1$. Each such real crossing time belongs to exactly one unit interval, including an integral time. All entries for the same $(\lambda,p)$ must therefore be combined into a single mark. For each $\lambda$ in the finite truncated list there are $(1+o(1))X/(\lambda L)$ primes contributing a mark, by the prime number theorem.
+
+Two different marks sharing a unit interval must satisfy $|\lambda p-\mu q|<1$. There are $o(X/L)$ such pairs for each fixed $\lambda,\mu$, excluding the identical mark. If $\lambda/\mu=u/v$ is rational in lowest terms, $up-vq$ takes finitely many integer values. At zero either the primes are bounded or the marks agree. For a nonzero value $b$, sieve the prime $p$ by small primes $\ell\nmid uvb$. For large $X$ it must avoid the single nonzero residue $b/u$ modulo each such $\ell$. The prime number theorem in fixed arithmetic progressions and the Chinese remainder theorem bound the limiting proportion by the product of $1-1/(\ell-1)$ over any finite set of these odd primes. This product tends to zero as the set is enlarged. For each $p$ there are boundedly many candidate $q$.
+
+If $\lambda/\mu$ is irrational, a candidate $q$ equals $\lfloor(\lambda/\mu)p\rfloor+j$ for one of finitely many fixed $j$. For every fixed primorial $M$, Vinogradov's theorem on irrational rotations of the primes \cite{Vin} makes $\lfloor(\lambda/\mu)p\rfloor$ equidistributed modulo $M$: apply it to $(\lambda/(\mu M))p$ and partition the unit interval into $M$ equal parts. This also holds over the multiplicative interval of primes used here by subtracting two initial counts. The limiting proportion for which $q$ avoids the primes of $M$ is $\varphi(M)/M$. Let $M$ grow after taking the limit in $X$. The proportion tends to zero.
+
+There are boundedly many marks per unit interval for fixed slopes and cutoff. Thus exceptional collisions have negligible normalized contribution. The truncated formula follows by adding single marks. In the infinite series the discarded coordinate mass is bounded by $\sum_j\beta_j\sum_{d>K}a_d/d$. Lipschitz continuity, including when some coordinates of a mark were truncated, completes the proof.
+\end{proof}
+
+\begin{corollary}\label{corr}
+For two slopes $\alpha,\beta$, the limiting Pearson correlation of $U_\alpha,U_\beta$ is zero when $\alpha/\beta$ is irrational. For $\alpha=A\gamma,\ \beta=B\gamma$ with $A,B$ coprime positive integers it is
+\[
+ \frac{\sum_{e\ge1}a_{Ae}a_{Be}/e}{\sqrt{AB}\, S}.
+\]
+In particular it is approximately $0.406417$ for slopes $2$ and $1$.
+\end{corollary}
+\begin{proof}
+The variables for fixed slopes are uniformly bounded by the one-step estimate and the bounded number of entering integers. Their products and squares can therefore be tested by Lipschitz functions agreeing with these polynomials on the relevant box. The means are $O(1/L)$, and $L\operatorname{Var}(U_\alpha)\to\alpha S$. The common crossing times have $\lambda=e/\gamma$ in the rational case and there are none in the irrational case. The covariance formula follows from Theorem~\ref{joint}.
+\end{proof}
+
+\section{The effect of cancellation on variation}
+Write $V_\beta(n)=\log(D(\lfloor\beta n\rfloor)/D(n))$, and $\Delta V_\beta=V_\beta(n+1)-V_\beta(n)$. For irrational $\beta>1$, Theorem~\ref{joint} gives, for any Lipschitz $\phi$ vanishing at zero,
+\[
+ \lim L\,\EE\phi(\Delta V_\beta)=
+ \sum_{d\ge1}\frac{\beta\phi(a_d)+\phi(-a_d)}d.
+\]
+For rational $\beta=A/B>1$ the answer is
+\begin{equation}\label{signed}
+ \sum_{A\nmid d}\frac{\beta\,\phi(a_d)}d+
+ \sum_{B\nmid d}\frac{\phi(-a_d)}d+
+ \sum_{e\ge1}\frac{\phi(a_{Ae}-a_{Be})}{Be}.
+\end{equation}
+Indeed when $n+1=Be p$ the incoming integer $Ae p$ and outgoing integer $Be p$ share the prime $p$. Formula~\eqref{signed} accounts for them at the same step.
+
+The signed mean in either case has limit $(\beta-1)\kappa$ after multiplication by $L$. For the mean absolute change, let $T(\beta)=\lim L\,\EE|\Delta V_\beta|$. Then
+\begin{equation}\label{defect}
+  T(\beta)=(1+\beta)\kappa-D_*(\beta),\qquad
+  D_*(\beta)=
+  \begin{cases}
+  \displaystyle\frac{2}{B}\sum_{e\ge1}\frac{\log(1+1/(Ae))}{e},
+     &\beta=A/B\text{ in lowest terms},\\
+  0,&\beta\text{ irrational}.
+  \end{cases}
+\end{equation}
+Here $\kappa\simeq1.257746887$ is also the first EGIP constant in the expansion of $\log \tau(n!)$: summation by parts gives $\kappa=\sum_{k\ge2}\log k/(k(k-1))$.
+
+\begin{corollary}\label{rough}
+On $(1,\infty)$ the function $T$ is continuous exactly at irrationals, differentiable nowhere, and has infinite total variation on every nondegenerate compact interval. Its $p$-variation is finite on each such interval for every $p>1$.
+\end{corollary}
+\begin{proof}
+The inequality $0\le t-\log(1+t)\le t^2/2$ gives
+\[
+ D_*(A/B)=\frac{2\zeta(2)}{AB}+O(1/(A^2B)).
+\]
+On a fixed compact slope interval this is bounded above and below by positive constants times $B^{-2}$. Only finitely many slopes there have bounded denominator. This proves continuity at irrationals, while approaching any rational through irrationals exhibits its discontinuity. At an irrational $x$ any derivative of $T$ would have to be $\kappa$ by irrational difference quotients. Infinitely many reduced $A/B$ satisfy $|x-A/B|<1/B^2$ by continued fractions. The corresponding defect divided by the distance to $x$ stays bounded away from zero, excluding that derivative.
+
+Every compact interval of positive length contains $\gg p$ reduced fractions with denominator $p$ for all sufficiently large primes $p$. The sum of their defects diverges by $\sum_p1/p=\infty$. In a finite partition, isolate any finite list of these fractions by interleaving irrationals. The variation of $D_*$ is at least the sum of their defects. Adding a linear function of bounded variation preserves infinitude. For $p$-variation with real $p>1$, the sum of the $p$-th powers of all defects in a compact interval is $\ll\sum_B B^{1-2p}<\infty$. In any partition each defect occurs at most twice as an endpoint; use $|u-v|^p\le2^{p-1}(|u|^p+|v|^p)$ for the defects and add the bounded $p$-variation of the line.
+\end{proof}
+
+The largest possible downward change also has a sharp formula:
+\[
+ \liminf_{n\to\infty} e^{\Delta V_\beta(n)}
+ =\begin{cases}(\beta+1)/(2\beta),&\beta\ge2\text{ integral},\\
+                 1/2,&\text{all other }\beta>1 .
+   \end{cases}
+\]
+The incoming terms are nonnegative and the outgoing one is at most $\log 2+o(1)$. At integer slope $A$ the incoming product also includes the step at $A(n+1)$. Put $t=P^+(n+1)/(n+1)\le1$. That step divided by the outgoing step has multiplicative ratio at least $(1+t/A)/(1+t)+o(1)\ge(A+1)/(2A)+o(1)$ by EGIP. The asserted endpoint occurs as a first-order atom, at $e=1$ in the paired case or $d=1$ on the negative side otherwise. Testing a nonnegative Lipschitz function supported in any neighborhood of the atom proves that the lower bound is approached infinitely often. The intensity theorem need not detect other values attained on a sparser sequence.
+
+For the family $\beta=(B+1)/B$ the corresponding limsup is exactly $2$. Only one site enters except when $n+1=Bz$, in which case two sites enter and the last is $(B+1)z$. Uniformly as $z\to\infty$, $P^+((B+1)z)\le\max(B+1,P^+(z))$ while $P^+(Bz)\ge P^+(z)$. EGIP therefore gives $W((B+1)z)-W(Bz)\le o(1)$. One other site can contribute at most $\log 2+o(1)$. The unpaired positive atom $a_1$ in \eqref{signed} gives the matching lower bound.
+
+\paragraph{Approaching a rational slope at finite resolution.}
+Fix $r=A/B>1$ in lowest terms, and use the slope $\beta_X=r+c/X$ throughout the dyadic sample, with $c$ fixed real. The limiting intensity of $\Delta V_{\beta_X}$ is a mixture with weight $\theta$ on \eqref{signed} and weight $1-\theta$ on the unpaired formula evaluated at $r$. Here $\theta=0$ for $c<0$, $\theta=1$ at $c=0$, and
+\[
+ \theta=\max(0,\min(1,r/c-1))\qquad(c>0).
+\]
+Indeed, on truncating the cofactors, simultaneous incoming and outgoing prime marks at $t$ and $m=n+1$ obey $|Am-Bt|=O_{A,B,c}(1)$. A nonzero difference gives finitely many two-prime equations, each negligible by the fixed-modulus argument of Theorem~\ref{joint}. Pairs of distinct incoming sites also have bounded nonzero differences. For $m=Bz,t=Az$, entry at this step means precisely $cm/X\ge0$ and $c(m-1)/X<r$. These conditions select a subinterval of asymptotic relative length $\theta$ inside $[X,2X)$. On it, the prime number theorem gives the fraction $\theta$ of each fixed cofactor's paired count. Over the whole sample the individual endpoint counts have the same asymptotics as at slope $r$, since the outer endpoints move by $O_c(1)$. Subtract double counts, add paired marks, and use \eqref{tail} as before. Thus slopes less than $r$ by even $|c|/X$ move the formerly shared jump into another step.
+
+\begin{figure}[ht]
+\centering\includegraphics[width=.91\linewidth]{slope-variation.pdf}
+\caption{The exact limiting coefficient. The line gives the value at every irrational slope. Dots show reduced rational slopes with denominator at most 18. Unplotted rationals also lie below the line.}
+\end{figure}
+
+\section{Moving sublinear windows}
+Let $h:\mathbb N\to\mathbb N$ be nondecreasing with $1\le h(n)\le Cn^{1-\epsilon}$ eventually for some $0<\epsilon<1$. Write $V(n)=\log(D(n+h(n))/D(n))$. These hypotheses include the logarithmic window in Erd\H os problem 420(ii), and, eventually, the monotone growing windows in (iii). The question there asks about the values of the ratio itself. Here we study its fluctuations between starting integers.
+
+\begin{theorem}\label{sub}
+For any integer $1\le s=s(X)\le h(X)$ with $s=o(L)$, and every Lipschitz $\phi:\mathbb R\to\mathbb R$ with $\phi(0)=0$,
+\[
+ \frac Ls\,\EE\phi(V(n+s)-V(n))\longrightarrow
+ \sum_{d\ge1}\frac{\phi(a_d)+\phi(-a_d)}d.
+\]
+In particular the average absolute log change is asymptotic to $2\kappa s/L$. The average positive and negative parts each have leading term $\kappa s/L$. The proportions with $e^{V(n+s)-V(n)}>1.6$ and with $e^{V(n+s)-V(n)}<1/1.6$ are each asymptotic to $s/L$.
+\end{theorem}
+
+\begin{proof}
+In the difference, the outgoing block is $n+1,\ldots,n+s$. The first $s$ incoming sites are $n+h(n)+1,\ldots,n+h(n)+s$. The two blocks are disjoint since $h(n)\ge s$. The extra incoming sites number $h(n+s)-h(n)$, of total size $\le s h(3X)$ summed over $n$. Every step has bounded log gain, so their normalized mean costs $o(1)$. We can henceforth use just the two blocks. For each $i\le s$ the maps $n\mapsto n+i$ and $n\mapsto n+h(n)+i$ are injective. Each image differs from $[X,2X)$ in $O(h(3X)+s)$ integers, since it contains $X$ distinct points in the slightly enlarged interval. For a fixed $d\le K$ the count of marks $dp$ over either block is consequently $(1+o(1))sX/(dL)$. By injectivity and \eqref{tail}, the normalized error from truncation is $O(1/K)+o(1)$.
+
+We bound collisions of distinct marked sites among the $2s$ positions. Partition $[X,2X)$ into the $O(1+h(2X))$ intervals of constancy of $h$. Intervals of length less than $X^{\epsilon/2}$ contain altogether $O(X^{1-\epsilon/2})$ integers. Even bounding their number of pairs per integer by $O(s^2)$ gives $o(sX/L)$. On any remaining interval of length $N$ all shifts are fixed. For two positions at positive separation $g\le 3X$, the number of starts on this interval yielding marks with prescribed cofactors $d,e\le K$ is
+\begin{equation}\label{sieve}
+ \ll_{K,\epsilon}\frac{N}{L^2}J(g),
+ \qquad J(g)=\prod_{p\mid g}(1-1/p)^{-1}.
+\end{equation}
+Here is a derivation. For primes $p>2$ outside $de$, one must avoid two translates of residues modulo $p$, or one when $p\mid g$. The large prime quotients are at least $X/K$ and hence exceed $Y=N^{1/40}$ for all large $X$. Apply the arithmetic large sieve \cite{Kow} at $Q=\lfloor N^{1/3}\rfloor$ using these residues for $p\le Y$. Write $\nu_p$ for the number of forbidden classes and put $\nu_p=0$ at omitted primes. The unrestricted squarefree denominator is $\prod_{p\le Y}(1-\nu_p/p)^{-1}$. In its normalized product measure a prime is included with probability $\nu_p/p$, so the expected log of a divisor is at most $(2+o(1))\log Y$ by Mertens' estimate. At least half the mass consists of divisors at most $Q$, by Markov's inequality. The numerator is $O(N+Q^2)=O(N)$; translation of the interval only shifts the forbidden classes. Inverting the denominator, the product of $(1-\nu_p/p)$ is at most $O_K(J(g)/(\log Y)^2)$: away from $2de$, $1-2/p\le(1-1/p)^2$, with one missing factor $1-1/p$ at primes dividing $g$. Since $\log N\ge(\epsilon/2)L$, this proves \eqref{sieve}.
+
+Uniformly for intervals $I$ of $s$ consecutive positive integers bounded by $3X$ we have
+\begin{equation}\label{meanJ}
+ \sum_{g\in I}J(g)\ll s+\log\log X .
+\end{equation}
+Prime factors above $L$ contribute a bounded factor, since at most $\log(3X)/\log L$ can divide one $g$. Expand the product over smaller primes in squarefree divisors $b$ with weight $\prod_{p\mid b}1/(p-1)$. There are at most $s/b+1$ multiples in $I$. The coefficient sum after division by $b$ is bounded by the convergent product $\prod_p(1+1/(p(p-1)))$, and the undivided coefficient sum is $\prod_{p\le L}(1-1/p)^{-1}\ll\log L$. This proves \eqref{meanJ}. For each position the separations to the opposite block form an interval of length $s$, and the separations within its own block split into at most two shorter intervals. Summing \eqref{sieve} gives the following bound for the total number of pairs, with multiplicity:
+\[
+ O_{K,\epsilon}\big(Xs(s+\log L)/L^2+X^{1-\epsilon/2}s^2\big).
+\]
+If a start carries $M\ge2$ marks, the error in replacing $\phi$ of the signed sum by the sum of individual test values is $O_\phi(M)=O_\phi(\binom M2)$. Divide by $sX/L$, take $X\to\infty$ at fixed $K$, and then let $K\to\infty$. For the two tail probabilities, sandwich their indicators between Lipschitz functions agreeing off arbitrarily small neighborhoods of the threshold. The thresholds lie strictly between successive atoms.
+\end{proof}
+
+\begin{corollary}\label{anti}
+If moreover $h(n)\ge c\log n$ eventually for a fixed $c>0$, there are $\delta,b>0$ such that for $s=\lfloor\delta L\rfloor$ each of the two events
+\[
+ V(n+s)-V(n)>\tfrac12\log 2,\qquad
+ V(n+s)-V(n)<-\tfrac12\log 2
+\]
+has probability at least $b\delta$ for all sufficiently large $X$. In particular $V(n)$ cannot converge in natural density to any monotone deterministic center in absolute error tending to zero. This also excludes centers whose change over that lag tends uniformly to zero on dyadic intervals.
+\end{corollary}
+\begin{proof}
+For each sign take a nonnegative Lipschitz bump of height one at $\pm a_1$, bounded by one and supported in the indicated open half-line. In the proof of Theorem~\ref{sub} the normalized single-mark sum at fixed $K$ is at least $1+o(1)$ from the $d=1$ term. The normalized tail error is $\ll_\phi 1/K+o(1)$ and the collision error is $\ll_{K,\epsilon,\phi}\delta+o(1)$. Choose $K$ large first, then a fixed $\delta<c$ small enough. For the claim about a nondecreasing center use the negative increment event; for a nonincreasing center use the positive one. On the event at least one of the two values differs from its center by at least $(\log2)/4$. Each endpoint belongs to at most two such comparisons. A center with uniformly $o(1)$ increments gives the same assertion with any smaller tolerance.
+\end{proof}
+
+\section{A sparse upper tail and pairs of primes}
+The jump intensity describes events on the $X/\log X$ scale. At slope $3$ rarer events have additional structure. Let $R(n)=\exp(\Delta V_3(n))$. Every subsequential limit of $R(n)$ strictly above $5/2$ belongs to
+\[
+ \{3\}\ \cup\
+ \left\{3-\frac{2}{d+1}: d\ge4,\quad d\not\equiv2\pmod4\right\}.
+\]
+Every member of this set is attained if Dickson's prime-tuples conjecture holds. Unconditionally, for fixed $\eta>0$, the number of $n\in[X,2X)$ with $R(n)>5/2+\eta$ is $O_\eta(X/L^2)$.
+
+To prove this, put $m=n+1$. The entering steps occur at $3m-2,3m-1,3m$. The last has log gain at most $W(m)+o(1)$ by EGIP, since $P^+(3m)=\max(3,P^+(m))$. Of the other two one is odd and one even. If the odd one is composite its cofactor is at least $3$, and the even one's cofactor is at least $2$ for all sufficiently large $m$. If the even one is not twice a prime, its cofactor is at least $4$ for large $m$: its largest prime either is odd, giving an even cofactor, or is $2$ and the cofactor tends to infinity. Thus exceeding $5/2+\eta$ eventually requires the odd site to be prime and the even site to be twice a prime. These are prime pairs $u,2u\pm1$; the two-residue sieve in \eqref{sieve} with fixed gap and cofactors gives the count bound. Along such a sequence the first two gains multiply to $3+o(1)$. Writing $d=m/P^+(m)$ gives $R(n)=3-2/(d+1)+o(1)$, also if $P^+(m)\le3$, when $d\to\infty$. For bounded even $d$, its large prime partner is odd; if $d\equiv2\bmod4$ then $3m-2$ is divisible by $4$, precluding the pair. This proves the containment.
+
+For the converse under Dickson's conjecture, if $4\mid d$ ask for simultaneous primes $r,\ (3d/2)r-1,\ 3dr-1$, as forms in $r$. If $d$ is odd take $r=4t+b$ with $b\equiv d\bmod4$ odd, and ask for simultaneous primes $r,\ 3dr-2,\ (3dr-1)/2$ as integral forms in $t$. In the even case the choice of odd $r$ avoids 2, and in the odd case all three forms are already odd. At 3 only the form $r$ can vanish. For every prime larger than 3 none of the forms vanishes identically (in particular at primes dividing $d$), and there are at most three forbidden residues. The linear forms are positive eventually and pairwise nonproportional. Dickson's conjecture gives infinitely many prime triples for each permitted $d$, so $m=dr$ realizes the stated limit. Closedness of the set of finite subsequential limits gives $3$ as $d\to\infty$. Establishing any limit above $5/2$ unconditionally would in particular yield infinitely many primes $u$ with at least one of $2u-1,2u+1$ prime.
+
+\paragraph{Scope and sources.} These are AI-authored written arguments. A separate AI audit reviewed the sieve, truncation, and slope analysis. Finite computations accompany this manuscript. Prior results for factorial levels and their normal order, including earlier observations using Mastrostefano's prime counts, are discussed in the annotated source \cite{record}. This paper concerns changes between starting integers. The limit distribution of the ratio itself at a fixed logarithmic window is a different problem. The all-start divergence in Erd\H os 420(i) remains open. The present theorems have not received external review or a full Lean check.
+\begin{thebibliography}{9}
+\bibitem{EGIP} P. Erd\H os, S. W. Graham, A. Ivi\'c and C. Pomerance, \href{https://math.dartmouth.edu/~carlp/factorial.pdf}{On the number of divisors of $n!$}, \emph{Analytic Number Theory}, 1996, Theorems 1 and 2.
+\bibitem{Vin} I. M. Vinogradov's theorem on the uniform distribution of irrational multiples of the primes. See the \href{https://assets.cambridge.org/97805214/59990/excerpt/9780521459990_excerpt.pdf}{Cambridge excerpt, section 1.1}, which explicitly states the form used here.
+\bibitem{Kow} E. Kowalski, \href{https://people.math.ethz.ch/~kowalski/dual-large-sieve.pdf}{An alternate argument for the arithmetic large sieve inequality}, introduction, inequality (1).
+\bibitem{record} \href{https://www.erdosproblems.com/420}{Erd\H os problem 420}; \href{https://erdosproblems.ai/wiki/library/factorials_binomials/erdos_1996_number_divisors}{annotated discussion of EGIP, including the unnumbered normal-order remarks}.
+\end{thebibliography}
+\end{document}

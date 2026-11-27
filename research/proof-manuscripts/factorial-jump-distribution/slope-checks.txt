@@ -1,0 +1,4 @@
+46 reduced slopes: entering/leaving counts match exact prime counts.
+20030 alignments matched both coordinates and their largest prime.
+48000 integer-slope lower proxy bounds passed (integer arithmetic).
+35847 microscopic alignment decisions agree with the overlap fraction.

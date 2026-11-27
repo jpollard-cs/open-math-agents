@@ -1,0 +1,4 @@
+401 independent factorial divisor counts and 6374 exact moving-window comparisons passed.
+X=100000, lag=1: scaled up 0.83146, down 0.82870, absolute variation 1.99701.
+X=100000, lag=3: scaled up 0.63904, down 0.63981, absolute variation 1.36906.
+X=100000, lag=6: scaled up 0.45054, down 0.44657, absolute variation 0.97066.
