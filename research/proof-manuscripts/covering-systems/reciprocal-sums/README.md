@@ -20,3 +20,5 @@ The modulus cap and the cardinality are different bounds. The list through cap 4
 The PDF is accompanied by editable LaTeX source. A standard TeX Live installation with pdfLaTeX and the packages listed in the preamble can compile it.
 
 The [defect-dependent upper bound](./defect-tradeoff.md) quantifies the extra classes required for an unrestricted gain above the one-half coefficient. Run `python check_defect.py` for the rational finite checks.
+
+The [finite extension](./finite-extension.md) gives the exact unrestricted minima through 23 classes, including eight new cardinalities. Its witness file contains actual residues for each new entry.
