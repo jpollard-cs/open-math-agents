@@ -1,58 +1,27 @@
-# Perfect matchings in graphs excluding $K_{3,3}$
+# Counting perfect matchings in graphs without $K_{3,3}$
 
-**A proof of the bound in Open Math Agents problem MO 410663**  
-Submitted by `jpollard-cs` with OpenAI Codex (GPT-6), 27 November 2026.
+*Jordan Pollard, with OpenAI Codex (GPT-6), November 27, 2026*
 
-Let $P(G)$ be the number of perfect matchings of a finite simple graph $G$. A perfect matching pairs every vertex with exactly one neighbor. We say that $G$ excludes $K_{3,3}$ when it has no two disjoint triples of vertices with all nine edges between them. Edges within either triple are allowed.
-
-**Theorem.** For every integer $n\ge 0$ and every graph $G$ on $2n$ vertices that excludes $K_{3,3}$,
+A perfect matching pairs every vertex of a graph with one of its neighbors. Write $P(G)$ for the number of ways to do this. Suppose $G$ has $2n$ vertices and contains no copy of $K_{3,3}$. This means that no two disjoint triples have all nine edges between them. Edges within each triple are allowed. The checked theorem gives
 
 $$
-P(G)^3\le (64n^2)^n.
+P(G)^3 \le (64n^2)^n .
 $$
 
-In particular, $P(G)\le (4n^{2/3})^n$ for $n\ge 1$. The project's statement asks for some positive integer $C$ in place of $64$. The proof supplies $C=64$. [Reviewed theorem statement, PR 349](https://github.com/GuillaumeBAUD-coder/open-math-agents/pull/349)
+For $n\ge1$ this reads $P(G)\le (4n^{2/3})^n$. The factor $4$ comes from the explicit witness $64$ in the proof. The project statement asks for the existence of a constant. [Formal statement](https://github.com/GuillaumeBAUD-coder/open-math-agents/blob/df2ae918f9c0cf4366fca812a462382fcc83de1f/statements/mo-410663.lean#L20-L22), [MatchingCount.uniform_upper](https://github.com/GuillaumeBAUD-coder/open-math-agents/blob/c7f8ce950580ef6dd80e9924ebbf6749ddfdcc2d/proofs/mo-410663.lean#L179-L193)
 
-## Bounding the smallest degree
+## Find a vertex with few possible partners
 
-Take any nonempty set of $m$ vertices and consider the graph they induce. Write $d$ for its smallest degree. Count the pairs $(v,T)$ in which $v$ is a vertex and $T$ is an unordered triple of its neighbors. Each vertex contributes at least $\binom d3$ pairs. Each triple occurs in at most two pairs. Indeed, three common neighbors of $T$ would form a second triple disjoint from $T$, since no vertex is adjacent to itself. The nine edges between the triples would give a $K_{3,3}$. Thus
+Take any nonempty set of $m$ vertices and let $d$ be the smallest degree inside it. Count the pairs consisting of a vertex and three of its neighbors inside the set. Each vertex contributes at least $\binom d3$ pairs. Each triple occurs at most twice. A third common neighbor would give a copy of $K_{3,3}$, since none of the common neighbors can belong to the triple in a loopless graph. [MatchingCount.contains_of_triples](https://github.com/GuillaumeBAUD-coder/open-math-agents/blob/c7f8ce950580ef6dd80e9924ebbf6749ddfdcc2d/proofs/mo-410663.lean#L17-L41)
 
-$$
-m\binom d3\le 2\binom m3.
-$$
+Thus $m\binom d3\le 2\binom m3$, so $6\binom d3\le 2m^2$. For $d\ge3$, the inequalities $d-1\ge d/2$ and $d-2\ge d/3$ give $d^3\le 8d(d-1)(d-2)\le 16m^2$. The same conclusion holds when $d\le2$, since $m\ge1$. For $n\ge1$, taking $m=2n$ gives a vertex with $d$ possible partners and $d^3\le64n^2$. [MatchingCount.small_degree](https://github.com/GuillaumeBAUD-coder/open-math-agents/blob/c7f8ce950580ef6dd80e9924ebbf6749ddfdcc2d/proofs/mo-410663.lean#L46-L90)
 
-Multiplying by six and using $6\binom m3\le m^3$ gives $6\binom d3\le 2m^2$. When $d\ge3$, the inequalities $d-1\ge d/2$ and $d-2\ge d/3$ give
+## Fix a partner and repeat
 
-$$
-d^3\le 8d(d-1)(d-2)=8\cdot 6\binom d3\le 16m^2.
-$$
+Choose such a vertex $v$. If it has no neighbor there are no perfect matchings. Otherwise divide all perfect matchings into classes according to the partner of $v$. If the largest class has size $M$, then $P(G)\le dM$. In that class, both $v$ and its partner are fixed. The same argument applies to the remaining $2(n-1)$ vertices. At zero remaining vertices a class has at most one matching, because every vertex's partner is fixed. [MatchingCount.mate_ext](https://github.com/GuillaumeBAUD-coder/open-math-agents/blob/c7f8ce950580ef6dd80e9924ebbf6749ddfdcc2d/proofs/mo-410663.lean#L92-L113), [MatchingCount.family_bound](https://github.com/GuillaumeBAUD-coder/open-math-agents/blob/c7f8ce950580ef6dd80e9924ebbf6749ddfdcc2d/proofs/mo-410663.lean#L115-L177)
 
-When $d\le2$, the same bound follows from $d^3\le8$ and $m\ge1$. We can therefore choose a vertex of degree $d$ satisfying $d^3\le16m^2$ in every nonempty induced subgraph.
+Induction now gives $M^3\le (64(n-1)^2)^{n-1}$. Multiplying by $d^3\le64n^2$ proves the claimed inequality. Lean carries out the induction inside the original graph. The family of matchings agrees on every partner outside the remaining vertex set, and every partner of a remaining vertex is still inside that set. Fixing a pair preserves both properties. [Induction step](https://github.com/GuillaumeBAUD-coder/open-math-agents/blob/c7f8ce950580ef6dd80e9924ebbf6749ddfdcc2d/proofs/mo-410663.lean#L134-L177)
 
-## Partitioning matchings by one vertex's partner
+## Prior work and formalization
 
-We use induction on $n$. The empty graph has one perfect matching, the empty set of edges, so the claim holds for $n=0$ with the usual convention $a^0=1$.
-
-Now suppose $n\ge1$. Choose a vertex $v$ of smallest degree $d$ in $G$. With $m=2n$, the degree bound gives $d^3\le64n^2$. Every perfect matching pairs $v$ with a unique neighbor $w$. Deleting the edge $vw$ and its endpoints leaves a perfect matching of $G-\{v,w\}$. Conversely, adding $vw$ extends every perfect matching of that smaller graph to one with partner $w$. Hence
-
-$$
-P(G)=\sum_{w\sim v}P(G-\{v,w\}).
-$$
-
-If $d=0$, the sum is empty and $P(G)=0$. Otherwise choose a neighbor whose summand is largest, and denote that summand by $M$. The smaller graph has $2(n-1)$ vertices and still excludes $K_{3,3}$. Induction gives $M^3\le(64(n-1)^2)^{n-1}$. It follows that
-
-$$
-\begin{aligned}
-P(G)^3 &\le d^3M^3\\
-&\le 64n^2\bigl(64(n-1)^2\bigr)^{n-1}\\
-&\le 64n^2(64n^2)^{n-1}=(64n^2)^n.
-\end{aligned}
-$$
-
-This completes the proof.
-
-## Formal proof and provenance
-
-The Lean proof implements the deletion step by fixing the partner of each removed vertex. Matchings in one class agree outside the remaining vertex set, and every remaining vertex has its partner in that set. These properties allow the induction to proceed on a smaller set within the original graph. The declaration `OMA.solution` has the exact type of the merged statement. At this writing the proof pull request is open, and its automated check succeeded. [Lean proof, PR 5548](https://github.com/GuillaumeBAUD-coder/open-math-agents/pull/5548) · [Automated check for the submitted commit](https://github.com/GuillaumeBAUD-coder/open-math-agents/actions/runs/45987377651)
-
-Michał Oszmaniec asked for an upper bound in December 2021. In the original discussion, `alpmu` pointed out that an extremal edge bound could be combined with a matching bound of Alon and Friedland. The argument above obtains a uniform estimate directly by counting triples and deleting matched pairs. [Original question and discussion](https://mathoverflow.net/questions/410663/upper-bound-on-the-number-of-perfect-matchings-in-k-3-3-free-graphs)
+Michał Oszmaniec asked the question on MathOverflow in 2021. In that discussion, alpmu identified an existing route combining an extremal edge bound with the perfect-matching inequality of Noga Alon and Shmuel Friedland. Oszmaniec confirmed that it gave the bound he needed. Left to Solve classifies the result as known. The contribution here is a Lean formalization by direct counting and induction. The project credits Jordan Pollard (@jpollard-cs), using OpenAI Codex (GPT-6), for the statement and proof. Codex drafted this explanation. [Original discussion](https://mathoverflow.net/questions/410663), [Alon and Friedland](https://arxiv.org/abs/0803.2578), [Project review](https://lefttosolve.com/p/mo-410663), [Accepted proof](https://github.com/GuillaumeBAUD-coder/open-math-agents/pull/5548)
