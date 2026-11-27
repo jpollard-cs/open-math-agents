@@ -1,0 +1,61 @@
+\newpage
+\head{6. The same constant in the second reciprocal term}
+Fix $H$ as on page 7. Among $k$ distinct moduli with a label graph covered by $H$, satisfying the period budget $\sum_{q^a\parallel L}a(q-1)\le k-1$ and admitting a cover, let $R_H^*(k)$ denote the largest reciprocal sum. For nonempty $H$, and also for empty $H$ by the earlier zero-defect construction, we obtain
+\[
+ \lim_{k\to\infty}\frac{R_H^*(k)-\tfrac12\log k}{\log\log k}
+    =\tfrac12+\gamma+C_H-1.\tag{6}
+\]
+Both bounds have remainder $O_H(1)$ after the two displayed orders, as shown on page 11. It applies to genuine irreducible sets. The construction for nonempty $H$ establishes the lower bound for the relaxation with coverage. In particular for one binary hub the possible additional second-order coefficient is bounded by $3\log2$ under irreducibility, and equals $3\log2$ in this relaxation.
+
+Pure $H$-labels contribute at most $\sum_{s\in\mathcal T}H_s/s=O_H(1)$. Labels $sp^a$ with $a\ge2$, $p\notin H$, contribute at most
+$\sum_{s,p,a\ge2} H_{sp^a}/(sp^a)=O_H(1)$, where only the exponent is restricted to be at least two. This follows from convergence of $\sum_{s\in\mathcal T}(1+\log s)/s$ and $\sum_p(1+\log p)/p^2$.
+
+For labels $sp$ with fixed $p\notin H$, the finite rank identity on page 8 is attained at \emph{every} cutoff by one infinite set: for each exact $H$-part $s$ select the $sp$ smallest $m$ with that exact part and take $n=pm$. This dominates the cumulative counts for any assignment, so partial summation bounds its reciprocal mass by that of this set, regardless of which exterior prime ultimately receives a modulus. Let $A_H(j)$ be the reciprocal sum of the first $j$ integers coprime to all of $H$. Inclusion-exclusion gives
+\[
+ A_H(j)=v[\log(j/v)+\gamma+\sum_{h\in H}\log h/(h-1)]+O_H(1/j).
+\]
+Indeed their counting function through $u$ is $vu+O_H(1)$ and their harmonic sum is $v(\log u+\gamma)-\sum_{d\mid\prod H}\mu(d)\log d/d+O_H(1/u)$. The divisor sum equals $-v\sum_{h\in H}\log h/(h-1)$ by differentiating the finite Euler product. The local optimal mass therefore equals
+\[
+ \frac1p\sum_{s\in\mathcal T}\frac{A_H(sp)}s
+   =\frac{\log p+\gamma+C_H-1}{p}+O_H(p^{-2}).
+\]
+Sum through $Y=\sqrt{k\log k}$ and bound larger active primes by the period budget as on page 2. Mertens' estimates give the upper bound in (6), including the stated bounded remainder.
+
+\newpage
+\head{Exact cardinality and the matching lower construction}
+Take $H\ne\varnothing$, fix $J\ge1$ and put $B=\prod_{h\in H}h^J$. The condition $\gcd(m,B)=s$ for $s\mid B$ has density $w_s=\varphi(B/s)/B$ with a bounded counting error depending only on $B$. For each prime $p>\max(H\cup\{13\})$, and each $s\mid B$, select the $sp$ smallest integers $m$ with this gcd, then discard those with a prime factor $\ge p$. Put $pm$ into the family with label $sp$. Before deletions this includes every $m\le p$, since no gcd class has more than $p$ entries up to $p$. Its endpoint for gcd $s$ is $(s/w_s)p+O_B(1)$. Partial summation on $p<m\le(s/w_s)p+O_B(1)$ gives additional harmonic mass $w_s\log(s/w_s)+O_B(1/p)$ in the $m$ variable. The $O_B(p/\log p)$ rejected $m$, all at least $p$, cost $O_B(1/(p\log p))$ in the original moduli. Thus the row block at $p$ contributes
+\[
+ \frac{\log p+\gamma+g_B}{p}+O_B(1/(p\log p)),\qquad
+ g_B=\sum_{s\mid B}w_s\log(s/w_s).
+\]
+No modulus occurs twice, since $p$ is its largest prime, of exponent one. Each label has the required capacity. Include the fixed five-row cover with the labels given on page 8. Process $p$ in increasing order and take any prefix of the final block to realize each sufficiently large cardinality. Through a full block $x$, the size is $(\sum_{s\mid B}s+o_B(1))x^2/(2\log x)$. The terminal partial block costs $O_B(x)$ rows and its omission loses $O_B(\log x/x)$ harmonic mass, using the prime number theorem to compare successive primes. Since $\sum_{s\mid B}s>1$, the first-power budget $\le(1+o(1))x^2/(2\log x)$ leaves room for all repeated powers, whose extra cost is $O_B(x\log x)$ as on page 8. Consequently at every sufficiently large exact $k$,
+\[
+ S=\tfrac12\log k+(\tfrac12+\gamma+g_B)\log\log k+O_B(1).
+\]
+The bounded error follows by summing the displayed block estimate, since $\sum_p1/(p\log p)$ converges, and by taking logarithms in the size asymptotic.
+
+The distribution $w_s$ is that of independent geometric prime exponents, each stopped at $J$. In fact
+\[
+ g_B=\sum_{h\in H}(1-h^{-J})\left[-\log(1-1/h)+2\log h/(h-1)\right].
+\]
+Given that an exponent reaches $J$, its remaining length has the original geometric law. Truncating it therefore loses the fraction $h^{-J}$ of both its mean and its entropy (by the entropy chain rule). Therefore $g_B$ is the expected log of the resulting integer plus the entropy of its distribution (natural logarithms). As $J\to\infty$ the expectation and entropy converge to those of the independent untruncated geometric variables; their geometric tails times $1+j$ are summable. This gives $g_B\to \sum_{s\in\mathcal T}(v/s)\log(s^2/v)=C_H-1$. First take $k\to\infty$ for fixed $J$, then $J\to\infty$. This proves (6). Page 11 refines the choice of cutoffs to control the remainder. For $H=\varnothing$ the accompanying zero-defect paper gives the asserted lower expansion.
+
+\newpage
+\head{Uniformly bounded remainder at every exact size}
+The two-cutoff construction below strengthens the lower estimate in (6) to
+\[
+ R_H^*(k)=\tfrac12\log k+
+       (\tfrac12+\gamma+C_H-1)\log\log k+O_H(1).\tag{7}
+\]
+The extra rows needed for the reciprocal term can be spent on the smaller exterior primes without changing the final cardinality scale.
+
+For a prescribed sufficiently large $k$, put $y=k^{1/8}$. For each sufficiently large prime $p\le y$ outside $H$, use the preceding gcd construction with $J(p)=\lfloor c_H\log\log p\rfloor$, choosing the positive constant $c_H$ so that $B(p)=\prod_{h\in H}h^{J(p)}\le(\log p)^{1/16}$. Omit finitely many starting primes, keeping the fixed cover. For all $p>y$ use one fixed $B_0=\prod_{h\in H}h$, continuing in increasing order until size $k$ is reached.
+
+Here are uniform estimates for the small primes. A gcd class mod $B$ has counting error at most $B$ and density $w_s\ge1/B$. Its endpoint is $sp/w_s+O(B/w_s)$ and is $O(B^2p)$. Its excess $m$-harmonic mass beyond $p$ differs from $w_s\log(s/w_s)$ by $O(B/p)$ by partial summation (the endpoint error is multiplied by $w_s$). Across all $s\mid B$ this costs $O(B^2/p)$. Every rejected $m$ is at least $p$ and equals $jr$ with $j\ll B^2$, $r\ge p$ prime. By Chebyshev the number is $O(B^2p(1+\log(2B))/\log p)$, summing $1/j$ for these $j$. Thus the errors in the original reciprocal sum, after division by $p$, are bounded in total, since
+\[
+ \sum_p\left(\frac{B(p)^2}{p^2}+
+       \frac{B(p)^2(1+\log(2B(p)))}{p\log p}\right)<\infty .
+\]
+Moreover $0\le C_H-1-g_{B(p)}\ll_H(1+J(p))2^{-J(p)}$ by the geometric tail formula for the stopped exponents and their entropies. The sum of these errors weighted by $1/p$ also converges, by partial summation and $J(p)=c_H\log\log p+O(1)$.
+
+At most $O(y^2(1+\log y)^2)=o(k)$ rows have been spent through $y$; indeed each prime contributes at most $p\sum_{s\mid B(p)}s\le p B(p)^2$. The largest exterior prime $x$ reached is again asymptotic to a positive $H$-dependent constant times $\sqrt{k\log k}$ by the fixed-block size estimate. The partial final block and the budget are handled as on page 10, since $B(p)^2 p=o(x)$ throughout the small-prime range. In the large-prime range the missing local second-order mass is bounded by $O_H(\sum_{y<p\le x}1/p)=O_H(1)$ because $\log x/\log y$ is bounded. Summing the block estimates therefore yields (7) at the prescribed size. For the empty set $H$ use the prior construction directly. An explicit constant with an $o(1)$ remainder and the second-order term for genuine irreducible covers with nonempty $H$ are separate questions.

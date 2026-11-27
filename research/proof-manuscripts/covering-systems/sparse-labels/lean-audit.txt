@@ -1,0 +1,2 @@
+'CoveringRectangle.contraction' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CoveringRectangle.deletion' does not depend on any axioms

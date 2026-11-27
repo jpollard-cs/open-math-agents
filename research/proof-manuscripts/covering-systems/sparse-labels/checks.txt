@@ -1,0 +1,4 @@
+64 distinct moduli, maximum 13860, period 360360.
+Every residue covered; all 64 rows have private residues.
+All prime-power slots total 62; exact maximum placement 62.
+One permitted edge 5--7 places all 64 rows.
