@@ -1,0 +1,82 @@
+\documentclass[10pt]{article}
+\usepackage[letterpaper,margin=0.88in]{geometry}
+\usepackage{amsmath,amssymb,xcolor,hyperref}
+\pdfmapfile{+cm.map}\pdfmapfile{+cmextra.map}\pdfmapfile{+symbols.map}
+\hypersetup{colorlinks=true,urlcolor=blue!55!black,pdftitle={A Selberg sieve block for the four-ninths factorial window},pdfauthor={Jordan Pollard, with OpenAI Codex}}
+\setlength{\parindent}{0pt}\setlength{\parskip}{4.5pt}
+\newcommand{\D}{\mathcal D}
+\newcommand{\wtR}{\mathcal R}
+\begin{document}
+{\LARGE\bfseries A Selberg sieve block for the\\[2pt] four-ninths factorial window\par}
+\medskip
+Jordan Pollard\hfill November 27, 2026\\
+{\small OpenAI Codex developed this formalization and prepared the proof note.}
+
+\section*{Counting prime divisors in one block}
+For nonnegative integers $n,h$ and real endpoints $u\le v$, let $T$ count the pairs $(j,p)$ with $n<j\le n+h$ and $u<p\le v$ a prime divisor of $j$. Fix an integer $z\ge1$ with $z^2\le u$. Write $[d,e]$ for the least common multiple and $\psi(y)=y-\lfloor y\rfloor-1/2$. Define
+\[
+ R(x,t)=\sum_{\substack{u<m\le v\\ t\mid m}}\psi(x/m),
+ \qquad \wtR(x)=\sum_{d,e\in\D}\lambda_d\lambda_e R(x,[d,e]).
+\]
+Here $m$ runs over positive integers, $\D$ consists of the squarefree integers in $[1,z]$, and the weights are given below. The following inequality holds with both boundary terms explicit:
+\begin{equation}
+ T\le \frac{h\log(v/u)}{\log(z+1)}+\frac{2hz^2}{u}+\wtR(n)-\wtR(n+h).
+ \tag{1}
+\end{equation}
+Erd\H{o}s, Graham, Ivi\'c and Pomerance use this type of block to count prime divisors when $h=\lfloor n^{4/9}\rfloor$. The Lean proof of (1) works at every admissible $n,h,u,v,z$.
+
+\subsection*{Weights and normalization}
+Let $\varphi$ be Euler's totient and $\mu$ the M\"obius function. Set
+\[
+ G=\sum_{q\in\D}\frac1{\varphi(q)},\qquad
+ \lambda_d=\frac{d\mu(d)}{G}
+             \sum_{\substack{q\in\D\\d\mid q}}\frac1{\varphi(q)}
+ \quad(d\in\D).
+\]
+We have $\lambda_1=1$, $|\lambda_d|\le1$, and $G\ge H_z\ge\log(z+1)$, where $H_z=\sum_{j\le z,\,j\ge1}1/j$. For the bound on $|\lambda_d|$, expand each $d/\varphi(q)$ as $\sum_{b\mid d}1/\varphi(q/b)$ using squarefreeness and $\sum_{b\mid d}\varphi(b)=d$. The map $(q,b)\mapsto q/b$ is injective into $\D$, since $[d,q/b]=q$ recovers $q$.
+
+For the bound $H_z\le G$, group integers $j\le z$ by their radical $q$. Set $M=q^z$. Each such $j$ yields a different divisor $t=Mq/j$ of $M$ with radical $q$. Thus $j\varphi(t)=M\varphi(q)$, and summing over the group gives $\sum_j 1/j\le 1/\varphi(q)$ by the totient divisor sum for $M$.
+
+Finally, expanding $\gcd(d,e)$ as a divisor sum of totients gives
+\[
+ \sum_{d,e\in\D}\frac{\lambda_d\lambda_e}{[d,e]}
+ =\sum_{\ell\in\D}\varphi(\ell)
+   \left(\sum_{\substack{d\in\D\\\ell\mid d}}\frac{\lambda_d}{d}\right)^2
+ =\frac1G.
+\]
+Indeed, interchanging the $d,q$ sums and applying M\"obius cancellation gives $\mu(\ell)/(G\varphi(\ell))$ for the inner sum.
+
+\newpage
+\section*{From the square sieve to the block inequality}
+A prime $p\in(u,v]$ has just the divisor $1$ in $\D$. The nonnegative square $(\sum_{d\mid m,\,d\in\D}\lambda_d)^2$ therefore majorizes the prime indicator for every integer $m\in(u,v]$. Multiply it by the number of multiples of $m$ in $(n,n+h]$, namely
+\[
+ \left\lfloor\frac{n+h}{m}\right\rfloor-\left\lfloor\frac n m\right\rfloor
+ =\frac h m + \psi(n/m)-\psi((n+h)/m).
+\]
+Expanding the square yields the two signed remainders in (1). For $1\le t\le z^2$, comparison of the harmonic sum on $(u/t,v/t]$ with the logarithmic integral gives
+\[
+ \left|\sum_{\substack{u<m\le v\\t\mid m}}\frac1m-
+             \frac{\log(v/u)}{t}\right|\le\frac2u.
+\]
+Indeed, put $a=\lfloor u/t\rfloor\ge1$, $b=\lfloor v/t\rfloor$. Integration bounds $\sum_{a<j\le b}1/j$ between $\log((b+1)/(a+1))$ and $\log(b/a)$. Its absolute difference from $\log(v/u)$ is at most $\log((a+1)/a)\le1/a\le2t/u$ by the defining inequalities for the floors. Division by $t$ gives the estimate. Summing it over at most $z^2$ ordered pairs with $|\lambda_d\lambda_e|\le1$ completes (1).
+
+\subsection*{The remaining analytic estimate}
+Suppose $A,B\ge0$, $0\le s<1$, and $|R(x,t)|\le A t^{-s}+B/t$ for $x\in\{n,n+h\}$ and every $1\le t\le z^2$. Put $C_s=(1+1/(1-s))/(1-s)^2$. Then
+\begin{equation}
+ T\le \frac{h\log(v/u)}{\log(z+1)}+\frac{2hz^2}{u}
+       +2\bigl(A C_s z^{2(1-s)}+B(1+\log z)^3\bigr).
+ \tag{2}
+\end{equation}
+To sum the errors, put $g=\gcd(d,e)$ and $(d,e)=(ga,gb)$. Dropping the coprimality and squarefree restrictions after replacing $[d,e]$ by $gab$ gives
+\[
+ \sum_{d,e\in\D}[d,e]^{-s}
+ \le \sum_{g\le z}g^{-s}\left(\sum_{a\le z/g}a^{-s}\right)^2
+ \le \frac{z^{2(1-s)}}{(1-s)^2}\sum_{g\le z}g^{s-2}
+ \le C_s z^{2(1-s)} .
+\]
+All indices in these sums are positive. At $s=1$ the same first inequality gives $H_z^3$. For fixed $s<1$ the fractional-power term thus carries no logarithmic factor.
+
+\textbf{Scope.} Equation (1), the two divisor sums, and the implication (2) are verified in Lean 4.33.1. To obtain the project's 48 prime-count inequalities, one still needs uniform cancellation in $R(x,t)$, the choices of $z$ for the relevant prime ranges, and the summation over blocks. This is a formalization of a step on the published four-ninths route for Erd\H{o}s 420. The original polylogarithmic question is open.
+
+{\small\textbf{Reference.} P. Erd\H{o}s, S. W. Graham, A. Ivi\'c and C. Pomerance, \emph{On the number of divisors of $n!$}, in \emph{Analytic Number Theory}, Vol. 1 (1996), Lemma 3 and equations (16)--(19). \href{https://math.dartmouth.edu/~carlp/factorial.pdf}{Author-hosted paper}.}
+\end{document}
