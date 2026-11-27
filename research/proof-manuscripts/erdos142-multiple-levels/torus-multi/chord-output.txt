@@ -1,0 +1,1 @@
+512 rational chords verified. Limiting mean squared sum = 3515/3024.

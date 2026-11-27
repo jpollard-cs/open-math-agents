@@ -1,0 +1,7 @@
+Nonconstant ordered triples checked in small cubes:
+2 8 384064
+3 6 258048
+4 4 27936
+5 4 103680
+400 bulk and 48 near-corner witness triples passed.
+q=3, d=12: best adjacent pair starts at 41 and has 1138038 points.
