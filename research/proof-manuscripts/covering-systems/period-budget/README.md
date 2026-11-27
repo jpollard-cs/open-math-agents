@@ -93,3 +93,5 @@ lean Size31Upper.lean
 The [new census and proof](minima-31-33.md) give $m(31)=96$ and $m(32)=m(33)=108$. There are precisely two minimizing 31-element sets. The note links the residue witnesses, Lean proofs of coverage and cardinality, and the exhaustive decision procedure for freely reassigned residues.
 
 The [size-36 exclusion](size36-cap.md) rules out the sole remaining candidate under cap 108 by giving a 33-row proper subcover. Thus $m(k)\ge112$ for all $k\ge36$. Four separate constructions attain cap 150 at sizes 34 through 37.
+
+The [prime-11 extension](prime11-minima.md) gives the exact unrestricted minimum 132 at each size from 39 through 43. The same construction supplies upper bounds at sizes 34–38 and attains the least possible cap for prime 11 at every size from 28 through 43.

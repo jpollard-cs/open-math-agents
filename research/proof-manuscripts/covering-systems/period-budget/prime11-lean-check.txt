@@ -1,0 +1,20 @@
+'Erdos1189.Prime11.Size34.covers' depends on axioms: [propext, Quot.sound]
+'Erdos1189.Prime11.Size34.size_and_max' does not depend on any axioms
+'Erdos1189.Prime11.Size35.covers' depends on axioms: [propext, Quot.sound]
+'Erdos1189.Prime11.Size35.size_and_max' does not depend on any axioms
+'Erdos1189.Prime11.Size36.covers' depends on axioms: [propext, Quot.sound]
+'Erdos1189.Prime11.Size36.size_and_max' does not depend on any axioms
+'Erdos1189.Prime11.Size37.covers' depends on axioms: [propext, Quot.sound]
+'Erdos1189.Prime11.Size37.size_and_max' does not depend on any axioms
+'Erdos1189.Prime11.Size38.covers' depends on axioms: [propext, Quot.sound]
+'Erdos1189.Prime11.Size38.size_and_max' does not depend on any axioms
+'Erdos1189.Prime11.Size39.covers' depends on axioms: [propext, Quot.sound]
+'Erdos1189.Prime11.Size39.size_and_max' does not depend on any axioms
+'Erdos1189.Prime11.Size40.covers' depends on axioms: [propext, Quot.sound]
+'Erdos1189.Prime11.Size40.size_and_max' does not depend on any axioms
+'Erdos1189.Prime11.Size41.covers' depends on axioms: [propext, Quot.sound]
+'Erdos1189.Prime11.Size41.size_and_max' does not depend on any axioms
+'Erdos1189.Prime11.Size42.covers' depends on axioms: [propext, Quot.sound]
+'Erdos1189.Prime11.Size42.size_and_max' does not depend on any axioms
+'Erdos1189.Prime11.Size43.covers' depends on axioms: [propext, Quot.sound]
+'Erdos1189.Prime11.Size43.size_and_max' does not depend on any axioms
