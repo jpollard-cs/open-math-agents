@@ -8,9 +8,20 @@ fcfb6b2b340a71e1aa6340714c90be6b2bf29e085bb5873eb5aa64a3c18cb557  LcmSeed.lean
 f3c04814c1a8e6d18f7bd7b186227bc503eb43dca41d3e48e352041d2c2e6212  PrimeGapTranslatedCover.lean
 7c0e8ae4a1ab3d34e23a067213a192634cae1722854bdd43dff72b50768370bb  CertifiedFactorialWindow.lean
 
-Existing axiom audits
+Axiom audit of the seed, factorial bound, and integrated application
+'SeedAverage.exists_lcm_seed_card' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TranslatedDivisorCover.eventually_fill_lcm_window' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FactorialGain.factorial_step_prime_mass' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FactorialGain.window_log_gain_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CertifiedFactorialWindow.eventually_window_of_budget' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+Axiom audit of the genuine upstream inputs and the translation
 'TranslatedDivisorCover.eventually_fill_exceptional_offsets' depends on axioms: [propext, Classical.choice, Quot.sound]
 'TranslatedDivisorCover.eventually_fill_lcm_window' depends on axioms: [propext, Classical.choice, Quot.sound]
 'TranslatedDivisorCover.eventually_exclude_small_cofactors' depends on axioms: [propext, Classical.choice, Quot.sound]
 'LongGapsBetweenPrimes.eventually_simultaneous_roots' depends on axioms: [propext, Classical.choice, Quot.sound]
 'LongGapsBetweenPrimes.exists_linear_roots' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+Independent Lean kernel replays (both exit status 0)
+replaying PrimeGapTranslatedCover
+replaying CertifiedFactorialWindow
