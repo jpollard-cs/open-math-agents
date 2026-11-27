@@ -1,0 +1,133 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[left=0.95in,right=0.95in,top=0.92in,bottom=0.92in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,hyperref}
+\hypersetup{colorlinks=true,urlcolor=blue,linkcolor=blue,pdftitle={A power-scale separation for minimum largest covering moduli},pdfauthor={Codex}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newcommand{\lcm}{\operatorname{lcm}}
+\newcommand{\Z}{\mathbb Z}
+\title{A power-scale separation for minimum largest covering moduli}
+\author{Codex (AI-generated), at the request of Jordan Pollard}
+\date{27 November 2026. Written proof for public review}
+\begin{document}
+\maketitle
+\begin{abstract}
+At every sufficiently large exact cardinality, an irreducible covering set can improve on the minimum largest modulus of all zero-defect covers by at least a constant times the three-fourths power of that minimum. Every unrestricted minimizer consequently has defect at least a constant times $k^{3/4}/(\log k)^{1/4}$. The constructed reciprocal sum can simultaneously come within any prescribed positive additive error of the zero-defect optimum. We identify the second term in the cap capacity of zero-defect covers, and its sharp order for the larger class admitting a complete placement in disjoint digit blocks. A finite instance has 6,313 distinct moduli at most 63,252, while the zero-defect minimum at that size is exactly 66,563. The unrestricted minimum and sharp unrestricted reciprocal coefficient in Erd\H os problem 1189 remain open.
+\end{abstract}
+
+\section{Exact-size statements}
+A finite set $A$ of distinct moduli greater than one covers if some residues cover $\Z$. It is irreducible if every proper subset fails under every choice of residues. Put $k=|A|$, $L=\lcm(A)$, $S(A)=\sum_{n\in A}1/n$ and $b(L)=\sum_{p^a\parallel L}a(p-1)$. A cover has zero defect if $k=1+b(L)$, the equality case of the Zn\'am--Simpson bound. Write $m(k)$ for the unrestricted minimum of $\max A$, $m_0(k)$ for the zero-defect minimum and $R_0(k)$ for the zero-defect maximum of $S$.
+
+For the grouped class $g$, partition the positions $(p,j)$, $1\le j\le v_p(L)$, into disjoint blocks $B$. Set $r_B=\prod_{(p,j)\in B}p$ and $D_B=\lcm_{(p,j)\in B}p^j$. After reserving the largest modulus, place each remaining modulus into a block whose $D_B$ divides it, with at most $r_B-1$ moduli per block. Membership in $g$ means such a placement exists. This is the class $h=0$ of the earlier grouped-digits note. Let $K_t(X)$ be the greatest size attained at cap $X$ in class $t$, and $A_t(X)$ the greatest $K$ such that every $5\le k\le K$ is attained there. All logarithms are natural. Write $F(z)=\sum_{p\le z}(p-1)$.
+
+\begin{theorem}\label{main}
+As $X\to\infty$, both $K_0(X)$ and $A_0(X)$ equal
+\[
+ F(\sqrt X)+\left(\tfrac32+o(1)\right)X^{2/3}/\log X .
+\]
+Both $K_g(X)-F(\sqrt X)$ and $A_g(X)-F(\sqrt X)$ are $\Theta(X^{3/4}/\log X)$.
+For every $\epsilon>0$ there is a $c_\epsilon>0$ such that at every sufficiently large integer $k$ some irreducible cover $A$ of exactly $k$ moduli satisfies
+\[
+ \max A\le m_0(k)-c_\epsilon m_0(k)^{3/4},
+ \qquad S(A)\ge R_0(k)-\epsilon .
+\]
+In particular the first inequality applies to $m(k)$. Every unrestricted minimizer $A$ at sufficiently large size obeys
+\[
+ k-1-b(\lcm(A))\gg k^{3/4}/(\log k)^{1/4}.
+\]
+\end{theorem}
+In fact both zero-defect capacities differ from the explicit integer budget $Z(X)$ below by at most $O_\nu(X^\nu)$ for every fixed $\nu>0$.
+
+The use of the actual prime sum $F$ avoids burying either power-scale term inside the prime-number-theorem error. The known first-order law in the two restricted classes is $m_0(k)\sim m_g(k)\sim k\log k$. The theorem leaves room for an unrestricted improvement of higher order.
+
+\section{A refinement with an adjustable distinguished modulus}
+We permit indexed lists temporarily, including a distinguished row of modulus 1 at the start. No equal moduli persist in the final constructions.
+\begin{lemma}\label{lift}
+Suppose an irreducible indexed cover has all moduli dividing $L$ and distinguished modulus $d\mid L$. Let $r\ge2$ and take exactly $r$ new moduli $n_i=r g_i$ such that $\gcd(n_i,L)=g_i$ and $\lcm_i g_i=d$. Replacing the distinguished row by these rows yields an irreducible indexed cover of period dividing $rL$. Any new row can be distinguished for the following step.
+\end{lemma}
+\begin{proof}
+Translate the old distinguished class to zero. Index the packet by $i=0,\ldots,r-1$ and use residues $di\pmod {n_i}$. Each $dt$ is covered by the row indexed by $t\bmod r$, since $n_i\mid rd$.
+
+After arbitrary reassignment and deletion of any number of rows, the surviving ordinary rows have a hole $x$, since originally even the full ordinary list could never cover alone. They miss all $x+tL$. A packet row can cover at most one of the $r$ lifts for $0\le t<r$, since $n_i/\gcd(n_i,L)=r$. All $r$ rows must therefore be present. At every ordinary hole each of their residue constraints projects to the assigned residue modulo $g_i$. The intersection of these projected classes is nonempty and is one class modulo their lcm $d$. Replacing the full packet by this class gives a covering assignment on the surviving old indices. Hence every old ordinary index must also survive.
+\end{proof}
+Taking the carried row to have modulus $rL$ recovers the usual full-period step. Allowing its projection to be a proper divisor is useful. If a side row certifies a superfluous prime power in $d$, the carried modulus can drop it. All divisibility and lcm conditions are checked at the step where it is dropped. The earlier coprime-period substitution and private-fibre arguments inspire this lemma.
+
+\section{Upper bounds at a fixed cap}
+For $p^a\parallel L$, remove all multiples of $p^a$. The remaining rows have an ordinary hole under any reassignment and miss the $p$ lifts over that hole modulo $L/(p)$. At least $p$ distinct multiples of $p^a$ are needed. The coefficient $p$ itself is ineligible, hence $p^a(p+1)\le X$. It follows that
+\[
+ K_0(X)\le Z(X):=1+\sum_{p^j(p+1)\le X}(p-1).
+\]
+The first positions contribute $F(\sqrt X)+O(\sqrt X)$, with at most one prime lost to the factor $p+1$. The second positions contribute $(3/2+o(1))X^{2/3}/\log X$ by partial summation of the prime number theorem. The remaining positions cost $O(X^{1/2}\log X)$ even by counting all integers through $X^{1/4}$ and at most $\log_2 X$ positions per prime.
+
+For any grouped placement, singleton first positions contribute at most $F(\sqrt X)$, and singleton higher positions contribute $O(X^{2/3}\log X)$. Charge every nonsingleton block to its smallest prime $p$ and its highest position at that prime. Charges are distinct. Since $D_B\ge r_B\ge p^2$, a block contributes at most $\min(\sqrt X,X/p^2)$. For $p\le X^{1/8}$, all charges together cost $O(X^{5/8}\log X)$. For larger primes each has at most eight possible charges. Chebyshev's prime-count bound and dyadic summation give
+\[
+ \sqrt X\pi(X^{1/4})+X\sum_{p>X^{1/4}}p^{-2}\ll X^{3/4}/\log X .
+\]
+This also bounds $k-1-h(A)-F(\sqrt X)$ for every unrestricted cover, where $h(A)$ counts the moduli outside its best placement.
+
+\section{The starting construction}
+Let $z$ be the largest prime with $C=z(z+1)\le X$ and $y=z+1$. Then $C\sim X$ and $F(z)=F(\sqrt X)+O(\sqrt X)$. Prepare all prime powers through $y$ in increasing prime order, increasing exponent at each prime. The prime $z$ is the last one because $z+1$ is even. Before the terminal step, append the position $p^j$ by forming $p-1$ side rows $p^j d'$ for $1\le d'<p$ and carrying the new period. The cofactors $d'$ divide the preceding core since their prime powers have already appeared. The terminal $z$ uses $z$ cofactors $1,\ldots,z-1,z+1$. Their lcm is the prior period. All rows meet Lemma~\ref{lift}, the maximum is $C$, and the distinctness of the side moduli follows from their new highest position or prime. The size and reciprocal sum are
+\[
+ B(z)=1+\sum_{p^j\le y}(p-1),\qquad
+ U_y+1/C,\quad U_y=\sum_{p^j\le y}H_{p-1}/p^j.
+\]
+Here $H_n=\sum_{i\le n}1/i$. The high-position side moduli are at most $y\sqrt y<C$ for large $z$.
+
+\section{Retaining and dropping extra powers}
+On an ordinary prime $p$ we may add one position above its baseline full power $t_0=\max\{p^j:p^j\le y\}$. Write $t=p t_0$. Permit this when $t\max(p+1,q)\le C$, with $q<z$ the next prime. The extra step uses side moduli $t,2t,\ldots,(p-1)t$. On the first $q$-step replace its last side cofactor $q-1$ by $t$. In the virtual row keep only the baseline period from the preceding primes, multiplied by $q$. The projection $t$ together with the baseline period has lcm the previous distinguished modulus. All ordinary $q$ cofactors lie in that modulus. The full ambient period still remembers the extra $p$ digit, but the fresh $q$-fibre and all future full-prime-exponent tests are valid. In particular at a higher $q$ step the side projections are $q^{j-1}d'$ with $q\nmid d'$. Consecutive primes may both take their extra position. The modified anchor $qt$ is distinct from the other $q$ side rows because $t>y$. Its greatest prime is $q$. No two stages coincide, and every new digit costs $p-1$ rows, preserving zero defect. The terminal projection lcm is exactly the baseline period.
+
+All primes $p\le\sqrt z/4$ are eligible for large $z$, since $q<2p$ and $t\le py$. Their optional costs $p-1$ fill every integer from zero to their sum. Indeed the first cost is one and each subsequent cost is at most one plus the preceding total by Bertrand's postulate and induction. This sum is $\gg z/\log z$. Independently, for fixed $0<\delta<1$, permit the square of each $\sqrt y<p\le(1-\delta)C^{1/3}$. The next prime satisfies $q/p\to1$ uniformly as $p\to\infty$ by the prime number theorem, so these squares fit. Their individual costs are smaller than the earlier contiguous total. The elementary interval rule that $[0,U]$ and $w+[0,U]$ join for $w\le U+1$ now gives every integer size up to
+\[
+ B(z)+\left(\tfrac32(1-\delta)^2+o(1)\right)C^{2/3}/\log C.
+\]
+Between consecutive prime terminals $z,z'$ the baseline increases by $O(z\log z)$. There is just one new first prime, $z'$, and the sum of \emph{all} higher-position costs through $z'+1$ is $O(z'\log z')$ by the elementary count used above with cutoff $\sqrt{z'+1}$. Bertrand gives $z'<2z$. Thus these intervals overlap eventually. Earlier fixed sizes $k\ge5$ have finite-cap zero-defect examples by the every-size construction. Sending $\delta$ down to zero proves both zero-defect assertions.
+
+\subsection*{Recovering the arithmetic upper bound to subpower error}
+In fact for every fixed $\nu>0$,
+\[
+ Z(X)-O_\nu(X^\nu)\ \le\ A_0(X)\ \le\ K_0(X)\ \le\ Z(X).
+ \tag{1}
+\]
+Here the target cap itself is $X$. Side rows are allowed to exceed the terminal row $C$ on this construction. Let $a_p$ be the greatest $j$ with $(p+1)p^j\le X$. For large $X$ it includes the baseline exponent at every $p\le z$. Indeed when the baseline exponent is at least two one has $p\le\sqrt{z+1}$, and its full power is at most $z+1$. For $p<z$ with successor $q$, one can add \emph{any initial string} of extra positions up through the largest $e\le a_p$ with $q p^e\le X$. Only the last power needs to be certified on the following prime. Its single anchor and the retained baseline together recover all of the preceding distinguished modulus. All intermediate side moduli are at most $(p-1)p^e\le X$. If the full arithmetic budget at $p$ loses a position $j$, then $p\le X^{1/(j+1)}<q$. There is at most one such $p$ for each $j$.
+
+We remove those losses for any prescribed finite set of leading levels $2\le j\le J$. For each $j$, let $p_j$ be the largest prime at most $w_j=X^{1/(j+1)}$, and let $q_j$ be its successor. Choose a prime $s_j$ between $0.60p_j$ and $0.70p_j$. In the prime order move $s_j$ to just after $p_j$. For fixed $J$ these intervals with one neighboring prime on each side are disjoint, all lie below $z$, and all tend to infinity. The prime number theorem gives $p_j\sim q_j\sim w_j$. Every prime from the predecessor of $s_j$ through $p_j$ has $a_p\le j$ there for large $X$, because its $(j+2)$nd power exceeds $X$. Every successor on the changed segment except the successor of $s_j$ is at most $p_j$, so all required certifications fit: $p_j^{j+1}\le X$. The successor of $s_j$ is $q_j$, and $q_j s_j^j<X$ for large $X$.
+
+For a prime $u$ processed while $s=s_j$ is missing, replace the unavailable cofactor $s$ among $1,\ldots,u-1$ by $u+1$ at every position. It is the only missing cofactor, since $s<u<2s-1$. All prime factors of $u+1$ are smaller than $s$ and its prime powers are at most $z+1$. If a separate anchor is needed on the first digit, replace one of these cofactors by the previous surplus power $t>z+1$. The small dressings cost at most $(u+1)u^{a_u}\le X$. The old ambient period can contain powers no longer distinguished, but the fresh digit ratio remains the radix in every row. This verifies the construction for each new order, including consecutive certifications. Outside the changed intervals the previous single-successor estimate applies. The possible cost of all losses at $j>J$ is at most $O(X^{1/(J+2)}\log X)$.
+
+The exact-size interpolation still works in the changed order. For $p\le\sqrt z/4$ every first extra power fits: consecutive successors in the new order are at most $2p$ for sufficiently large $X$ (on the exceptional segments this follows from the prime number theorem and $s_j>0.60p_j$). The baseline may be kept on any subset. Additional copies of each optional cost $p-1$ at the same prime are available up to its maximum number of extra digits, by taking its successive positions. After obtaining a contiguous total $\gg z/\log z$ from the small primes, all remaining optional individual costs are at most $X^{1/3}$, since an extra position has exponent at least two. Successive prime-terminal intervals overlap as before, using the coarser zero-defect result already proved even if $X$ lies strictly between two terminal caps. More explicitly all sizes through $B(z)$ already fit at $C\le X$, and the present construction supplies $[B(z), Z(X)-O(X^{1/(J+2)}\log X)]$. Taking $1/(J+2)<\nu$ proves (1).
+
+\section{Pairing primes at positive defect}
+Use the baseline powers through $y$ throughout this construction. For consecutive primes $p<q$ with $p\ge5$, we may replace their two first-position steps by one step of radix $pq$, followed by their ordinary higher-position steps in order. Give its $pq-1$ side rows moduli $pq e$ with distinct $e\le z$ whose prime factors are smaller than $p$. Carry the full new period. Each $e$ divides the old period, and Lemma~\ref{lift} applies. Its size gain is $(p-1)(q-1)$, while the possible reciprocal loss is bounded by $H_{p-1}/p+H_{q-1}/q$. Distinctness follows also without comparing greatest primes: each completed side modulus divides the new ambient period but does not divide the old one. Within a stage all side moduli are distinct. The terminal maximum can be reserved, and assigned blocks for the other entries are precisely the stages just used.
+
+For all large $p$ with $q\le\sqrt z/4$ there are enough choices for $e$. Among $e\le 4pq$ the count having a prime divisor $s\ge p$ is at most $4pq\sum_{p\le s\le4pq}1/s$. Mertens' prime reciprocal estimate and $q/p\to1$ bound the sum by $\log 2+o(1)$. Since $4(1-\log 2)>1$ and $4pq\le z$, the remaining set supplies all $pq-1$ cofactors.
+
+Here are the integer-size and reciprocal details. Run the first two binary positions, then all ternary positions, then the higher binary positions, before continuing with primes $p\ge5$. This reordering preserves the baseline side rows. Among the upper half of the binary positions form disjoint pairs of consecutive positions: there are $\gg\log z$ such pairs. Each may be run separately or together. For a pair ending at $t=2^j$ the combined step has radix four, side moduli $t,3t,9t$, and carries the full period. All projections meet Lemma~\ref{lift}, since $9$ is present and the old binary power is $t/4$. Each pairing gains one row. Together these optional pairs cost $o(1)$ in lost reciprocal mass, since the first changed binary power is $\gg\sqrt z$. They fill an initial integer interval of extra sizes of length $\gg\log z$.
+
+Fix $b=1/4$ and $a\in[b/2,b)$ with $\log(b/a)<\epsilon/2$. Pair consecutive primes from $[a\sqrt z,b\sqrt z]$, leaving at most one unused. By the prime number theorem these pairs can contribute a total $\gg_\epsilon z^{3/2}/\log z$. The sum of their reciprocal losses is at most $\log(b/a)+o(1)$ by partial summation. To bridge to their individual costs we use only sparsely many smaller primes. Starting at $T_0=(\log z)^{1/4}$, take 200 disjoint consecutive-prime pairs in each interval $[T,2T)$, with $T=2^jT_0$ and $2T\le a\sqrt z$. There are enough primes in every interval for large $z$. At the first bin the binary interval exceeds every available cost. After any bin the reached length is at least $200(T-1)^2$, which exceeds all costs in the next bin. For the last bin $a\sqrt z<4T$ and $b/a\le2$, so it also bridges every cost in the main band. The interval rule therefore gives \emph{every} gain up to the total, with reciprocal cost at most
+\[
+ \log(b/a)+o(1)+O\Big(\sum_{j\ge0}\frac{\log(2^jT_0)}{2^jT_0}\Big)
+ =\log(b/a)+o(1).
+\]
+Use half-open endpoints between bins, including at their interface with the main band. The preceding $O(z\log z)$ bound on successive baseline differences again joins the intervals. This proves both grouped-capacity estimates. For the reciprocal assertion, the earlier all-size zero-defect estimate gives $R_0(k)=U_y+o(1)$ uniformly when $k\sim F(z)$. Explicitly, its cutoff determined by $F(w)\sim k$ satisfies $w/z\to1$. The sum of first-position masses between the cutoffs is $o(1)$ by partial summation, and the convergent sum over the higher positions has vanishing tail. This compares our actual sums with the exact-size optimum.
+
+Finally fix $X=m_0(k)$ and $Y=X-\eta X^{3/4}$ with a small fixed $\eta>0$. The zero-defect upper bound gives $k\le F(\sqrt X)+o(X^{3/4}/\log X)$. The interval between $\sqrt Y$ and $\sqrt X$ has length $H\sim\eta X^{1/4}/2$. The Montgomery--Vaughan Brun--Titchmarsh inequality bounds the primes there by $2H/\log H$. Weighting by $\sqrt X$ gives $F(\sqrt X)-F(\sqrt Y)\ll\eta X^{3/4}/\log X$, with an absolute constant for all sufficiently large $X$ at each fixed $\eta$. Choose $\eta$ small compared with the grouped construction constant for the desired $\epsilon$. The overlapping exact-size intervals then include $k$ under cap $Y$ with the stated reciprocal sum. This comparison also works with the (possibly smaller) least $X$ for which $Z(X)\ge k$.
+
+To obtain the direct obstruction for \emph{every} unrestricted minimizer, fix an absolute $a>0$ small enough that all large $X$ admit every size up to $G(X)=F(\sqrt X)+aX^{3/4}/\log X$. Let $X_k$ be the least integer above a fixed large starting point with $G(X_k)\ge k$. A single integer cap increment changes $G$ by at most $O(\sqrt{X_k})$, including a possible prime jump. Thus $k=F(\sqrt{X_k})+aX_k^{3/4}/\log X_k+O(\sqrt{X_k})$ and $X_k\sim k\log k$. Any minimizer has $M\le X_k$ and $1+b(L)\le Z(M)\le Z(X_k)$ by the fibre bound, irrespective of its placement. Subtraction leaves $k-1-b(L)\gg X_k^{3/4}/\log X_k$, as asserted. The same inequality applies to every cover under this explicit cap. This proves Theorem~\ref{main}.
+
+\section{Finite witness, limits and credits}
+At $z=251$ the constructor retains extra prime powers when they can be certified on the next singleton step and uses a disjoint selection of feasible consecutive-prime pairs. It yields 6,313 distinct moduli with maximum 63,252. Varying its extra powers gives all 30 sizes $6284\le k\le6313$ at this cap. In fact
+\[
+ m(k)\le63252\quad(6284\le k\le6313),\qquad
+ m_0(k)=66563\quad(6284\le k\le6334).
+\]
+To prove the lower bound, first exclude the prime 257. The full zero-defect budget at 66562, after deducting the contribution 256 for that prime, is 6283. If 257 occurs, the fibre bound requires 257 of its multiples. Below $257\cdot259=66563$ their only possible coefficients are $1,\ldots,256,258$ (and at a lower cap there may be fewer). Their lcm together with 257 already forces $1+b(L)\ge6335$. Thus the entire interval of sizes is excluded below 66563. This uses the actual forced period as well as the budget.
+
+For the matching examples take terminal prime 257 and omit prime 131. The terminal coefficients at cap 66563 are $1,\ldots,256$ with 131 removed, together with 258 and 259. Their lcm equals the previous baseline period. Each earlier prime $p>131$ can replace the missing $131$ by $p+1$ in its side cofactors. The resulting baseline size is 6205. The finite subset computation in \texttt{plateau.py} supplies every increment from 79 through 129 with additional powers, checking every projection, cofactor, distinctness and exact size. The positive-defect examples and this plateau need no assumption of monotonicity. For $k=6313$, the companion Lean development proves existence of a covering assignment on all integers and a hole for every deletion and every assignment, together with size and cap. The cap 63,252 supplies an unrestricted upper bound. The general asymptotic estimates and the period-budget argument are written proofs.
+
+The role of arbitrary reassignment is exactly Lemma~\ref{lift}. Considering private points just for the displayed assignment would be insufficient. All large constructions here admit a complete block placement. In particular they cannot answer whether unplaceable moduli produce a different unrestricted leading constant. Obtaining many simultaneous indispensable rows reusing the same prime positions across different blocks is the remaining obstacle. Summing independent packet gains cannot achieve that.
+
+\smallskip\noindent
+Sources: the \href{https://www.erdosproblems.com/1189}{Erd\H os problem statement}; R. J. Simpson, \emph{Regular coverings of the integers by arithmetic progressions}, Acta Arith. (1985); Z. W. Sun, \emph{On covering numbers}, Integers (2007); E. \"Ozt\"urk, \href{https://www.researchgate.net/publication/413884122}{\emph{Irreducible covering systems: the largest modulus, the maximal reciprocal sum, and exact values for at most nineteen moduli}} (2026), in particular Remark 6.5. We build on the contributor-fork manuscripts \emph{Irreducible covers at every cardinality}, \emph{A sharp asymptotic for one class of irreducible covers}, and the earlier sparse-label substitution. Mertens' theorem, the prime number theorem, Bertrand's postulate, and the Montgomery--Vaughan short-interval inequality are classical inputs. For the latter see \href{https://teorth.github.io/expdb/blueprint.pdf}{the exponent database, Theorem 19.7}. The asymptotic proof is written and awaits independent review. No priority claim is made.
+\end{document}
