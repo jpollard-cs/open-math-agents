@@ -26,6 +26,26 @@ If every row has the same phase, choose two neighboring complete columns of shad
 
 In the absence of this lattice every stated box misses at least one shadow cell. Partition the plane into these boxes and count cells, discarding boundary boxes in large windows. Upper shadow density is then at most 1−1/(L_x L_y). The upper covered density of P is s/(wh) times upper shadow density: both are constant multiples of upper center density because the shapes are finite and the translates disjoint. Conversely, a determinant-wh packing gives shadow density one and its shadows tile the plane. This proves the dichotomy.
 
+The density dichotomy also holds for real translations of the closed unit-cell polyomino, with disjoint interiors. Round both coordinates of every center down. If two rounded cells coincided, the corresponding original lower corners would differ by less than one in both coordinates and the interiors would have overlapped. Thus rounding preserves packing and changes anchor counts in large windows only by a boundary error. The classification that follows is for integer centers.
+
+## Every doubly periodic extremizer when the bound is sharp
+
+The difference table actually gives the full set of optimal periodic patterns. Define the horizontal alphabet X to be empty if P−P contains a nonzero multiple of (w,0). Otherwise include a residue i modulo w in X exactly when no difference (x,h) of cells of P has x congruent to i. Define the vertical alphabet Y by interchanging coordinates and interchanging w,h. Let N(k,q) denote the number of primitive necklaces of length k on q letters, with N(k,0)=0.
+
+If the bound is sharp, the number of translation classes of optimal doubly periodic center patterns with *smallest possible motif for that pattern* of exactly k copies is
+
+$$
+ N(k,|X|)+N(k,|Y|)-{\bf 1}_{k=1,\;0\in X}.
+$$
+
+In particular the possible finite minimal motif sizes are either just one or all positive integers. The second case occurs exactly when at least one alphabet has two letters. The bound is sharp precisely when at least one alphabet is nonempty.
+
+Indeed, at optimal periodic density the shadow rectangles tile the plane. Consider the phase of the horizontal intervals on each horizontal line of cells. If the phase ever changes, the row interface is a boundary of whole rectangles; their common height propagates horizontal strip boundaries throughout the tiling. Each strip has height h and is filled by centers of one phase modulo w. If the phases never change, the vertical width-w columns persist throughout the plane and each column has one vertical phase modulo h. Thus every such tiling has either a row or a column description (possibly both). This argument also applies to nonperiodic perfect shadow tilings.
+
+For the row description, self-compatibility at period (w,0) is required. The difference (w−1,0) ensures self-contact, and the cylinder theorem shows that any successive horizontal phase increments chosen from X give a packing. Every row description arises in this way. The same holds in the columns with Y. In a row description, exactly as proved for the T family below, the least motif size equals the least period of the increment sequence; translations identify precisely cyclic rotations of these words. A pattern in both descriptions has periods (w,0) and (0,h) at center density 1/(wh), so its centers are one rectangular lattice coset. This is counted twice exactly when 0 belongs to X (equivalently Y). This proves the count.
+
+For a separate check, `rectangle_families.py` computes the two alphabets directly from the cell differences. It compares the predicted primitive counts with exhaustive torus enumeration for every fixed connected shape through seven cells, rectangle sides 2 through 4 with s≤wh and the required difference inclusion, and k=1,2,3. All 705 comparisons passed, including tests with no maximizer at the rectangle bound.
+
 ## An explicit family and its optimal arrangements
 
 For w,h≥2 take the left vertical bar (0,y), 0≤y≤2h−2, and append the horizontal arm (x,h−1), 1≤x≤w−1. The resulting T has s=w+2h−2 cells. Its difference set is precisely R−R together with the vertical differences (0,j), h≤|j|≤2h−2. This follows by taking two bar cells, two arm cells, or one of each. At w=3,h=2 it is the ordinary five-cell T, in fixed orientation.

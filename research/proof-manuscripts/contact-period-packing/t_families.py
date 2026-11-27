@@ -1,5 +1,4 @@
 """Count optimal T-packings directly on every relevant HNF torus."""
-from math import gcd
 from verify import periods
 
 def primitive_necklaces(colors, length):
@@ -8,9 +7,10 @@ def primitive_necklaces(colors, length):
         counts[n] = colors**n - sum(counts[d] for d in counts if n%d==0)
     return counts[length]//length
 
-def count_patterns(w,h,k):
+def count_patterns(w,h,k,shape=None):
     rect = [(x,y) for x in range(w) for y in range(h)]
-    shape = {(0,y) for y in range(2*h-1)} | {(x,h-1) for x in range(w)}
+    if shape is None:
+        shape = {(0,y) for y in range(2*h-1)} | {(x,h-1) for x in range(w)}
     total=0
     for a,b,shear in periods(w*h*k):
         def label(x,y):
