@@ -14,7 +14,7 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-We compute the divisor optimization $U(k)$ in Section 8 of \"Ozt\"urk's paper to additive $o(1)$, including the second-order and constant terms. This identifies exactly how much the period constraint can prove about the maximal reciprocal sum of an irreducible covering set. A construction attains the defect-dependent leading bound for every defect exponent once reducible covers are admitted. The resulting square-prime threshold has a sharp constant. We determine the minimum largest modulus at cardinality 26: it is 70, with a unique extremal set. Independent finite searches confirm the earlier ten values at sizes 16 through 25. The sharp leading coefficient for irreducible sets and the general exact minimum remain open.
+We compute the divisor optimization $U(k)$ in Section 8 of \"Ozt\"urk's paper to additive $o(1)$, including the second-order and constant terms. This identifies exactly how much the period constraint can prove about the maximal reciprocal sum of an irreducible covering set. A construction attains the defect-dependent leading bound for every defect exponent once reducible covers are admitted. We determine the sharp threshold for every fixed prime exponent in an optimizing compressed period. We determine the minimum largest modulus at cardinality 26: it is 70, with a unique extremal set. At size 27 it is 72, with three extremal sets, and size 28 requires at least 84. Independent finite searches confirm the earlier ten values at sizes 16 through 25. The sharp leading coefficient for irreducible sets and the general exact minimum remain open.
 \end{abstract}
 
 \section{The price of the period}
@@ -89,6 +89,8 @@ For fixed $\varepsilon>0$, plug in the two values of $x$ obtained from the formu
 For an exact computation of $B(k)$ it suffices to search products of the first consecutive primes with nonincreasing exponents. Replacing a used prime by a smaller missing prime reduces the period cost and maps divisors injectively to no larger divisors. For $p<q$ with exponents $a<b$, swap the two exponents. On the old exponent pairs $(i,j)$, keep pairs with $j\le a$ fixed; on $j>a$ use $(j,i)$. This is a bijection onto the new divisor box, decreases each affected divisor, and reduces the period cost. Iteration proves the assertion. At a candidate period take the $k$ smallest nonunit divisors if available. A separate finite test compares this enumeration with enumeration of all budget-feasible periods for $2\le k\le18$.
 
 \input{squares.tex}
+\input{all-powers.tex}
+\input{counting.tex}
 \section{What the defect can buy}
 Let $\delta=k-1-b(L)$. A companion manuscript \cite{parallel} proves the following inequality with error $O(\log\log k)$. We give a separate proof of the leading interpolation to identify the contribution that can be attained after dropping irreducibility.
 \begin{theorem}\label{def}
@@ -163,11 +165,13 @@ A second solver projects the top ternary digit instead, onto a 120-cycle. If the
 The source, finite certificates and output accompany this note.
 
 \input{size26.tex}
-\paragraph{Status and remaining question.} The unrestricted exact function $m(k)$ and sharp coefficient of $R(k)$ are still undetermined. Is it possible for a positive-defect irreducible family to collect a positive multiple of $\log k$ from moduli $n$ with largest prime factor at most $\sqrt n$, beyond what is lost in its nonsmooth rows? The reducible construction shows why just a period budget and slot matching cannot rule this out. The next cardinality requires unsaturated prime digits; the procedures in the preceding section can handle these through cap 72. These are AI-authored written and computational arguments, pending external review.
+\input{next-minima.tex}
+\paragraph{Status and remaining question.} The unrestricted exact function $m(k)$ and sharp coefficient of $R(k)$ are still undetermined. Is it possible for a positive-defect irreducible family to collect a positive multiple of $\log k$ from moduli $n$ with largest prime factor at most $\sqrt n$, beyond what is lost in its nonsmooth rows? The reducible construction shows why just a period budget and slot matching cannot rule this out. The unresolved case at size 28 next permits a tenth 7-divisible modulus, 84. These are AI-authored written and computational arguments, pending external review.
 \begin{thebibliography}{9}
 \bibitem{problem} \href{https://www.erdosproblems.com/1189}{Erd\H os problem 1189}, cardinality formulation. The underlying period bound is due to Zn\'am and Simpson.
 \bibitem{ozturk} E. \"Ozt\"urk, \href{https://doi.org/10.13140/RG.2.2.16138.63684}{Irreducible covering systems: the largest modulus, the maximal reciprocal sum, and exact values for at most nineteen moduli}, 2026. Its finite reciprocal maxima concern a different extremum from the minimum largest modulus studied here.
 \bibitem{parallel} Codex, companion covering-systems manuscripts for Jordan Pollard: \href{https://github.com/jpollard-cs/open-math-agents/blob/b32f70d5e6f1337e10ad264b55ea8489c7ed7773/research/proof-manuscripts/covering-systems/reciprocal-sums/defect-tradeoff.md}{defect estimate}, \href{https://github.com/jpollard-cs/open-math-agents/blob/6d05185cfb18d26dd67a443067d6559b017e4657/research/proof-manuscripts/covering-systems/reciprocal-sums/finite-60.md}{exact minimum table through 25} and accompanying covering residues.
+\bibitem{younis} K. Younis, \href{https://arxiv.org/abs/2409.05761}{Asymptotics for smooth numbers in short intervals}, Theorem 1.1.
 \bibitem{previous} Codex, \href{https://github.com/jpollard-cs/open-math-agents/tree/d0e21ac225a5ca3f274071fbe9751cdc54a479f3/research/proof-manuscripts/covering-systems/reciprocal-sums}{Irreducible covers at every cardinality}, written research manuscript and reproducible certificates. That note credits earlier order-of-growth results of Pickhardt and the Paratelligent Research Agent and the constructions of \"Ozt\"urk.
 \end{thebibliography}
 \end{document}
