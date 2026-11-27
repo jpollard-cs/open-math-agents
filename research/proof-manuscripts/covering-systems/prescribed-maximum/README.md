@@ -82,13 +82,34 @@ Conversely, take \(V=2\cdot3^a\). Use the earlier binary digit and all ternary d
 
 Sun's Theorem 1.4(ii) already gives the related three-prime *primitive covering number* threshold for \(2\cdot3^a q^b\). The assertions here prescribe a largest modulus, its number of classes, and irreducibility under reassignment.
 
+## 5. Exact least size for maxima \(5^a q^b\) at defect three
+
+**Theorem 2.** Let \(q>5\) be prime and \(a,b\ge1\). Every irreducible covering set with largest modulus \(5^aq^b\) has at least
+\[
+                        4+4a+b(q-1)
+\]
+classes. This number is attained **if and only if** \(q\le4a\). In particular \(\kappa(25\cdot7^b)=12+6b\) for every \(b\ge1\).
+
+We first establish an obstruction that permits arbitrary residue choices, even if every nontrivial divisor is available. For any primes \(5\le p<q\) and positive \(a,b\), the divisors greater than one of \(4p^aq^b\) cannot cover the integers. Fix a residue modulo 4 missed by the classes of moduli 2 and 4, using any missed residue if either class is absent. Write \(S=1+p+\cdots+p^{a-1}\), so \(p^a\ge4S+1\). For each \(1\le i\le a\), at most three moduli with odd part \(p^i\) are available. Their classes can exclude at most \(3p^{a-i}\) residues modulo \(p^a\) over the chosen residue modulo 4. At least \(K\ge p^a-3S\ge S+1\) residues survive these exclusions, where \(K\) denotes the actual number of survivors.
+
+Take the Cartesian product of these \(K\) rows with all \(q^b\) residues in the last coordinate. For each \(1\le j\le b\), at most three classes with odd part \(q^j\) can touch \(Kq^{b-j}\) points each. The at most three classes with odd part \(p^i q^j\) can each touch at most \(p^{a-i}q^{b-j}\) points. This bounds the total contribution at level \(j\) by \(3(K+S)q^{b-j}\). Since \(3(K+S)<6K\le(q-1)K\), summing the geometric progression leaves an uncovered point. At \(p=5,a=2,q=7\) we have \(S=6,\ K\ge7\), so even summing over infinitely many levels gives covered proportion at most \(3(1+6/7)/6=13/14\) on the surviving grid.
+
+Now write \(m=5^aq^b\) and \(L=tm\). The LCM bound gives \(k\ge1+4a+b(q-1)+f(t)\). If \(f(t)\le2\), then \(t\) is one of \(1,2,3,4\). For \(t\mid4\) the preceding obstruction applies. For \(t=3\), even the sum of the reciprocals of all permitted nontrivial divisors is less than \((4/3)(5/4)(7/6)-1=17/18\). Hence \(f(t)\ge3\), proving the lower bound. At equality \(t=6\) or \(8\). There are exactly \(4a\) divisors of each of \(6\cdot5^a\) and \(8\cdot5^a\) at most \(5^a\). Indeed, for the \(5\)-exponents from zero to \(a-2\) all four multipliers are possible, at exponent \(a-1\) exactly three are possible, and at exponent \(a\) just one. Section 1 now requires \(q\le4a\).
+
+Conversely, suppose \(q\le4a\) and use \(W=6\cdot5^a\). Process the digits of 2 and 3 with multipliers 1 at the binary digit and 1, 2 at the ternary digit. At every 5-digit use the four earlier multipliers \(1,2,3,6\). Their moduli stay below \(m\), since \(q\ge7\). From the \(4a\) divisors of \(W\) at most \(5^a\), choose \(q\) distinct final multipliers including \(2,3,5^a\); their LCM is \(W\). Use any \(q-1\) of them at each earlier \(q\)-digit. Section 2 gives coverage and irreducibility under all reassignments. The total size is \(1+f(Wq^b)=4+4a+b(q-1)\).
+
+Sun's Theorem 1.4(iii) had already supplied primitive covering periods with factors \(2,3,5,q\), and others with factors \(2,5,q\). Jones and White give counterexamples to a general converse to Sun's sufficient condition. The proof above derives its lower bound directly for the prescribed maximum.
+
 ## Verification, sources, and open directions
 
 Codex produced the argument and programs at Jordan Pollard's request. The general statements have written proofs. The Python constructor outputs an explicit residue assignment for a given \(m\), or certifies impossibility by Theorem 1. Running it without arguments checks the decisions through 500, the cardinality table by two exhaustive methods (enumerating candidate LCMs and adjoining possible divisors), and the 315 example. Of the 109 positive decisions through 500, 76 had periods at most 100,000 and were also scanned point by point. The other 33 received the divisor-budget checks. Lean 4.33.1 verifies all 630 residues and the proper-period budget of the 315 example by kernel reduction without axioms. It also checks the abstract injection count for a private-point fiber. The general CRT construction and its use of the LCM bound have written proofs. Priority and independent review remain open.
 
-The first construction with \(W=\operatorname{lcm}(h,1,\ldots,q-1)\) can use more classes than necessary. Section 3 gives a smaller candidate \(V\), but primes in its factorization may lack enough admissible earlier multipliers to support the construction. The 175 example shows that a second constraint on the total number of admissible divisors can raise the minimum. Determining the minimum for \(25\cdot7^b\) with \(b\ge2\) would test whether this gap persists once more lower-level divisors are available. The original extrema at a prescribed cardinality are a separate optimization.
+The accompanying Lean file \(\texttt{SurvivingFiber.lean}\) checks the surviving-row inequality, the geometric budget for arbitrary depth, and the finite-set conclusion that any grid satisfying the written incidence bounds has an uncovered point. The CRT incidence bounds and Theorem 2 as a whole have written proofs. The Python checks also verify the small-divisor counts for auxiliary factors 6 and 8 through \(a=12\) and construct the equality witnesses through \(a=8,\ b=3\).
+
+The first construction with \(W=\operatorname{lcm}(h,1,\ldots,q-1)\) can use more classes than necessary. Section 3 gives a smaller candidate \(V\), but primes in its factorization may lack enough admissible earlier multipliers to support the construction. Section 5 resolves this obstruction at every power of 7 for \(h=25\). A next case with a definite gap is \(m=25\cdot11^b\). Theorem 1 gives existence, while Theorem 2 excludes defect three. The question is which larger auxiliary periods yield the exact minimum. The original extrema at a prescribed cardinality are a separate optimization.
 
 - [Formal Conjectures, Erdős #1189, especially part (ii)](https://google-deepmind.github.io/formal-conjectures/src/FormalConjectures/ErdosProblems/%C2%AB1189%C2%BB/)
 - [Z.-W. Sun, *On covering numbers*, Theorem 1.1, Lemma 2.1, and Theorem 1.4](https://arxiv.org/pdf/math/0601017)
+- [L. Jones and D. White, *On primitive covering numbers*, especially Theorem 4](https://www.academia.edu/65929846/On_Primitive_Covering_Numbers)
 - [P. Balister, B. Bollobás, R. Morris, J. Sahasrabudhe, M. Tiba, *The structure and number of Erdős covering systems*, Theorem 2.4 and Appendix A](https://arxiv.org/abs/1904.04806)
 - [E. Öztürk, *Irreducible covering systems: the largest modulus, the maximal reciprocal sum, and exact values for at most nineteen moduli*, 2026 preprint](https://doi.org/10.13140/RG.2.2.16138.63684)

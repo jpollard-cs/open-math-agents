@@ -144,6 +144,20 @@ def checks():
     assert finite_bound(25, 7) == (10, 100)
     assert len([d for d in divisors(700) if 1 < d <= 175]) == 15
     assert len(cs) == 18 and verify(cs, 175, 1050)
+    for a in range(1, 13):
+        h = 5**a
+        for t in (6, 8):
+            assert sum(d <= h for d in divisors(t * h)) == 4 * a
+        if a <= 8:
+            for q in range(7, 4 * a + 1):
+                if factors(q) != {q: 1}:
+                    continue
+                for b in (1, 2, 3):
+                    m = h * q**b
+                    cs = construct(m, 6 * h)
+                    assert len(cs) == 4 + 4 * a + b * (q - 1)
+                    verify(cs, m, 150000)
+    print("5^a q^b family: auxiliary divisor counts through a=12, witnesses through a=8, b=3")
 
 
 if __name__ == "__main__":
