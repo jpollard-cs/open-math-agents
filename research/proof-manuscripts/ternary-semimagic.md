@@ -3,13 +3,13 @@
 A square matrix over $\mathbb F_3$ is *semi-magic* if all its row sums and column sums have one common value, called its *margin*. Let $\beta(A)$ denote the least number of distinct permutation matrices in an expression for $A$ as a linear combination over $\mathbb F_3$. Each nonzero coefficient is $+1$ or $-1$. Write $M(n)$ for the largest value of $\beta(A)$ among the semi-magic squares of order $n$.
 
 **Theorem.** For every $n\ge1$,
-$
+$$
 M(n)\le\left\lceil\frac{3n}{2}\right\rceil .
-$
+$$
 For all $n\ge6$ the sharper bounds
-$
+$$
 4\lfloor n/3\rfloor\le M(n)\le2\lceil2n/3\rceil+1
-$
+$$
 give $M(n)=4n/3+O(1)$. Among squares of margin zero, the maximum is exactly $4n/3$ whenever $3\mid n$ and $n\ge6$.
 
 The first inequality answers the third question in Gerry Myerson's MathOverflow post of 11 August 2025. The argument constructs integer lifts with controlled line sums, decomposes them into signed perfect matchings, and checks the case $n=4$ by a finite enumeration. [Myerson's question](https://mathoverflow.net/a/499014)
