@@ -1,0 +1,3 @@
+h=5, F=2.2595908425
+h=15, F=2.2688958037
+All eleven window lengths gave a ratio strictly between 2.25 and 2.27.
