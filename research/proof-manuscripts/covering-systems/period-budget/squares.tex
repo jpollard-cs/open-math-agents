@@ -1,0 +1,38 @@
+\section{The optimal cost of prime squares}
+Let $q$ be the largest prime for which $\sum_{p\le q}(p-1)\le k-1$. Let $V(k)$ be the reciprocal mass of the first $k$ nonunit $q$-smooth integers, and let $T$ be the largest of them. Compression in Section 1 gives $U(k)\le V(k)$. The PNT gives $q\sim\sqrt{k\log k}$ and smooth counting as above gives $T\sim k/\rho\sim q^2/(2\rho\log q)$. The smooth sum is an explicit benchmark with no optimization over periods.
+\begin{theorem}
+With $c_*=(2/3)^{1/3}$, one has
+\[
+ V(k)-U(k)\sim \tfrac94 c_*^2 q^{-2/3}.
+\]
+In every maximizing compressed period the largest prime appearing to exponent at least two is $(c_*+o(1))q^{2/3}$. The number of omitted primes from the end of the list $p\le q$ is $(\tfrac34 c_*^2+o(1))q^{1/3}/\log q$.
+\end{theorem}
+\begin{proof}
+For a compressed period $L$, let $J$ be the first $k$ nonunit $q$-smooth integers and $E=\{n\in J:n\nmid L\}$. If $L$ has at least $k$ nonunit divisors, its best reciprocal sum $S_L$ satisfies
+\[
+ \sum_{n\in E}(1/n-1/T)\le V(k)-S_L\le\sum_{n\in E}1/n.
+\]
+Indeed each missing member must be replaced above $T$. The same inequalities hold for any period using only primes up to $q$ with enough divisors.
+
+Fix $c>0$ and put $w=cq^{2/3}$. Start with every prime through $q$ to exponent one. Add a second copy of each prime up to $w$, then enough copies to include every prime power $p^a\le q^{3/2}$ with $a\ge3$. For large $q$ the latter primes are already squared. The added budget for squares is
+\[
+ \sum_{p\le w}(p-1)\sim\tfrac34 c^2 q^{4/3}/\log q.
+\]
+Higher powers cost $O(q\log q)$ since $p\le q^{1/2}$ and the number of exponents for any prime is $O(\log q)$. Remove the fewest first-power primes from the top of the list needed to fit the budget. Its initial slack is $O(q)$, by the PNT applied to the next prime. The number removed is $r\sim\tfrac34 c^2 q^{1/3}/\log q$ and each equals $(1+o(1))q$. Indeed every fixed interval $[(1-\varepsilon)q,q]$ has far more primes than this requirement. There remain more than $k$ nonunit divisors.
+
+Omitting each of the $r$ primes costs at most $H_{\lfloor T/p\rfloor}/p\sim\log q/q$. The omitted squares of primes $p>w$ cost, in total, at most
+\[
+ \sum_{w<p\le\sqrt T}\frac{H_{\lfloor T/p^2\rfloor}}{p^2}
+   =(c^{-1}+o(1))q^{-2/3}.
+\]
+For any fixed $D>c$, on $w<p\le Dq^{2/3}$ the harmonic number is $(2/3+o(1))\log q$, and partial summation of the PNT gives $\sum_{p>v}p^{-2}\sim1/(v\log v)$. Beyond $Dq^{2/3}$ the contribution is $O(q^{-2/3}/D)$ with an absolute implied constant for fixed $D\ge1$. Send $D$ to infinity. Unavailable higher powers on already squared primes have negligible cost. With $Y=q^{3/2}$, for $p\le Y^{1/3}$ the sum of reciprocals of powers above $Y$ is $O(1/Y)$ per prime; for $p>Y^{1/3}$ use $O(p^{-3})$. Multiplication by $H_{\lfloor T\rfloor}=O(\log q)$ gives $O(q^{-1}\log q)=o(q^{-2/3})$. A union bound on $E$ now gives
+\[
+ V(k)-U(k)\le (\tfrac34 c^2+1/c+o(1))q^{-2/3}.
+\]
+
+Conversely fix a compressed optimizer and let $r$ be the number of top primes missing, $w$ the largest squared prime (zero if none). First $r=O(q^{1/3}/\log q)$. For each missing $p>q/2$, the distinct integers $pj$, $1\le j\le q^{1/4}$, belong to $E$ and contribute $\gg\log q/q$ to its truncated weight. The lists are disjoint. Comparison with the upper bound just proved shows that only $O(q^{1/3}/\log q)$ such primes are absent. Compression and the PNT then force every absent prime to lie in this top interval and in fact to equal $(1+o(1))q$. The full contributions of their multiples to the truncated weight are $(1+o(1))r\log q/q$: $T/p<q$ makes all the cofactors smooth, their total truncated weight for one prime is $H_{\lfloor T/p\rfloor}/p-\lfloor T/p\rfloor/T$, and products of two such primes exceed $T$.
+
+The extra budget spent on squares is at most $rq+O(q)$. Since the primes appearing squared form a prefix under compression, this forces $w=O(q^{2/3})$. Also $w/q^{2/3}$ stays bounded away from zero. Otherwise take any fixed $0<\varepsilon<1$ and use the missing squares $p^2$ with $\varepsilon q^{2/3}<p\le q^{2/3}$. Up to $T$ their multiples are all smooth and pairwise disjoint, and subtracting $1/T$ per multiple changes their mass by $O(\sum p^{-2})=o(q^{-2/3})$. The lower loss is $(1/\varepsilon-1+o(1))q^{-2/3}$, contradicting the preceding upper bound as $\varepsilon$ decreases.
+
+Along any subsequence where $w/q^{2/3}\to c>0$, the square budget forces $r\ge(\tfrac34 c^2-o(1))q^{1/3}/\log q$. Count the top-prime multiples and the missing $p^2$-multiples for $w<p\le Dq^{2/3}$ together. Their supports up to $T$ are disjoint since the product of a top prime and any such square exceeds $T$. The same harmonic calculation gives the liminf $\tfrac34c^2+1/c$ after multiplying by $q^{2/3}$ and sending $D\to\infty$. This function has its unique minimum at $c_*$, of value $\tfrac94c_*^2$. The matching upper bound forces $c=c_*$ on every such subsequence. The lower bound using the actual $r$ likewise forces its stated asymptotic.
+\end{proof}

@@ -1,0 +1,5 @@
+C= 2177/5000 delta= 1/100000 mesh 4096 enhanced strips 2065
+Baker-Harman range extensions: {'I': 1879, 'II': 1870}
+Strict-criterion exact upper bound 25583390673365959/25600000000000000 0.9993511981783578
+2048 independently clipped u-intervals; direct five-term bound 511700563485934523/512000000000000000 < 0.9996.
+Decimal display: 0.9994151630584659

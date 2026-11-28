@@ -1,0 +1,5 @@
+'SaturatedBox.at_most_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SaturatedBox.count' depends on axioms: [propext, Classical.choice, Quot.sound]
+replaying SaturatedBox
+64 distinct moduli, maximum 69632, period 1045524480; 52 raw indices, all 255255 internal residues covered.
+33552 unrestricted assignments on the residual coordinates checked across six cases.

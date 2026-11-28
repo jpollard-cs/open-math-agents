@@ -1,0 +1,45 @@
+Lean (version 4.33.1, x86_64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)
+z=7, cap=56, baseline=16, constructed=16, zero-defect upper=19, pairs=[]
+z=11, cap=132, baseline=28, constructed=28, zero-defect upper=32, pairs=[]
+z=43, cap=1892, baseline=280, constructed=281, zero-defect upper=308, pairs=[]
+z=97, cap=9506, baseline=1057, constructed=1059, zero-defect upper=1138, pairs=[]
+z=149, cap=22350, baseline=2278, constructed=2280, zero-defect upper=2387, pairs=[]
+z=223, cap=49952, baseline=4662, constructed=4688, zero-defect upper=4833, pairs=[(5, 7)]
+z=307, cap=94556, baseline=8587, constructed=8650, zero-defect upper=8879, pairs=[(7, 11)]
+z=503, cap=253512, baseline=22035, constructed=22182, zero-defect upper=22557, pairs=[(5, 7), (11, 13)]
+z=251, cap=63252, k=6313, zero upper=6283, difference=30
+z=307, cap=94556, k=8903, zero upper=8879, difference=24
+z=503, cap=253512, k=22635, zero upper=22557, difference=78
+30 positive-defect covers, sizes 6284..6313, cap 63252.
+51 independent packet lists verified, sizes 6284..6334, cap 66563.
+Through cap 66562: zero budget without 257 = 6283; with 257 forced size >=6335.
+Ten distinct ordinary candidates contain covers, checked throughout every period.
+'PacketCoverage.coverage' depends on axioms: [propext, Quot.sound]
+PacketCoverage.lean:85:6: warning: Try `simp at H` instead of `simpa using H`
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+'PacketEssential.essential' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Packet6313.covering' depends on axioms: [propext, Quot.sound]
+'Packet6313.nontrivial' depends on axioms: [propext, Quot.sound]
+'Packet6313.after_deletion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Packet6313.every_integer' depends on axioms: [propext, Quot.sound]
+'Packet6313.size' does not depend on any axioms
+'Packet6313.maximum' does not depend on any axioms
+'Packet6313.distinct' depends on axioms: [propext, Quot.sound]
+'Packet6313.budgets' does not depend on any axioms
+'Zero6313.covering' depends on axioms: [propext, Quot.sound]
+'Zero6313.nontrivial' depends on axioms: [propext, Quot.sound]
+'Zero6313.after_deletion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Zero6313.every_integer' depends on axioms: [propext, Quot.sound]
+'Zero6313.size' does not depend on any axioms
+'Zero6313.maximum' does not depend on any axioms
+'Zero6313.distinct' depends on axioms: [propext, Quot.sound]
+'Zero6313.budgets' does not depend on any axioms
+'Zero6313.zero_count' does not depend on any axioms
+'Zero6313.plateau_budget' does not depend on any axioms
+replaying Zero6313
+replaying Packet6313
+replaying PacketAssignment
+replaying PacketEssential
+replaying PacketCoverage
+All five modules replayed successfully.

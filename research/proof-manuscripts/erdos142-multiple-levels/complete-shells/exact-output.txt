@@ -1,0 +1,4 @@
+Exact maximum: 2458977
+Squared radii: 1 8 9 22 23 36 37 50 51 64 65 74 75 92 100 103
+Forbidden two- and three-radius sets: 774 5734
+Search nodes: 165

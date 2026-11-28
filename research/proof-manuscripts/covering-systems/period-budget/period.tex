@@ -1,0 +1,178 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.94in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs}
+\usepackage[colorlinks=true,linkcolor=black,urlcolor=blue,citecolor=black]{hyperref}
+\pdfmapfile{+cm.map}\pdfmapfile{+cmextra.map}\pdfmapfile{+symbols.map}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newcommand{\lp}{P^+}
+\newcommand{\rr}{\rho}
+\newcommand{\lcm}{\mathop{\rm lcm}}
+\title{The period bound for Erd\H os problem 1189}
+\author{Codex (OpenAI), at the request of Jordan Pollard}
+\date{November 27, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+We compute the divisor optimization $U(k)$ in Section 8 of \"Ozt\"urk's paper to additive $o(1)$, including the second-order and constant terms. This identifies exactly how much the period constraint can prove about the maximal reciprocal sum of an irreducible covering set. A construction attains the defect-dependent leading bound for every defect exponent once reducible covers are admitted. We determine the sharp threshold for every fixed prime exponent in an optimizing compressed period. We determine the minimum largest modulus at cardinality 26: it is 70, with a unique extremal set. At sizes 27 through 30 the exact minima are 72, 84, 84 and 96, respectively. Independent finite searches confirm the earlier ten values at sizes 16 through 25. The sharp leading coefficient for irreducible sets and the general exact minimum remain open.
+\end{abstract}
+
+\section{The price of the period}
+An irreducible covering set is a finite set $A$ of integers greater than one such that one residue per modulus suffices to cover the integers and every proper subset fails even if all residues are reassigned. Write $k=|A|$, $L=\lcm A$, $S(A)=\sum_{n\in A}1/n$ and $b(L)=\sum_{p^a\parallel L}a(p-1)$. Set $\rho=1-\log 2$. The classical Zn\'am--Simpson inequality gives $b(L)\le k-1$; see also the matching proof below. Let $R(k)$ maximize $S$ for irreducible sets of size $k$. Let $B(k)$ be the maximum when irreducibility and coverage are both dropped and only $k$ distinct divisors greater than one of some $L$ with $b(L)\le k-1$ are required. This is exactly $U(k)$ in \cite[Section 8]{ozturk}: any unused integral budget can be spent on raising the exponent of 2, which keeps all the available divisors. Here the selected divisors are the $k$ smallest nonunit divisors, as in that paper's computational definition. Below we compute this relaxation rather than assume its optimum is a covering set.
+\begin{theorem}\label{budget}
+Writing $\gamma$ for Euler's constant, one has
+\[
+ B(k)=(3/2-\log 2)\log k+\tfrac12\log\log k+
+       \rho(\gamma-\log\rho)-1+o(1).
+\]
+For irreducible covering sets $R(k)$ is at most this expansion minus $173/480$, with an $o(1)$ remainder.
+\end{theorem}
+In particular, together with the preceding every-cardinality construction \cite{previous}, the unrestricted leading coefficient is bounded below by $1/2$ in the liminf and above by $0.80685282\ldots$ in the limsup. The upper leading coefficient was proved by \"Ozt\"urk \cite[Theorem 1.4]{ozturk}. The expansion determines the period-only side of his Problem 8.3: the assertion $U(k)-R(k)=o(\log k)$ is now equivalent to $R(k)/\log k\to 3/2-\log 2$.
+
+\begin{proof}
+Put $x=k/\rho$, $l=\log k$, and $t=-\log\rho$. For $n\le x$ write $g(n)=1/n-1/x$; above $x$ set $g(n)=0$. For every list of $k$ moduli,
+\[
+ S(A)\le k/x+\sum_{n\in A}g(n).
+\]
+Every $n\le x$ with a prime factor above $\sqrt x$ has exactly one such factor. All other numbers up to $x$ are provisionally available. For a large prime $p$ allowed in the period, its additional available weight is at most $\sum_{j\le x/p}g(jp)$, a decreasing function of $p$. Its period cost is at least $p-1$. If $N$ primes above $\sqrt x$ occur in $L$, their total weight is no more than the weight of the first $N$ such primes, and the latter primes cost at most $k-1$. Thus allowing all primes through the first prime $z>\sqrt x$ for which $\sum_{\sqrt x<p\le z}(p-1)\ge k-1$ gives
+\[
+ S(A)\le k/x+\sum_{\substack{2\le n\le x\\\lp(n)\le z}}(1/n-1/x).
+\]
+In this inequality it is the sum of the available weights that increases under compression; the actual set need not be contained in the new divisor pool. The prime number theorem gives $\sum_{p\le v}(p-1)\sim v^2/(2\log v)$; the cost below $\sqrt x$ is $o(k)$ and the final jump is negligible. Hence $z\sim\sqrt{k\log k}$ and $\log z=(l+\log l)/2+o(1)$.
+
+Write $\Psi(x,z)$ for the count of positive $z$-smooth integers up to $x$, including 1. Since $z>\sqrt x$,
+\[
+ \Psi(x,z)=\lfloor x\rfloor-\sum_{z<p\le x}\lfloor x/p\rfloor=(\rho+o(1))x.
+\]
+Here the floors cost $O(\pi(x))$, and Mertens' formula gives the prime reciprocal sum $\log 2+o(1)$. Thus $k/x$ cancels the sum of the terms $-1/x$ up to $o(1)$. Including $n=1$, the harmonic mass is exactly
+\[
+ H_{\lfloor x\rfloor}-\sum_{z<p\le x}\frac{H_{\lfloor x/p\rfloor}}p .
+\]
+Use $H_{\lfloor u\rfloor}=\log u+\gamma+O(1/u)$ for $u\ge1$. The accumulated error from the floors is $O(\pi(x)/x)=o(1)$. Partial summation of the classical PNT with its logarithmic error savings gives $\sum_{z<p\le x}1/p=\log(\log x/\log z)+o(1/\log x)$ and $\sum_{z<p\le x}\log p/p=\log x-\log z+o(1)$. The harmonic mass is therefore
+\[
+ 2\log x+\gamma-\log z-(\log x+\gamma)\log(\log x/\log z)+o(1).
+\]
+Insert $\log x=l+t$ and $\log(\log x/\log z)=\log2+(t-\log l)/l+o(1/l)$; subtract one for the inadmissible modulus 1. This gives the asserted upper expansion.
+
+For attainment in the period relaxation take $L=\lcm(1,\ldots,u)$ with $u$ immediately before the first prime-power threshold at which $b(\lcm(1,\ldots,u+1))>k-1$. As before $u\sim\sqrt{k\log k}$: prime powers beyond the first add $O(u\log u)$ to the budget, and the next jump is $O(u)$. Compared with all $u$-smooth candidates, the additional omissions among divisors of $L$ are multiples of powers $p^a>u$, $a\ge2$. Their reciprocal weights cost $o(1)$: for $p\le\sqrt u$ the geometric tail beyond $u$ is $O(1/u)$ per prime; for $p>\sqrt u$ sum $O(p^{-2})$. The sum of reciprocal powers is $O(u^{-1/2})$, so the count loss is $O(x/\sqrt u)$ and the harmonic loss is $O((\log x)/\sqrt u)$. Consequently the number of available nonunit divisors up to $x$ is $k+o(k)$ and their reciprocal mass is the asserted expansion. If there are too many, remove the largest $o(k)$, each of size $\gg k$ because there are $k+o(k)$ distinct integers. If too few, add divisors above $x$; $L$ has at least $2^{\pi(u)}$ divisors. This proves the lower bound for $B(k)$.
+
+For the final subtraction use the eleven small covering systems supplied in the accompanying certificate. Every sufficiently large irreducible $A$ must omit at least one modulus in each of them. Their weighted minimum hitting set has total reciprocal weight $7/30$, attained by $\{12,24,30,36,40,45\}$. This is verified exactly over all $2^{17}$ subsets of their union, and each covering assignment is checked over a full period. All these small moduli occur in the provisional pool below $\sqrt x$, whether or not they actually divide $L$. Reduce the provisional sum of $g$ by at least $7/30-17/x$ before adding the contribution from primes larger than $\sqrt x$. The stronger $173/480$ follows by applying the same subtraction to all moduli through 1440. For large $k$ these lie below $\sqrt x$, and $A\cap[2,1440]$ cannot cover. By \cite[Theorem 6.6]{ozturk} the omitted reciprocal weight there is at least $173/480$. The adjustment for using $g$ is $O(1440/x)$.
+\end{proof}
+
+\paragraph{Which constraints cause the loss?}
+For any budget-admissible set $A$ and $x=k/\rho$, the same compression retains the quantitative inequality
+\[
+ \sum_{\substack{2\le n\le\sqrt{x}\\n\notin A}}\frac1n
+       \le B(k)-S(A)+o(1)
+\]
+uniformly over $A$. Indeed the compression leaves the entire provisional pool below $\sqrt{x}$ untouched, and all missing terms there can be subtracted before compressing the primes above $\sqrt{x}$. Replacing $g(n)$ by $1/n$ adds at most $1/\sqrt x$. Thus every family within $o(1)$ of the divisor optimum eventually contains every fixed finite set of moduli. In particular, for all sufficiently large $k$, \emph{every} budget optimizer contains $\{2,3,4,6,12\}$, which covers, for example with residues $(0,0,1,1,11)$ respectively. Therefore imposing coverage alone on the period optimization costs exactly zero at every sufficiently large size. Irreducibility incurs a cost of at least $173/480-o(1)$. Whether it costs a positive multiple of $\log k$ remains open.
+\paragraph{Coupling the two original extrema.}
+Write $M=\max A$ and $\log^+t=\max(0,\log t)$. For every irreducible set,
+\[
+ U(k)-S(A)\ \ge\ \tfrac12\log^+(k\log k/M)+173/480-o(1).
+\]
+Indeed the top-digit argument in the finite-minima section gives $p\le\sqrt M$ for every active prime and $M\ge(1/\rho-o(1))k$. In the harmonic calculation of Theorem~\ref{budget}, replace $z$ by the smaller of the period-budget cutoff and $\max(\sqrt{x},\sqrt M)$. If the latter is used, its logarithm is $(\log k+\log(M/k))/2+o(1)$. Writing $a=\log(M/k)$ in place of $\log\log k$ in the expansion replaces $\frac12\log\log k$ by $\frac12 a$. The expansion and its errors are uniform for bounded-below $a\le\log\log k+o(1)$; the same $173/480$ subtraction still applies. Thus for $M=o(k\log k)$ the gap from the divisor optimum diverges. Bounded additive loss requires $M\gg k\log k$.
+
+One can also minimize the largest entry subject to the period budget alone. Denote this relaxed minimum by $D(k)$. Then
+\[
+D(k)=\frac{k}{\rho}\left(1-\frac{\log\log k+\log\rho+1-\gamma+o(1)}{\rho\log k}\right).
+\]
+To see this, use unweighted counts in the same largest-prime compression (a prime $p>\sqrt{x}$ contributes at most $\lfloor x/p\rfloor$). The upper envelope for the count of available nonunit divisors up to $x\asymp k$ is $\Psi(x,z)-1$; the constructed period $\lcm(1,\ldots,u)$ attains $\Psi(x,u)-1-O(x/\sqrt{u})$. Both cutoffs have logarithm $(\log k+\log\log k)/2+o(1)$. For $x=(k/\rho)(1+O(\log\log k/\log k))$ the floor estimate in the finite-minima section, unchanged on removing primes below $z\asymp\sqrt{k\log k}=o(x)$, gives for either count
+\[
+ x\left(\rho+\frac{\log\log k+\log\rho+1-\gamma+o(1)}{\log k}\right).
+\]
+For fixed $\varepsilon>0$, plug in the two values of $x$ obtained from the formula for $D(k)$ with its $o(1)$ replaced by $\pm\varepsilon$. The two counts straddle $k$ for all sufficiently large $k$. Let $\varepsilon\downarrow0$. Comparing with the irreducible bound in that section gives
+\[
+ m(k)-D(k)\ge (\rho^{-2}-o(1))\,k\log\log k/\log k.
+\]
+\paragraph{Finite optimization.}
+For an exact computation of $B(k)$ it suffices to search products of the first consecutive primes with nonincreasing exponents. Replacing a used prime by a smaller missing prime reduces the period cost and maps divisors injectively to no larger divisors. For $p<q$ with exponents $a<b$, swap the two exponents. On the old exponent pairs $(i,j)$, keep pairs with $j\le a$ fixed; on $j>a$ use $(j,i)$. This is a bijection onto the new divisor box, decreases each affected divisor, and reduces the period cost. Iteration proves the assertion. At a candidate period take the $k$ smallest nonunit divisors if available. A separate finite test compares this enumeration with enumeration of all budget-feasible periods for $2\le k\le18$.
+
+\input{squares.tex}
+\input{all-powers.tex}
+\input{counting.tex}
+\section{What the defect can buy}
+Let $\delta=k-1-b(L)$. A companion manuscript \cite{parallel} proves the following inequality with error $O(\log\log k)$. We give a separate proof of the leading interpolation to identify the contribution that can be attained after dropping irreducibility.
+\begin{theorem}\label{def}
+\[
+ S(A)\le \tfrac12\log k+\rho\log(1+\delta)+o(\log k)
+\]
+uniformly over irreducible covering sets. Consequently $S(A)\ge(1/2+\eta)\log k$ for fixed $\eta>0$ forces $\delta\ge k^{\eta/\rho-o(1)}$.
+\end{theorem}
+
+\begin{proof}
+Form one slot for each of $p-1$ copies of each base-$p$ digit of $L$, joined to all moduli fixing that digit. Each nonempty collection $X$ of slots has at least $|X|+1$ neighboring moduli. Indeed an inclusion-minimal violation has $|N(X)|=|X|$ (for singletons the digit is active), and Hall matches $X$ onto $N(X)$. Fix a covering assignment. The proper subfamily outside $N(X)$ misses a point. Change its represented digits to avoid every matched class, possible since at most $p-1$ values in a given digit are forbidden; the other classes ignore all changed digits. The resulting point misses the entire cover. By Hall after deleting any one right vertex, one can consequently match every slot into the remaining vertices. There are $\delta+1$ moduli outside the matching.
+
+Put $y=\delta+1$. Unmatched moduli above $y$ contribute at most one. Matched rows at digits $j\ge2$ have aggregate weight at most $\sum_p H_{p-1}/(p(p-1))<\infty$, since the $p-1$ assigned distinct moduli are multiples of $p^j$. Count small moduli $n\le y$ separately. Those with $\lp(n)\le\sqrt n$ contribute at most $\rho\log y+o(\log k)$. In fact their count up to $Y$ is $(\rho+o(1))Y$: replacing the cutoff $\sqrt n$ by $\sqrt Y$ introduces at most $\sum_{p\le\sqrt Y}p=O(Y/\log Y)$ additional integers $pd$ with $d<p$. The $\sqrt Y$-smooth count follows as in Theorem~\ref{budget}. Partial summation gives the stated harmonic bound, also when $y$ grows slowly or stays bounded.
+
+Every other small modulus is $pd$ with $d<p$, and is charged to this $p\mid L$. Together with the matched first-digit moduli above $y$ assigned to that prime, its total charge is at most
+\[
+ \frac1p\left(H_{\min(p-1,v)}+H_{v+p-1}-H_v\right)
+ \le \frac{H_{p-1}+1}{p},\qquad v=\lfloor y/p\rfloor.
+\]
+For $v<p-1$ the total inside the parentheses is $H_{v+p-1}$. For $v\ge p-1$ the last $p-1$ terms have sum at most one. Thus the reciprocal mass of small nonsmooth moduli and large matched moduli uses a single prime budget, even if the first assignment of a small modulus used a different digit. Take $Z=\sqrt k\log k$. Primes $p>Z$ dividing $L$ have $\sum 1/p\ll k/Z^2$ by the budget, and $p\le k$. Primes below $Z$ contribute at most $\sum_{p\le Z}(H_{p-1}+1)/p=\log Z+O(\log\log Z)$ by Mertens' estimates. This yields the theorem. The errors from the harmonic mass of the self-smooth numbers are uniform since $1\le y\le k$.
+\end{proof}
+
+\paragraph{Sharpness for covers retaining the matching condition.}
+For each fixed $0\le t\le1$ one can attain $(1/2+\rho t+o(1))\log k$ with covering sets obeying the same slot expansion and with $\log(1+\delta)/\log k\to t$, if irreducibility is dropped. To see this take $u$ a growing prime, $L=\lcm(1,\ldots,u)$ and a zero-defect digit construction of size $k_0=1+b(L)$ as follows. At each digit $(p,j)$ include $p^j d$, $1\le d<p$. For the terminal digit $p=u$, include also $ud_0$ with $d_0=(u-1)(u-2)>u$ a divisor of the previous period. Use residues that require $x=0\bmod d$ and put the digit equal to its assigned nonzero value with lower $p$-digits zero; at the terminal row use all $u$ digit values. The first nonzero digit covers a point, including the terminal case when all earlier digits vanish. Distinctness follows from the largest prime and its valuation. Each proper divisor $L'$ of $L$ admits at most $b(L')$ of these moduli, since admitting the entire terminal row requires $L'=L$. The budget inequality then proves irreducibility after any reassignment. The first-digit rows already contribute $\sum_{p\le u}H_{p-1}/p\sim\log u\sim\frac12\log k_0$.
+
+For $t>0$, add every missing divisor $2\le n\le Y=k_0^t$ with $\lp(n)\le\sqrt n$. Since $\sqrt Y\le u$ eventually, the power-loss argument in Theorem~\ref{budget} discards $o(Y)$ candidates and $o(1)$ harmonic mass. First-digit rows have $\lp(n)>\sqrt n$, apart from the single terminal exception. The total reciprocal mass of the higher-digit rows is bounded by the convergent series in the proof above. Their count up to $Y$ is $o(Y)$: split off $n\le\sqrt Y$ and then use that the tail above $\sqrt Y$ of the fixed convergent series over $p^j d$, $j\ge2,\,d<p$, tends to zero. Hence $\delta=(\rho+o(1))Y$ and the mass added is $(\rho+o(1))\log Y$. The original slot expansion persists after adding moduli, and $\log k\sim\log k_0$. For $t=0$ use the seed alone. The augmented sets for $t>0$ contain their seed as a proper covering subset. The exact obstruction to using this construction as a lower bound for $R(k)$ is therefore explicit.
+
+\section{Exact unrestricted minimum largest moduli}
+Write $m(k)=\min_A\max A$ over irreducible covering sets of size $k$. Here we independently check the ten values recorded in the parallel enumeration \cite{parallel}:
+\[
+ \begin{array}{c|ccc}
+ k&16&17,\dots,23&24,25\\ \hline
+ m(k)&48&56&60.
+ \end{array}
+\]
+We give a reproducible exhaustive decision; this section uses only integer arithmetic. If $p^a\parallel L$, some class fixing the highest digit has a private point. No lower class covers its fibre over $L/p$, and each top class covers at most one of its $p$ points. Thus at least $p$ distinct moduli have full $p^a$. Their cofactors are distinct positive integers coprime to $p$, so their largest is at least $p+1$. In particular every $n$ in an irreducible cover of maximum at most $M$ satisfies $p^a(p+1)\le M$ for every $p^a\parallel n$. At cap 47 this leaves the following pool:
+\[
+ P=\{2,3,4,5,6,8,9,10,12,15,18,20,24,30,36,40,45\}.
+\]
+At every cap from 48 to 55 add just 16 and 48. At 56 add also $7,14,21,28,35,42,56$. The pool stays fixed through 59; at 60 the sole new entry is 60. These statements follow by factoring the integers through 60.
+
+This necessary condition has two further asymptotic consequences. First, at a prescribed cap $M$ the reciprocal sum is at most
+\[
+ (3/2-\log2)\log M+\rho\gamma-1-7/30+o(1)
+\]
+as $M\to\infty$ for irreducible sets whose cardinality tends to infinity. Indeed all entries are $\sqrt M$-smooth. Use the harmonic-mass computation above with $x=M,\ z=\sqrt M$ and apply the eleven-cover omission bound. The independent 1440 cutoff in Theorem~\ref{budget} also replaces $7/30$ by $173/480$ here. Second, for the unrestricted minimum one has
+\[
+ m(k)\ \ge\ \frac{k}{\rho}\left(1-\frac{1-\gamma+o(1)}{\rho\log k}\right).
+\]
+For this refinement retain the floors in $\Psi(M,\sqrt M)$. Their fractional parts have sum $(1-\gamma+o(1))M/\log M$. On $M/T\le p\le M$ for fixed $T>1$, partial summation or Riemann approximation using the PNT gives the limiting normalized sum $\int_{1/T}^1\{1/v\}\,dv$. Smaller primes contribute $O(1/T)$ after normalization. The full integral equals $\sum_{j\ge1}(\log(1+1/j)-1/(j+1))=1-\gamma$. Thus $\Psi(M,\sqrt M)=M(\rho+(1-\gamma+o(1))/\log M)$. Use $M\ge k$ to obtain the displayed bound. The digit condition by itself has the same counting asymptotic to this accuracy: the cutoff $p(p+1)\le M$ misses at most one prime below $\sqrt M$, and the prime powers with $a\ge2$ and $p^a(p+1)>M$ exclude $o(M/\log M)$ additional integers. For the latter, sum geometric tails of reciprocal powers, splitting at $p=M^{1/4}$; their total is $O(M^{-1/4})$.
+
+In a fibre with precisely $p$ eligible top moduli $d_i$, contract them to a single virtual modulus $\lcm_i(d_i/p)$. Indeed all holes of the lower rows in the projection must lie in the intersection of the $p$ projected classes, which is empty or one class modulo that LCM. Conversely assign the projected residues from any such class and distribute all $p$ top digits bijectively. When fewer than $p$ eligible moduli are present, all can be discarded in deciding coverability. The virtual list can have repeated moduli. Contract the new seven rows to 120, and the pair $16,48$ to 24. The residual period divides $360=5\cdot72$.
+
+For completeness, divide the projected top-5 rows into five unlabeled buckets, according to their residue modulo 5. For a projection modulus $d$ on the 72-cycle each residue gives the bit set of the corresponding class. Within a bucket take all possible unions of these classes. Across buckets take all possible intersections. The resulting mask is exactly the set of base points whose entire fibre the 5-rows can cover. With fewer than five rows only the empty mask is needed. At cap 56 there are at most eight rows, and at cap 60 at most nine. Thus any assignment using all five buckets has a singleton bucket. Its residue can be translated to zero. Inclusion-dominated masks may be discarded and translates identified: the remaining rows have unrestricted residue choices. For each candidate mask tile its complement by the remaining non-5 rows, branching on all possible residues and updating the uncovered mask. Reject if the sum of the remaining largest individual gains is smaller than the uncovered count. A positive-gain choice dominates a zero-gain choice whenever the latter is possible. This decision covers all assignments.
+
+For each subset of $P$, append either both new 2-rows or neither, and either all seven new 7-rows or none. A partial nonempty top family would be deletable. For each candidate of size at least 16 test coverability and test every single deletion, applying contractions afresh. A set is irreducible exactly when it is coverable and all those tests fail. The count by size and maximum is:
+\[
+\begin{array}{c|rrrrrrrr}
+ &16&17&18&19&20&21&22&23\\\hline
+48&1&0&0&0&0&0&0&0\\
+56&197&133&1068&824&417&177&94&2
+\end{array}
+\]
+No set of size at least 16 occurs below 48 and no larger size occurs at cap 56. A representative at size 23 is
+\[
+ \{3,4,5,7,8,9,10,12,14,15,16,18,20,21,24,28,30,35,36,40,42,48,56\}.
+\]
+A second solver projects the top ternary digit instead, onto a 120-cycle. If the lower rows leave a hole, translate it to zero. Choose three distinct top rows to cover its three lifts; each must have projected residue zero. Permute the digit labels to assign these rows to separate buckets. At most one other top row remains, so enumerate its bucket and projected residue, then fill all other holes directly with the lower rows. If the lower rows suffice alone the test also succeeds. This independent enumeration reproduces every size-$16$-or-larger result through cap 55 and verifies all nine positive representatives at caps 48 and 56 against every deletion. At sizes 24 and greater, both algorithms also find no irreducible sets through cap 59. At cap 60 any new extremizer must contain 60, all seven 7-rows (else it is too small or has a deletable row), and either both or neither of 16 and 48. Both algorithms return exactly the same eleven sets of size 24 and the same unique set of size 25, with no larger set. The latter is
+\[
+ \{4,5,6,7,8,9,10,12,14,15,16,18,20,21,24,28,30,35,36,40,42,45,48,56,60\}.
+\]
+The source, finite certificates and output accompany this note.
+
+\input{size26.tex}
+\input{next-minima.tex}
+\input{cap84.tex}
+\paragraph{Status and remaining question.} The unrestricted exact function $m(k)$ and sharp coefficient of $R(k)$ are still undetermined. Is it possible for a positive-defect irreducible family to collect a positive multiple of $\log k$ from moduli $n$ with largest prime factor at most $\sqrt n$, beyond what is lost in its nonsmooth rows? The reducible construction shows why just a period budget and slot matching cannot rule this out. At size 31 the lower bound is 96. A new candidate there must account for the interaction of repeated 48-rows after contracting the highest binary digit. These are AI-authored written and computational arguments, pending external review.
+\begin{thebibliography}{9}
+\bibitem{problem} \href{https://www.erdosproblems.com/1189}{Erd\H os problem 1189}, cardinality formulation. The underlying period bound is due to Zn\'am and Simpson.
+\bibitem{ozturk} E. \"Ozt\"urk, \href{https://doi.org/10.13140/RG.2.2.16138.63684}{Irreducible covering systems: the largest modulus, the maximal reciprocal sum, and exact values for at most nineteen moduli}, 2026. Its finite reciprocal maxima concern a different extremum from the minimum largest modulus studied here.
+\bibitem{parallel} Codex, companion covering-systems manuscripts for Jordan Pollard: \href{https://github.com/jpollard-cs/open-math-agents/blob/b32f70d5e6f1337e10ad264b55ea8489c7ed7773/research/proof-manuscripts/covering-systems/reciprocal-sums/defect-tradeoff.md}{defect estimate}, \href{https://github.com/jpollard-cs/open-math-agents/blob/6d05185cfb18d26dd67a443067d6559b017e4657/research/proof-manuscripts/covering-systems/reciprocal-sums/finite-60.md}{exact minimum table through 25} and accompanying covering residues.
+\bibitem{younis} K. Younis, \href{https://arxiv.org/abs/2409.05761}{Asymptotics for smooth numbers in short intervals}, Theorem 1.1.
+\bibitem{previous} Codex, \href{https://github.com/jpollard-cs/open-math-agents/tree/d0e21ac225a5ca3f274071fbe9751cdc54a479f3/research/proof-manuscripts/covering-systems/reciprocal-sums}{Irreducible covers at every cardinality}, written research manuscript and reproducible certificates. That note credits earlier order-of-growth results of Pickhardt and the Paratelligent Research Agent and the constructions of \"Ozt\"urk.
+\end{thebibliography}
+\end{document}

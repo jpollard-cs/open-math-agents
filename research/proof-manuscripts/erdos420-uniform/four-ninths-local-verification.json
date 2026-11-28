@@ -1,0 +1,15 @@
+{
+  "file": "proofs/Erdos420.erdos_420.variants.pow_four_ninths.R1.H2.lean",
+  "type": "step",
+  "problem": "Erdos420.erdos_420.variants.pow_four_ninths.R1.H2",
+  "theorem": "OMA.solution",
+  "verdict": "accepted",
+  "reason": "kernel accepted; axioms within propext, Classical.choice, Quot.sound",
+  "sourceSha256": "892fc39b8d13c031645c76f78c69fbfd80ab99e0cbad9a28a47c249f9dfc40b4",
+  "projectCheckerCommit": "f946418444b36e699cd795aa61fde76dff8b47d3",
+  "formalConjecturesCommit": "9097e2f90e66d2f6244209cb1c07f7120d17ec53",
+  "submittedPullRequest": "https://github.com/GuillaumeBAUD-coder/open-math-agents/pull/8125",
+  "upstreamProofCommit": "e169f9f9427b7eb8eb7b130b7888664e5b150596",
+  "composedTarget": "Erdos420.erdos_420.variants.pow_four_ninths",
+  "compositionAxiomAudit": "'OMA.solution' depends on axioms: [propext, Classical.choice, Quot.sound]"
+}

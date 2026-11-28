@@ -1,0 +1,23 @@
+1 of 24 removable 63 irreducible sets so far 0
+2 of 24 removable 63 irreducible sets so far 0
+3 of 24 removable None irreducible sets so far 0
+4 of 24 removable 63 irreducible sets so far 0
+5 of 24 removable 63 irreducible sets so far 0
+6 of 24 removable None irreducible sets so far 0
+7 of 24 removable 63 irreducible sets so far 0
+8 of 24 removable None irreducible sets so far 0
+10 of 24 removable 63 irreducible sets so far 0
+11 of 24 removable None irreducible sets so far 1
+12 of 24 removable None irreducible sets so far 1
+13 of 24 removable None irreducible sets so far 1
+14 of 24 removable None irreducible sets so far 1
+15 of 24 removable None irreducible sets so far 1
+17 of 24 removable None irreducible sets so far 1
+18 of 24 removable None irreducible sets so far 1
+19 of 24 removable None irreducible sets so far 1
+20 of 24 removable None irreducible sets so far 1
+21 of 24 removable None irreducible sets so far 1
+22 of 24 removable None irreducible sets so far 1
+23 of 24 removable None irreducible sets so far 1
+24 of 24 removable None irreducible sets so far 1
+size 26, max 70: [(4, 5, 6, 7, 8, 9, 10, 12, 14, 15, 16, 18, 20, 21, 24, 28, 30, 35, 40, 42, 45, 48, 56, 60, 63, 70)]

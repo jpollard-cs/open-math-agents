@@ -1,0 +1,23 @@
+size 28: seed 18, distinguished  5, 1 ordinary holes per 2520, full period 27720
+size 29: seed 19, distinguished  5, 2 ordinary holes per 5040, full period 55440
+size 30: seed 20, distinguished  5, 1 ordinary holes per 5040, full period 55440
+size 31: seed 21, distinguished  7, 2 ordinary holes per 5040, full period 55440
+size 32: seed 22, distinguished  7, 2 ordinary holes per 5040, full period 55440
+size 33: seed 23, distinguished  7, 2 ordinary holes per 5040, full period 55440
+size 34: seed 24, distinguished  7, 2 ordinary holes per 5040, full period 55440
+size 35: seed 25, distinguished  7, 2 ordinary holes per 5040, full period 55440
+size 36: seed 26, distinguished 40, 2 ordinary holes per 5040, full period 55440
+size 37: seed 27, distinguished 40, 2 ordinary holes per 5040, full period 55440
+size 38: seed 28, distinguished 28, 2 ordinary holes per 5040, full period 55440
+size 39: seed 29, distinguished 28, 2 ordinary holes per 5040, full period 55440
+size 40: seed 30, distinguished 28, 4 ordinary holes per 10080, full period 110880
+size 41: seed 31, distinguished 28, 4 ordinary holes per 15120, full period 166320
+size 42: seed 32, distinguished 28, 8 ordinary holes per 30240, full period 332640
+size 43: seed 33, distinguished 35, 12 ordinary holes per 30240, full period 332640
+Seed irreducibility: 172 cap-60 deletions and 171 larger-base deletions checked.
+cap 111: additions [], excludes sizes from 36
+cap 119: additions [112], excludes sizes from 37
+cap 125: additions [112, 120], excludes sizes from 38
+cap 131: additions [112, 120, 126], excludes sizes from 39
+cap 134: fourteen additions, excludes sizes from 50
+Every 36-subset of the cap-108 pool passes the cited lower-bound alternatives.

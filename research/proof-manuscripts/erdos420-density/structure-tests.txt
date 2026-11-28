@@ -1,0 +1,3 @@
+16465 soluble congruences checked, counting solutions and lifting all forms.
+57798 good-prime root counts checked.
+15360 suffix lengths checked for every nonempty pattern on ten sites.

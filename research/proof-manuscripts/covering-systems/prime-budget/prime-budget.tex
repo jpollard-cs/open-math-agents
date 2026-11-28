@@ -1,0 +1,127 @@
+\documentclass[11pt]{article}
+\usepackage[letterpaper,margin=.87in]{geometry}
+\usepackage{amsmath,amssymb,booktabs,hyperref,microtype}
+\ifdefined\pdfmapfile\pdfmapfile{+cm.map}\pdfmapfile{+cmextra.map}\pdfmapfile{+symbols.map}\fi
+\hypersetup{colorlinks=true,urlcolor=blue,pdftitle={The largest active prime at a quadratic modulus cap},pdfauthor={Codex (OpenAI)}}
+\setlength{\parindent}{0pt}\setlength{\parskip}{5pt}
+\newcommand{\head}[1]{\par\vspace{5pt}{\large\bfseries #1}\par}
+\newcommand{\lcm}{\operatorname{lcm}}
+\newcommand{\eps}{\varepsilon}
+\begin{document}
+{\LARGE\bfseries The largest active prime at a quadratic modulus cap}\par
+{\large Irreducible covering sets of every exact cardinality}\par
+Codex (OpenAI), at the request of Jordan Pollard. Research manuscript for review, 27 November 2026.
+
+A set $A$ of $k$ distinct integers greater than one covers if one residue for each modulus covers all integers. It is irreducible if every proper subset fails for all choices of residues. Write $M=\max A$, $L=\lcm A$ and $P=P^+(L)$. Define $P_\lambda(k)$ as the maximum $P$ among such sets with $M\le\lambda k^2$, or zero for an empty family.
+
+\head{The sharp tradeoff at every size}
+For every fixed $\lambda>0$,
+\[
+ \lim_{k\to\infty}\frac{P_\lambda(k)}k
+   =\min\{1,\sqrt{(1-\log 2)\lambda}\}.\tag{1}
+\]
+Equivalently, for every fixed $0<t<1$, the least $M$ among irreducible $k$-sets with $P\ge tk$ is asymptotic to $t^2 k^2/(1-\log 2)$. At cap $k^2$ the answer in (1) is about $0.55394$. At intermediate caps $k^\sigma$, $1<\sigma<2$, the sharp prime scale is $\sqrt{(1-\log\sigma)k^\sigma}$ (page 8). The transition to $P/k\to1$ occurs at a cap of about $3.25889k^2$.
+
+\head{Exact inverse problem with a prescribed prime}
+Let $K(p,T)$ be the fewest moduli in any irreducible set with $p\mid L$ and $M\le pT$. Here $p$ is prime and $T$ is an integer. Define
+\[
+ b(Q)=\sum_{q^a\parallel Q}a(q-1),\quad
+ C(p,T)=\min_{(Q,p)=1,\ \#\{d\mid Q:d\le T\}\ge p} b(Q).
+\]
+For every sufficiently large prime $p$, simultaneously for every $T\ge p+1$,
+\[
+                         K(p,T)=p+C(p,T).\tag{2}
+\]
+There is no example for $T\le p$. The right side is a finite arithmetic optimization over nonincreasing exponent lists. For $p/T\to\alpha\in(0,1)$ let $y_*$ be the least prime for which at least $p$ integers up to $T$ are $y_*$-smooth. Then
+\[
+                  K(p,T)-p\sim \frac{y_*^2}{2\log y_*}.\tag{3}
+\]
+The same scale controls how many integers lose coverage when the multiples of $p$ are removed. The greatest possible density of that set of integers, maximizing also over covering assignments, is $\exp(-(1+o(1))y_*)$.
+
+Erd\H os \#1189(ii) asks for the unrestricted minimum $M$ at each $k$. Equation (1) determines its restriction $P\ge tk$; the unrestricted minimum and the sharp unrestricted reciprocal coefficient remain open here. The proofs use the Zn\'am--Simpson period bound, the classical prime fibre observation, the earlier digit construction, and Dickman's smooth-number theorem. The verification files concern finite instances.
+
+\newpage
+\head{1. Why the inverse problem is arithmetic}
+Every irreducible covering set satisfies $1+b(L)\le k$ (Zn\'am--Simpson). This also applies to the period of a minimal covering subfamily under any given assignment. Fix $p^a\parallel L$. A modulus divisible by $p^a$ has a private point in a covering assignment. Vary only the top base-$p$ digit of that point in CRT coordinates. Every modulus missing that digit misses the entire fibre. At least $p$ different moduli divisible by $p^a$ are required. On division by $p^a$ these give distinct divisors of $Q=L/p^a$ at most $pT/p^a\le T$. This proves $k\ge1+a(p-1)+b(Q)\ge p+C(p,T)$. The first $p$ positive integers coprime to $p$ already reach $p+1$.
+
+For the reverse bound compress the prime support of $Q$ onto the first primes different from $p$. Moving a prime to a smaller unused one decreases cost and maps its divisors injectively to no larger divisors. Arrange exponents in decreasing order. If $u<v$ have exponents $a<b$, swap them. For divisors whose exponent at $v$ exceeds $a$, interchange their exponents at $u,v$; keep other divisors fixed. This is an injection into no larger divisors of the new integer. Every prime power $q^a\parallel Q$ is at most $T$ in a cost minimizer, since an unused top digit can be dropped. We use a compressed minimizer below.
+
+\textbf{Realization criterion.} Suppose the primes of $Q$ are less than $p$, its top powers are at most $T$, and each $q^a\parallel Q$ has $q-1$ distinct divisors of the earlier-prime part of $Q$ at most $pT/q^a$. Suppose at least $p$ divisors of $Q$ are at most $T$. For each $j\le a$ choose the indicated $q-1$ distinct earlier cofactors $d$; include the moduli $dq^j$. Assign the nonzero $q$-digits $b=1,\ldots,q-1$ bijectively, by the congruences
+\[
+                 x\equiv0\pmod d,\quad x\equiv bq^{j-1}\pmod {q^j}.
+\]
+Choose $p$ distinct terminal cofactors $e\mid Q$, $e\le T$, including every full prime power of $Q$ (there are fewer than $p$). Include $pe$ with $x\equiv0\pmod e$ and a different residue modulo $p$ for each $e$. All moduli are distinct by their largest prime, its exponent and their cofactor. An integer with a first nonzero digit in the ordered prime digits of $Q$ is covered there; all multiples of $Q$ reach the terminal block. The nonterminal rows miss precisely $Q\mathbb Z$.
+
+The period is $pQ$ and there are $p+b(Q)=1+b(pQ)$ rows. For any proper divisor $D\mid pQ$ at most $b(D)$ rows divide $D$: each surviving digit permits at most $q-1$, and retaining every terminal row forces $pQ\mid D$. A covering subfamily minimized after arbitrary reassignment needs at least $1+b(D)$ rows at its own period $D$. At period $pQ$ it needs every row. This proves irreducibility in the required sense.
+
+\newpage
+\head{2. Realizing an optimizer uniformly in the cap}
+Here $p$ tends to infinity. If $T\ge2p$, feasibility at $T_0=2p$ gives $C(p,T)=o(p^2/\log p)$ uniformly. Indeed take all prime powers with bases $q\le (2p)^{9/10}$ up to $2p$. Their cost is $O(p^{1.8}\log p)$ and their divisors through $2p$ include all smooth numbers with that cutoff. Dickman's formula $\Psi(x,x^{1/u})/x\to\rho(u)$ gives proportion $1-\log(10/9)>1/2$. The prime number theorem gives $\sum_{q\le x}(q-1)\sim x^2/(2\log x)$. Hence the largest prime in an optimal compressed support is $o(p)$, since all smaller primes except possibly $p$ occur. 
+
+For $p+1\le T<2p$ there is no optimally used prime $v>p$. Such a prime accounts for just one divisor through $T$, namely $v$. Remove it. If fewer than $p$ divisors remain, some element of $\{1,\ldots,p-1,p+1\}$ is missing. Increase an insufficient exponent of one of its prime factors by one. This introduces at least the new prime power itself through $T$ and costs less than $v-1$. This contradicts optimality. We have used that $p$ is odd.
+
+For each prime $q$ in either compressed support the earlier part contains the squarefree product of all smaller primes. For all large $q$ this gives at least $q-1$ divisors at most $2q$. Indeed the squarefree integers through $2q$ have asymptotic count $12q/\pi^2$; deleting those with a prime factor $\ge q$ costs $O(q/\log q)$. For each of the bounded smaller $q$, the earlier product has at least $q-1$ divisors by Bertrand's postulate: if $q$ is the $j$th prime then $q-1\le2^{j-1}$. Their sizes are bounded by an absolute constant for this finite set, hence by $p$ eventually.
+
+The allowance $pT/q^a$ is at least $p$. This handles $q\le p/2$ and thus all primes when $T\ge2p$. Otherwise $p/2<q<p$, $T<2p$, and $a=1$ for large $p$. If $2q^2\le pT$ the allowance still reaches $2q$. In the last case $q>\sqrt{pT/2}>T/2$. Of the at least $p$ divisors through $T$, those with a prime factor $\ge q$ must themselves be primes in $[q,p)$, at most $p-q$ in number. At least $q$ earlier divisors remain, all within the allowance $pT/q\ge T$. This proves the realization criterion in every case and completes (2).
+
+At a fixed small prime the arithmetic lower bound still applies. Checking the criterion on one optimizer suffices to prove equality for that instance. For example at $p=11$ the exact minima for $T=12,16,22,44$ are respectively $28,21,20,18$. Explicit optimal cofactor periods are $2520,240,120,72$. The accompanying program searches exponent lists and constructs the rows and residues.
+
+\newpage
+\head{3. Smooth divisors and the size of the excess}
+Write $p/T\to\alpha\in(0,1)$. Define $\beta\in(0,1)$ by $\rho(1/\beta)=\alpha$. Dickman's theorem and strict monotonicity of $\rho$ beyond one give $y_*=T^{\beta+o(1)}$. Every feasible cofactor period contains at least $\pi(y_*)$ primes: otherwise compress them onto the first primes and even the unrestricted smooth count is too small. Thus its cost is at least $\sum_{q\le y_*}(q-1)$.
+
+Fix $\eta>0$ and put $z=(1+\eta)y_*$. Use all primes $q\le z$ with exponent one, enhancing those $q\le z^{1/2}$ to their largest power at most $T$. Among the $z$-smooth integers through $T$ this loses at most $T\sum_{n>\sqrt z} n^{-2}=O(T/\sqrt z)$ integers. Including primes $y_*<q\le z$ gains $\gg_{\alpha,\eta}T/\log y_*$ integers: take $q$ times any $y_*$-smooth integer through $T/z$. These sets are disjoint, and Dickman's theorem (or monotone squeezing with fixed exponents) gives a positive smooth proportion at that bound. Thus at least $p$ divisors remain. The extra powers cost $O(z\log T)$ and increase $\log Q$ by $O(\sqrt z\log T)$. The cost is $(1+o(1))z^2/(2\log z)$, and $\log Q\sim z$. Let $\eta\downarrow0$ to get (3). This period satisfies the realization criterion by the squarefree argument on page 3 since $z=o(p)$.
+
+\textbf{The threshold for (1).} The inverse function in (3) crosses $\beta=1/2$ exactly at $\alpha_0=\rho(2)=1-\log2$. If $M\le\lambda k^2$ and along a subsequence $P/k$ exceeds $\sqrt{\alpha_0\lambda}$ by a fixed amount, set $p=P$. Then $p\asymp k$ since $p\le k$, and $p^2/M$ stays above $\alpha_0$ by a fixed amount. Enlarge the cofactor cap if needed to $T=\lceil p/\alpha\rceil$ with fixed $\alpha\in(\alpha_0,1)$ below that ratio. Equations (2)--(3) would force $k-p\ge p^{2\beta-o(1)}$ with $2\beta>1$, an impossibility. This proves the upper bound in (1).
+
+\textbf{Exact cardinality in the opposite direction.} Fix $0<t<\min(1,\sqrt{\alpha_0\lambda})$. Choose a constant $g>1/\alpha_0$ with $gt^2<\lambda$; take a prime $p\sim tk$ and $T=\lceil gp\rceil$. Choose $0<\beta'<1/2$ such that $\rho(1/\beta')>1/g$. Start with the primes up to $y=T^{\beta'}$. Give each prime its first digit, then enlarge its exponent as far as $q^a\le T^{1/4}$ allows. This period $Q_0$ has cost $O(y^2\log T)=o(p)$. It has at least $p$ divisors through $T$: powers first missing at $q\le T^{1/8}$ exceed $T^{1/4}$, costing $O(T^{7/8})$ integers in total. Squares at primes above $T^{1/8}$ cost another $O(T^{7/8})$. The starting smooth count exceeds $p$ by a fixed positive proportion of $T$.
+
+\newpage
+\head{Reaching every size and retaining the cap}
+Set $r=k-p-b(Q_0)>0$. For every prime $q$ offer one optional digit with cost $q-1$: one more exponent for old primes, the first exponent for new ones. Every integer through the sum of the first $j$ costs is a subset sum. In fact the first cost is one and each successive cost is at most one plus the preceding sum, by induction and Bertrand ($q_{i+1}-1\le2(q_i-1)$). Stop at the first prefix reaching $r$. Its largest prime is $O(\sqrt{r\log(2r)})=o(p)$ by the prime number theorem. Select a subset totaling $r$.
+
+All top powers remain at most $T$. For an old prime an additional power is at most $\max(qT^{1/4},q^2)\le T$; new primes have exponent one. Old primes have all smaller primes available and the allowance is at least $p$, so the squarefree argument applies. For any new prime $q>y$, at least $p$ divisors of $Q_0$ through $T$ are available earlier, hence at least $q-1$ within $pT/q$. The terminal row conditions survive. The realized irreducible set has exactly $k$ moduli, $P=p$ and $M\le pT\le\lambda k^2$ for large $k$. Taking $t$ up to the stated limit proves (1). Inverting the strict inequalities gives the fixed-$t$ minimum statement on page 1.
+
+\head{4. A sharp estimate for loss of coverage}
+For any assignment covering all integers remove every row divisible by $p$, and let $H$ be the periodic set now uncovered. With $p/T\to\alpha\in(0,1)$ and $M\le pT$, the maximum density $\Delta(p,T)$ of $H$ over irreducible sets and their assignments satisfies
+\[
+                       -\log \Delta(p,T)\sim y_* .\tag{4}
+\]
+The period constructed on page 4 leaves precisely the multiples of $Q$ and $\log Q\sim(1+\eta)y_*$. It gives the required lower bound for the density.
+
+For the upper bound no $p^2$ can divide the period of an irreducible set in this regime: the top-digit bound gives $p^a\le T=O(p)$. At each $x\in H$, varying the $p$ coordinate while keeping the others fixed still misses all the retained rows. At least $p$ distinct cofactors $d\le T$ must therefore hit $x$ in their assigned congruences modulo $d$.
+
+Take $X$ uniform in $H$ over a common period containing all prime coordinates up to $T$ (enlarge by their product if needed). Let $D=\log(1/\operatorname{dens}H)$; the empty case is immediate. For each prime $q$ write $v_q=\max_a\Pr(X=a\bmod q)$. Subadditivity of Shannon entropy on CRT coordinates gives
+\[
+ D\ge\sum_{q\le T}D_{\rm KL}(X\bmod q\;\|\;\mathrm{Unif}_q).
+\]
+Indeed $D$ is the deficit against the uniform law on the full period; every fibre of projection to these coordinates has the same size. By grouping the most probable residue versus all others, each marginal deficit is at least $v_q\log(qv_q)-v_q$ (use $(1-v)\log(1-v)\ge-v$).
+
+\newpage
+\head{Arithmetic estimates for the entropy bound}
+Take $w=y_*^{1/2}$ and $s=(\log T)^{-2}$. For $s\le t\le1$ retain all primes $\le w$ and all larger primes $q\le T$ with $v_q\ge t$. Let $Y(t)$ be the prime at the same rank as the cardinality of this set. Compression and integration of indicators give
+\[
+ p\le sT+\int_s^1\Psi(T,Y(t))\,dt,\qquad
+ \int_s^1Y(t)\,dt\le(1+o(1))(D+O(w)).
+\]
+For the first inequality, a hit modulo $d$ has probability at most the minimum $v_q$ over its prime factors above $w$, with empty minimum one. At each level compress those allowed prime factors to obtain at most $\Psi(T,Y(t))$ choices of $d$. For the second, $\theta(Y(t))$ is the least log product of that many primes. Integrating this costs at most $\theta(w)+\sum_{q>w,v_q\ge s}v_q\log q$. The entropy bound controls the sum with relative error $o(1)$ since $\log q\gg_\alpha\log T$ and $|\log s|=O(\log\log T)$. The prime number theorem applies uniformly since $Y(t)\ge(1-o(1))w$.
+
+Write $u=1/\beta$, $h=\rho(u-1)>0$, with $\rho(v)=1$ for $0\le v\le1$. For each fixed $a>0$,
+\[
+ \Psi(T,ay_*)-\Psi(T,y_*)=(h\log a+o(1))\,T/\log y_*.
+\]
+For $a>1$ count by the largest prime in $(y_*,ay_*]$. For each such $q$ the summand is $\Psi(T/q,q)$, whose ratio to $T/q$ tends uniformly to $h$ by monotonicity and Dickman's theorem. For $a<1$ reverse the interval, with the same proof. Partial summation with the prime number theorem gives the formula, and monotonicity upgrades it to uniformity for $a$ in compact subintervals of $(0,\infty)$. The jump at $y_*$ is at most $T/y_*=o(T/\log T)$.
+
+Consequently for all $Y\in[w/2,T]$,
+\[
+ \Psi(T,Y)\le p+\frac{T}{\log y_*}\left[h(Y/y_*-1)+o(1)\right].
+\]
+On compact ratios this uses $\log a\le a-1$. Below $e^{-2}y_*$ use monotonicity at $e^{-2}y_*$. Above a sufficiently large constant multiple, each doubling interval $[v,2v]$ adds at most $T\sum_{v<q\le2v}1/q\ll T/\log y_*$ by Chebyshev. The resulting $O(1+\log a)$ is at most $h(a-1)$ for all sufficiently large $a$. Substitution into the integrated bound yields $\int_s^1Y(t)dt\ge(1-o(1))y_*$, proving (4). This argument also bounds the upper tail for arbitrary choices of one residue per $d\le T$ when at least $p$ must hit.
+
+\head{Sources and remaining question}
+The original formulation is at \href{https://www.erdosproblems.com/1189}{Erd\H os Problems 1189}. The period inequality is due to Zn\'am and Simpson; the prime fibre bound is classical. For smooth numbers see A. Granville, \emph{Smooth numbers: computational number theory and beyond} (2008). The companion every-size manuscript gives the earlier digit and terminal-cofactor construction. Equation (1) leaves the regime $P=o(k)$ open for the unrestricted minimum. In particular the estimate does not show the unrestricted minimum has order $k^2$; previous constructions achieve $O(k\log k)$. The independent role of medium-sized primes at such smaller caps remains to be determined.
+\input{uncapped}
+\input{intermediate}
+\input{reciprocal}
+\input{simultaneous}
+\end{document}

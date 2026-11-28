@@ -1,0 +1,72 @@
+\documentclass[10pt]{article}
+\usepackage[letterpaper,margin=.88in]{geometry}
+\usepackage{amsmath,amssymb,xcolor,hyperref}
+\pdfmapfile{+cm.map}\pdfmapfile{+cmextra.map}\pdfmapfile{+symbols.map}
+\hypersetup{colorlinks=true,urlcolor=blue!50!black,pdftitle={The intermediate primes in the four-ninths factorial window},pdfauthor={Jordan Pollard, with OpenAI Codex}}
+\setlength{\parindent}{0pt}\setlength{\parskip}{5pt}
+\newcommand{\ee}{\mathrm e}
+\begin{document}
+{\LARGE\bfseries The intermediate primes in the\\[2pt] four-ninths factorial window}\par\medskip
+Jordan Pollard\hfill November 27, 2026\\
+{\small OpenAI Codex developed the Lean formalization and prepared this proof guide.}
+
+\section*{What the estimate establishes}
+Let $\tau(m)$ count the positive divisors of $m$. Erd\H{o}s, Graham, Ivi\'c and Pomerance proved in 1996 that, for every sufficiently large integer $n$, advancing the factorial by $h=\lfloor n^{4/9}\rfloor$ positions at least doubles its divisor count:
+\[
+                         \tau((n+h)!)\ \ge\ 2\tau(n!).
+\]
+The Open Math Agents project reduced this result to two estimates for the logarithmic mass carried by primes. Its small-prime estimate already has a formal proof. This note accompanies the Lean proof of the other estimate. With $c=4/9$ and $d=5/9+1/10000$, it gives, for all sufficiently large $n$,
+\begin{equation}
+ \sum_{n<m\le n+h}\ \sum_{n^c<p\le n^d} v_p(m)\log p
+ \ \le\ \left(\frac59-\frac1{5000}\right)h\log n .
+ \tag{1}
+\end{equation}
+Here $p$ ranges over primes and $v_p(m)$ is its multiplicity in $m$. The fixed saving in (1) leaves enough mass in primes larger than $n^d$ to force doubling. Part (i) of Erd\H{o}s problem 420 asks whether a window of length $\lfloor(\log n)^C\rfloor$ can force the ratio to tend to infinity for sufficiently large fixed $C$. That question remains open.
+
+\section*{Recovering the error from reciprocal sums}
+For $x\ge1$ an integer, $1\le t\le u\le v\le3u$ with $t$ a positive integer, write $D=\{m\in\mathbb N:u<m\le v,\ t\mid m\}$ and $N=|D|$. The sieve needs
+\[
+ R=\sum_{m\in D}\big(\{x/m\}-1/2\big),\qquad
+ S(j)=\sum_{m\in D}\exp(2\pi i jx/m).
+\]
+If $|S(j)|\le E j^k+F/j$ for all integers $j\ge1$ with $0<k<1$ and $E,F\ge0$, then each integer $H\ge1$ gives
+\[
+ |R|\le \frac{N}{2H}+\frac E2\left(\frac1k+\frac1{1-k}\right)H^k+F.
+\]
+The proof takes a rational grid $Q$ divisible by $H$ and by all denominators in $D$. Averaging the sawtooth over $Q/H$ adjacent grid points in both directions supplies pointwise one-sided bounds, including at integers. Finite Fourier inversion bounds a coefficient at distance $r$ from frequency zero by $1/(4r)$ and the averaging multiplier by $\min(1,H/r)$. Summing these bounds yields the displayed inequality. This step introduces no error depending on the grid size.
+
+Put $m=tq$. Discrete first-derivative summation controls runs where the increments of the phase $Y/q$ stay away from integers. Counting the short runs near integer increments gives the basic square-root estimate. Applying van der Corput differencing once and twice supplies the other two exponent pairs. For a sum beginning at $M\ge1$ and ending at or before $3M$, all three estimates have the form
+\[
+ \left|\sum_q \exp(2\pi iY/q)\right|\ll M^\ell(Y/M^2)^k+M^2/Y,\qquad Y>0 .
+\]
+
+\newpage
+\section*{From three exponent pairs to 48 prime ranges}
+At $Y=jx/t$, optimize the preceding Fourier inequality in $H$, using the trivial bound when it is smaller. Each exponent pair gives
+$|R|\ll x^p u^q t^{-s}+u^2/(xt)$. Here $q$ denotes an exponent. The interval index $j$ starts at zero.
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{c|c|c}
+Prime ranges $j$ & Reciprocal exponent pair $(k,\ell)$ & Local error exponents $(p,q,s)$\\ \hline
+$0,\ldots,15$ & $(1/14,11/14)$ & $(1/15,2/3,11/15)$\\
+$16,\ldots,30$ & $(1/6,2/3)$ & $(1/7,3/7,4/7)$\\
+$31,\ldots,47$ & $(1/2,1/2)$ & $(1/3,0,1/3)$
+\end{tabular}
+\end{center}
+Partition $[c,d]$ into 16 equal subintervals in each of the three segments cut out by $c,77/162,29/54,d$. On one resulting band $(a,b]$, count the pairs $(m,p)$ with $n<m\le n+h$, $n^a<p\le n^b$ and $p\mid m$. The finite Selberg upper bound with level $z=\lfloor n^g\rfloor$ has main term at most $h(b-a)/g$. Split the band into intervals of ratio at most two to sum the local errors. All three error terms are bounded by a constant times $(1+\log n)^4$ multiplied respectively by
+\[
+ n^{c+2g-a},\qquad n^{p+bq+2g(1-s)},\qquad n^{2b-1}.
+\]
+In the first 16 bands take $g=17/24-5b/4-10^{-9}$. In the next 15 take $g=19/54-b/2-10^{-9}$. In the last 17 take $g=1/12-10^{-6}$. The rational inequalities at the endpoints give $g>0$, $2g<a$, and each displayed exponent strictly less than $c$. The errors are therefore $o(h)$ even after taking the floor in $h$.
+
+Write $A_j=(b-a)\theta_j+10^{-6}$ for the prescribed allowance at the right endpoint $b$ of band $j$. The coefficients $\theta_j$ are the reciprocals of $17/24-5b/4$ for $j<16$, of $19/54-b/2$ for $16\le j<32$, and are $12$ thereafter. At $j=31$ the middle coefficient already equals $12$. On every band $(b-a)/g<A_j$, so the count is at most $A_j h$ for all sufficiently large $n$, simultaneously in $j$.
+
+\section*{Restoring prime powers}
+Within each band, $\log p\le b\log n$. The exact rational mesh sum satisfies
+\[
+ c+\sum_{j=0}^{47} b_j A_j<2499/2500,
+\]
+where $b_j$ denotes the right endpoint. This proves a first-power bound of $(5/9-1/2500)h\log n$. For $p>h$ with $p^2\mid m$, the integer $m/p^2$ determines the pair $(m,p)$ in the window: distinct squares above $h^2$ with the same multiplier are spaced by more than $h$. There are at most $(n+h)/(h+1)^2$ such pairs. Each pair contributes at most $\log(n+h)$ beyond its first power. The total extra mass is eventually at most $h\log n/5000$, proving (1).
+
+{\small\textbf{Sources and attribution.} P. Erd\H{o}s, S. W. Graham, A. Ivi\'c and C. Pomerance, \emph{On the number of divisors of $n!$}, Progress in Mathematics 138 (1996), 337--355, Lemma 3 and Corollary 3. \href{https://math.dartmouth.edu/~carlp/factorial.pdf}{Original paper}. Project contributions include the parent reduction by steveDOTdigital and the small-prime proof by OrangeHeadz. \href{https://github.com/GuillaumeBAUD-coder/open-math-agents/pull/5169}{Parent reduction}\enspace$\cdot$\enspace\href{https://github.com/GuillaumeBAUD-coder/open-math-agents/pull/5473}{Small-prime proof}.}
+\end{document}

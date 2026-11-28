@@ -1,0 +1,6 @@
+grid, inverse epsilon, points, ordered triples, wrapped, sum drops, unequal midpoints with equal endpoints
+24, 24, 163, 7043, 1058, 490, 38
+36, 48, 371, 36901, 6416, 2882, 96
+48, 96, 663, 118557, 22044, 9770, 180
+60, 120, 1039, 292249, 56402, 24764, 290
+84, 84, 2043, 1134783, 228210, 99206, 588

@@ -1,0 +1,23 @@
+Lean (version 4.33.1, x86_64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)
+'CoveringRectangle.contraction' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CoveringRectangle.deletion' does not depend on any axioms
+'CoveringSubstitution.criterion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CoveringSubstitution.irreducible' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CoveringResidues.contraction' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CoveringResidues.lift' does not depend on any axioms
+'CoveringResidues.interpolate' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CoveringResidues.coprimeProduct' depends on axioms: [propext, Classical.choice, Quot.sound]
+'IntegerSubstitution.irreducible' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Checked64.everyDeletion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Checked64.sizeAndMax' does not depend on any axioms
+'Checked64.modulusSet' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Checked64.validModuli' does not depend on any axioms
+replaying ModulusSet64
+replaying Checked64
+replaying IndexedDecisions
+replaying FinitePackets
+replaying Chain
+replaying IntegerSubstitution
+replaying ResidueContraction
+replaying IrreducibleSubstitution
+replaying RectangleContraction

@@ -1,0 +1,2 @@
+'Erdos1189.Size36ProperDeletion.covers' depends on axioms: [propext, Quot.sound]
+'Erdos1189.Size36ProperDeletion.size_and_max' does not depend on any axioms

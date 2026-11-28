@@ -1,0 +1,175 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\pdfmapfile{+cm.map}\pdfmapfile{+cmextra.map}\pdfmapfile{+symbols.map}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[colorlinks=true,linkcolor=black,urlcolor=blue,citecolor=black]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newcommand{\PP}{\mathbb P}
+\newcommand{\NN}{\mathbb N}
+\newcommand{\R}{\mathbb R}
+\newcommand{\ph}{\varphi}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\limg}{\mathop{\rm lim}}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\one}{\mathbf1}
+\title{Limit points of short products of consecutive factorial-divisor ratios}
+\author{Codex (OpenAI), at the request of Jordan Pollard}
+\date{November 27, 2026 \quad$\cdot$\quad AI-authored research manuscript}
+\begin{document}
+\maketitle
+\begin{abstract}
+Write $\tau$ for the divisor function. For every $f(n)\to\infty$ with
+$f(n)=O(\log n)$, we give a proof that the set of finite limit points of
+$\tau((n+\lfloor f(n)\rfloor)!)/\tau(n!)$ is precisely $[1,\infty)$.
+This answers the two density questions in Erd\H os problem 420.
+The proof uses the well-distribution theorem of Banks, Freiberg and Maynard and the rough prime clusters in Maynard's dense-clusters argument. We preserve selected prime multiples while making the aggregate contribution of every other offset in a logarithmic interval tend to zero. The conclusion permits oscillating window lengths. A quantitative extension is given at the end. This is a written proof for external review.
+\end{abstract}
+
+\section{A simultaneous statement about window lengths}
+Set $F(n,h)=\tau((n+h)!)/\tau(n!)$ for nonnegative integers $n,h$.
+The Erd\H os--Graham questions ask for density at $h=\lfloor\log n\rfloor$ and at every $h=\lfloor f(n)\rfloor$ with $f$ monotone, $f(n)\to\infty$, $f(n)\le\log n$ \cite{EG,FC}. We use natural logarithms. The symbol $P^+(a)$ denotes the largest prime factor of $a>1$.
+
+\begin{theorem}\label{thm}
+Fix integers $D\ge1$, $r\ge0$, and a real $C>0$. There is an integer $J\ge1$ and a sequence $n\to\infty$ along which
+\[
+ \max_{J\le h\le C\log n}
+ \big|\log F(n,h)-r\log(1+1/D)\big|\longrightarrow0 .
+\]
+The maximum is over integral lengths.
+\end{theorem}
+
+\begin{corollary}\label{cor}
+If $f(n)\to\infty$ and $f(n)=O(\log n)$, the finite subsequential limits of
+$F(n,\lfloor f(n)\rfloor)$ form $[1,\infty)$. In particular both density questions have affirmative answers.
+\end{corollary}
+\begin{proof}
+Theorem \ref{thm} supplies the limit $(1+1/D)^r$ for each $D,r$.
+For $a\ge1$ take $r=\lfloor\log a/\log(1+1/D)\rfloor$ and let $D\to\infty$.
+Subsequential limits form a closed set (or choose a diagonal subsequence).
+All the ratios are at least one by factorial divisibility.
+\end{proof}
+
+For use below, Erd\H os, Graham, Ivi\'c and Pomerance \cite[Theorem 2]{EGIP} proved the uniform estimate
+\begin{equation}\label{step}
+\frac{\tau(v!)}{\tau((v-1)!)}=1+\frac{P^+(v)}v+O(v^{-1/2})\qquad(v\ge2).
+\end{equation}
+Within a window of $O(\log n)$ terms this error sums to $o(1)$ after taking logarithms. The construction has two components. The first supplies many starts with a prime cluster in a prescribed residue class. The second arranges that the other offsets have small total weight for at least one of these starts.
+
+\section{Many rough clusters in a fixed residue class}
+The scale is a large integer $X$. All parameters and tuple sizes are fixed before $X\to\infty$. Let $h_1<\cdots<h_k$ be an admissible tuple of positive integers, where admissible means the residues $-h_i$ omit at least one class modulo every prime. For example take $h_i=i k!$ for $1\le i\le k$.
+
+\begin{lemma}\label{cluster}
+Given $m\ge1$, take $k$ sufficiently large in terms of $m$. There are constants $\rho,\eps>0$ with the following property. Put $w=(\eps/3)\log X$ and let $B=Z_{X^{2\eps}}$ be the exceptional prime or $1$ in \cite[(4.8)]{BFM}. Let
+\[
+ W=\prod_{p\le w,\ p\nmid B}p,\qquad x=\lfloor X/W\rfloor .
+\]
+For every $b\in[0,W)$ with $(\prod_i(b+h_i),W)=1$, there are $\gg_k x/(\log x)^k$ integers $u\in[x,2x)$ such that at least $m$ of
+$L_i(u)=Wu+b+h_i$ are prime, and all $L_i(u)$ have no prime factor below $x^\rho$ except possibly $B$. A nontrivial $B$ tends to infinity with $X$.
+\end{lemma}
+
+\begin{proof}
+Use Maynard \cite[Hypothesis 1 and the proof of Theorem 3.1]{May}, with $\mathcal A=\Z$, $\mathcal P=\PP$, level $\theta=1/5$ and coefficient bound $x^1$. The forms are admissible: at $p\mid W$ all are nonzero modulo $p$, and at $p\nmid W$ the change of variable is invertible. Write $C_0=100k^2+20$, choose $\eps$ small enough for \cite[Theorem 4.2]{BFM} with exponent $C_0$ and level $1/3$, and decrease it so $\eps<1/20$. We have $W<X^\eps$, $P^+(W)\le w<X^{\eps/\log_2 X}$, and $(B,W)=1$. Also $1\le B\le X^{2\eps}<x$ by its definition, and \cite[(4.9)]{BFM} gives $B/\ph(B)=1+O(1/\log_2 X)$, proving the last assertion. Here $\log_j$ denotes the $j$-fold iterated logarithm.
+
+The two integer-distribution requirements in Maynard's hypothesis follow by counting a residue class in an interval. For the prime requirement, $u\equiv a\bmod q$ corresponds exactly to $L_i(u)\equiv Wa+b+h_i\bmod Wq$ in the interval of values. If $(L_i(a),q)=1$ this residue is prime to $Wq$. Take $q\le x^{1/5}$ prime to $B$, so $Wq<X^{1/3}$. Theorem 4.2 of \cite{BFM}, including its prime-indicator formulation directly after (4.10), bounds the sum of maximal prime-count discrepancies at all these moduli by
+\[
+ \ll X/(\ph(W)(\log X)^{C_0}).
+\]
+It applies to an interval of length $X$ with left endpoint near $X$. The interval for $L_i([x,2x))$ differs from such an interval by $O(W+1)$ endpoints; the total trivial error over $q$ is $O((W+1)x^{1/5})$, absorbed in the preceding bound. Here one counts primes in the specified residue modulo $Wq$, so the intervening integers between two values $L_i(u)$ introduce no extra solutions.
+
+For clarity about normalization, let $\Pi$ be the prime count in the common length-$X$ interval for this $i$. The discrepancy at $q=1$ gives the actual count $P_i$ of primes of the form $L_i(u)$ as $\Pi/\ph(W)$ plus the preceding error. Replacing $\Pi/\ph(Wq)$ by $P_i/\ph_L(q)$ in the summed estimate costs an additional $O(\log^2 X)$ in the error factor, since $\ph_L(q)=\ph(Wq)/\ph(W)\ge\ph(q)$ and $\sum_{q\le x^{1/5}}1/\ph(q)\ll\log^2 X$. Also $P_i\sim X/(\ph(W)\log X)$ by the prime number theorem. These bounds prove Maynard's Hypothesis 1(2), with its $100k^2$ powers of log to spare as needed. In the prime-density assumption of its Theorem 3.1, we may take a fixed positive density parameter, for example $1/4$, because $\log x/\log X>1-\eps+o(1)$ and $\ph(B)/B\to1$.
+
+We use the roughness conclusion from the \emph{proof} of Maynard's Theorem 3.1. Its sum (6.2) has positive summands only on starts with all $L_i(u)$ free of $p<x^\rho$ for $p\nmid B$ and with the prescribed number of prime values. Equations (6.3)--(6.4), (6.8)--(6.12) bound their number below by $\gg_k x/(\log x)^k$, using the fixed $\rho>0$ chosen in that proof and $k$ large enough for $m$. The constants of this application are uniform in $W,b,X$ under the verified distribution hypotheses.
+\end{proof}
+
+\section{Prescribing divisors at the other offsets}
+Fix $D$, the tuple, and a fixed constant $c>0$. Let $H$ be an integer with $D h_k\le H\le c w$, and call $j\in[1,H]$ ordinary when $j\notin\{Dh_i:1\le i\le k\}$. For each fixed $A>0$ put $z=(\log w)^A$.
+
+\begin{lemma}\label{guard}
+For all sufficiently large $X$, a residue $b$ satisfying Lemma \ref{cluster} can be chosen such that each ordinary $j$ has an assigned prime $q_j\mid W$ with $q_j\ge z$ and $q_j\mid Db+j$.
+\end{lemma}
+\begin{proof}
+Put $y=\exp(\sqrt{\log w})$. For $y<p\le w/2$, $p\nmid B$, set $b=0\bmod p$. No $b+h_i$ is divisible by such a prime, since $h_i$ is fixed and positive. An offset still uncovered is either $y$-smooth, a multiple of the omitted prime $B$ in $(y,w/2]$, or has a factor $p>w/2$. There are $o(w/\log^2 w)$ of the first kind. Indeed for $\sigma=1-1/\log y$, Rankin's inequality bounds their count by $H^\sigma\prod_{p\le y}(1-p^{-\sigma})^{-1}$. We may bound with $H=cw$ throughout. The product is $O((\log y)^3)$ by $p^{1/\log y}\le e$ and Mertens' theorem. The omitted-prime multiples number $O(w/y+1)$. In the final case $j=ap$ with $a\le2c$, giving $O_c(w/\log w)$ possibilities. Thus $O_c(w/\log w)$ offsets remain.
+
+Independently for $z\le p\le y$, $p\nmid B$, choose $b\bmod p$ uniformly among residues avoiding all $-h_i$. For large $X$ all these primes exceed $D$. For an ordinary $j$, a residue which gives $Db+j=0\bmod p$ is available unless $p\mid\prod_i(j-Dh_i)$. This product is nonzero with absolute value at most $(H+Dh_k)^k$. The sum of $1/p$ over its prime divisors $p\ge z$ is at most $O_k(\log(H+Dh_k)/(z\log z))$. We take $A>2$, which suffices for this bound to be $o(1)$; the lemma for smaller $A$ follows from its case $A>2$. At every other available prime the coverage probability is at least $1/p$. Mertens' theorem bounds the probability of surviving all these primes by $O(\log z/\log y)=o(1)$, uniformly in $j$. Omitting $B$ costs a bounded factor. Some choice therefore leaves $o(w/\log w)$ ordinary offsets.
+
+Assign to each of those offsets its own previously unused prime in $(w/2,w]$ different from $B$ and avoiding $D\prod_i(j-Dh_i)$. Only $O_{k,c}(1)$ primes in this range are forbidden for each $j$, and the prime number theorem provides $\gg w/\log w$ of them. Set $b=-j/D\bmod p$. Finally choose an admissible residue at every still unused prime of $W$ and combine the choices by the Chinese remainder theorem.
+\end{proof}
+
+\section{A uniform upper sieve and the aggregate background}
+We record the dimension dependence needed here so that losses from the growing modulus are visible.
+
+\begin{lemma}\label{upper}
+Fix $d,\rho>0$, with $d$ an integer, and $x=X^{1-O(\eps)}$ as above. Let $d$ integer linear forms in one variable be pairwise nonproportional, with nonzero leading coefficients and all coefficients $O(X^{O_d(1)})$. In any interval of length at most $2x$, the number of arguments at which all forms avoid primes up to $x^a$ other than the one possible prime $B$ is
+\[
+ \ll_{d,\rho} \frac{x(\log\log X)^{2d}}{(\log X)^d}
+\]
+for a fixed $0<a<\min(\rho,1/(20d))$ chosen in terms of $d,\rho$.
+\end{lemma}
+\begin{proof}
+Outside $p\le2d$, the exceptional prime and the primes dividing the product $\Delta$ of the leading coefficients and all pairwise determinants, the $d$ forbidden residue classes are distinct. The nonzero product, enlarged by $B$ and the small primes, has absolute value $X^{O_d(1)}$. The arithmetic large sieve \cite{Kow} with $Q=\lfloor x^{1/3}\rfloor$ bounds the count by $\ll(x+Q^2)/L$, where $L$ sums $\prod_{p\mid s}d/(p-d)$ over squarefree $s\le Q$ supported on the good primes $p\le Y=x^a$. Use the same weights without the restriction $s\le Q$. In their normalized product distribution a prime is present independently with probability $d/p$. Thus $\mathbb E\log s=\sum d\log p/p\le2d\log Y$ for all large $X$. Our choice of $a$ and Markov's inequality retain at least half the total weight below $Q$.
+
+The full weight is $\prod_{\rm good}(1-d/p)^{-1}$. Over $2d<p\le Y$ it is $\gg_d(\log Y)^d$ by Mertens' theorem. Discarded primes cost at most $\exp(2d\sum_{p\mid\Delta}1/p)\ll_d(\log\log X)^{2d}$: split the sum at $(\log X)^2$, using Mertens below and the size of $\Delta$ above. This proves the estimate. Reducing $a$ by a fixed factor only changes its constant.
+\end{proof}
+
+Choose $A=10(k+2)$ in Lemma \ref{guard}. Write $t=Wu+b$ and consider the successful $u$ from Lemma \ref{cluster}. For an ordinary offset set
+\[
+ v_j=Dt+j,\qquad R_j=v_j/P^+(v_j),\qquad
+ U(u)=\sum_{j\ {\rm ordinary}}\frac1{R_j}.
+\]
+We claim that some successful $u$ has $U(u)=o(1)$. Terms with $R_j>(\log X)^3$ contribute $O(H/(\log X)^3)$ at every start. For the others write $R_j=s$. Then $v_j/s\asymp X/s$ is prime and exceeds $w$. Since $q_j\mid v_j$, we have $q_j\mid s$.
+
+Fix $j,s$. The congruence $s\mid D(Wu+b)+j$ is either inconsistent or comprises a single residue of $u$ modulo $s/\gcd(s,DW)$. Set $u=u_0+\ell e$ in that class, $e=s/\gcd(s,DW)$, $0\le u_0<e$. The $k$ forms $L_i(u_0+\ell e)$ and the extra integral form $(D(W(u_0+\ell e)+b)+j)/s$ have nonzero leading coefficients and size-polynomial coefficients. They are pairwise nonproportional: an identity with one of the distinguished forms would force $j=Dh_i$. At every counted success the first $k$ forms are rough outside $B$ and the extra prime is larger than $x^a$. Lemma \ref{upper}, with $d=k+1$, bounds the number by $O_k(x(\log\log X)^{2d}/(\log X)^d)$; using the larger length $2x$ in this estimate is sufficient.
+
+For a given $j$ the sum of $1/s$ over the admissible multiples of $q_j$ up to $(\log X)^3$ is $O(\log\log X/q_j)$. Divide the resulting total bound by the lower count of successes. The mean of $U$ over successful $u$ is at most
+\begin{equation}\label{mean}
+ O\left(\frac{H}{(\log X)^3}\right)
+ +O_{k,D}\left(\frac{H}{\log X}
+          \frac{(\log\log X)^{2d+1}}{(\log w)^A}\right)=o(1).
+\end{equation}
+The estimate concerns a nonnegative sum. It supplies a single successful start at which the whole ordinary contribution is small, uniformly over every subinterval of the guarded offsets.
+
+\section{Extracting the prescribed limit}
+For Theorem \ref{thm}, use $m=\max(r,1)$ in Lemma \ref{cluster}. Put $J=Dh_k+1$ and $H=J+\lceil 2C\log X\rceil$, which is $O(w)$. For a successful start selected by \eqref{mean}, each prime form $t+h_i$ gives exactly $P^+(D(t+h_i))/(D(t+h_i))=1/D$ for all large $X$. If $t+h_i$ is composite, its least prime factor tends to infinity uniformly over successes: it is at least $x^\rho$ unless divisible by $B$, and a nontrivial $B$ tends to infinity. Hence $P^+(D(t+h_i))/(D(t+h_i))=o(1)$ in this case. Here $D$ is fixed and the least prime factor is applied to $t+h_i$ alone.
+
+In the ordered list of offsets $Dh_i$ where $t+h_i$ is prime, take the suffix of length $r$. When $r>0$ set $n=Dt+s$ with $s$ one less than the first offset in this suffix. For $r=0$ take $s=Dh_k$. For $J\le h\le C\log n$, the window $(n,n+h]$ stays in $Dt+[1,H]$ and contains exactly those $r$ distinguished prime offsets. There are at most $k$ distinguished composite offsets, of total weight $o(1)$. Equation \eqref{mean} bounds all ordinary offsets together. Applying \eqref{step} and adding logarithms gives the assertion uniformly in $h$. Letting $X$ grow gives $n\to\infty$. This completes the proof of Theorem \ref{thm}.
+
+\section{A larger range}
+The same proof applies to every growing $f$ satisfying, for some fixed $0\le\beta<1$,
+\[
+ f(n)=O\big(\log n\,(\log\log n)^\beta\big).
+\]
+Indeed use $H=O(w(\log w)^\beta)$ and $y=\exp((\log w)^\gamma)$ with $\beta<\gamma<1$. The smooth contribution above is $\ll H\exp(-\log H/\log y)(\log y)^3=o(w/\log^2 w)$ when estimated at this upper envelope. For offsets with a prime $p>w/2$, summing $\pi(H/a)\ll H/(a\log w)$ up to $a\le 2H/w$ costs $O(H(1+\log(2+H/w))/\log w)$. The random choices leave a proportion $O(\log z/\log y)$ of those offsets. Because $\gamma>\beta$, their product is $o(w/\log w)$ and the final assignments fit. The term from multiples of an excluded prime above $y$ is still negligible. The extra factor $(\log w)^\beta$ in \eqref{mean} is absorbed by $A$. Finally $H=o(\sqrt X)$ still makes the accumulated error from \eqref{step} negligible.
+
+
+A slightly more careful smooth-number estimate reaches the following form of the classical large-gap scale. Write $s_j=\log_j w$ for $j=1,2,3$. One may use any
+\[
+ H=o\!\left(\frac{w s_1s_3}{s_2^3}\right).
+\]
+To verify this directly take $\log y=s_1s_3/(60s_2)$, $v=s_3/2$, and $\sigma=1-v/\log y$. The logarithm of the Euler product in Rankin's bound is at most
+\[
+ \sum_{p\le y}p^{-1}+O(v e^v)+O(1)\le 2s_2
+\]
+for large $w$. Indeed $e^t-1\le te^v$ for $0\le t\le v$, and $\sum_{p\le y}(\log p)/p\ll\log y$; the prime powers of degree at least two cost $O(1)$ as $\sigma\to1$. At the upper envelope $H_0=w s_1s_3/s_2^3$ we have $H_0^{1-\sigma}\ge\exp(30s_2)$. Consequently the smooth contribution below $H_0$ is $o(w/s_1^2)$. The count of offsets with a prime above $w/2$ is $O(Hs_2/s_1)$ for $H\ge w/2$, and zero below $w/2$. The random sieve multiplies this by $O_A(s_2^2/(s_1 s_3))$, leaving $o(w/s_1)$ offsets. Exceptional-prime multiples above $y$ contribute $O(H_0/y+1)$. The individual assignments in $(w/2,w]$ therefore still suffice. Finally $H/\log X=O(s_1)$ in \eqref{mean}. This proves Corollary~\ref{cor} in the extended range
+\[
+  f(n)\longrightarrow\infty,\qquad
+  f(n)=o\!\left(\frac{\log n\,\log_2 n\,\log_4 n}{(\log_3 n)^3}\right).
+\]
+For a possibly oscillating $f$, take $H$ equal to $J$ plus an integer upper bound for $f$ on $[DX/2,3DX]$, using its actual maximum there rounded up. This is still $o(H_0)$, and the lower bound $f\ge J$ holds eventually. The earlier $O(\log n(\log_2 n)^\beta)$ extension is included.
+
+The proof also gives a lower bound on the number of witnesses. For any fixed target neighborhood intersecting $(1,\infty)$ and any such $f$, the number of qualifying $n\le T$ is $T^{1-o(1)}$. Choose $D,r$ so that $(1+1/D)^r$ lies in the neighborhood. By Markov's inequality at least half the successful $u$ have ordinary mass at most twice the bound in \eqref{mean}. Distinct such $u$ give distinct starts because $W\to\infty$ and the possible suffix shifts are bounded by $J$. All starts lie below $3DX$. The lower count is $\gg_k X^{1-\eps}/(\log X)^k$ and $\eps$ can be arbitrarily small after $k$ is fixed. Taking $X=\lfloor T/(3D)\rfloor$ gives the assertion.
+
+The quantifier in the remaining part (i) of problem 420 is different. It asks for divergence at every sufficiently large start for sufficiently large fixed logarithmic powers. Selecting starts at which a prescribed finite ratio occurs leaves that question open.
+
+\paragraph{Verification and priority.} This manuscript supplies a written argument using the cited analytic theorems. A second AI derivation checked the interfaces to the analytic theorems. A small Lean lemma verifies intermediate counts in shrinking suffixes. Independent finite tests exercise congruence lifting, root counts and suffix selection. The full analytic proof awaits Lean formalization and human review. A separate machine-checked proof in the same project concerns the classical four-ninths doubling bound. That submission has a different conclusion. The authorship here is AI; Jordan Pollard requested the research. Priority and external verification are pending.
+
+\begin{thebibliography}{9}
+\bibitem{EG} P. Erd\H os and R. L. Graham, \emph{Old and New Problems and Results in Combinatorial Number Theory}, L'Enseignement Math\'ematique, Geneva (1980), p.~83.
+\bibitem{EGIP} P. Erd\H os, S. W. Graham, A. Ivi\'c and C. Pomerance, \href{https://math.dartmouth.edu/~carlp/factorial.pdf}{On the number of divisors of $n!$}, in \emph{Analytic Number Theory}, Progress in Mathematics 138 (1996), 337--355, Theorem~2.
+\bibitem{BFM} W. D. Banks, T. Freiberg and J. Maynard, \href{https://doi.org/10.1112/plms/pdw036}{On limit points of the sequence of normalized prime gaps}, Proc. London Math. Soc. 113 (2016), 515--539, Theorem~4.2 and equations (4.8)--(4.10).
+\bibitem{May} J. Maynard, \href{https://doi.org/10.1112/S0010437X16007296}{Dense clusters of primes in subsets}, Compos. Math. 152 (2016), 1517--1554, Theorem~3.1, Hypothesis~1 and its proof in section~6.
+\bibitem{Kow} E. Kowalski, \href{https://people.math.ethz.ch/~kowalski/dual-large-sieve.pdf}{An alternate argument for the arithmetic large sieve inequality}, introduction and arithmetic sieve bound.
+\bibitem{FC} Erd\H os Problems, \href{https://www.erdosproblems.com/420}{problem 420}; Google DeepMind Formal Conjectures, \texttt{Erdos420.erdos\_420.parts.ii} and \texttt{.iii}.
+\end{thebibliography}
+\end{document}

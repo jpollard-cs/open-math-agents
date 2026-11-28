@@ -1,0 +1,7 @@
+37 valid pairs, 32768 right-hand rectangles, upward rounding to 1/1000000000.
+Exact upper bound: 204787819349075237/204800000000000000
+Upward decimal enclosure: 0.9999405242
+Ideal equality has a unique root in (0.40980664, 0.40980665).
+23 affine-envelope regions after rational intersections.
+Independent analytic integral enclosure: 999932748493353/1000000000000000 15623949195209/15625000000000
+0.99993274849335 to 0.99993274849338 (decimal display).

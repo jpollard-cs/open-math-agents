@@ -1,0 +1,7 @@
+Integer example: 29 distinct moduli, maximum 176 period 18480 full coverage. Before closure the unique hole is 0 modulo 1680
+Independent residue enumeration: 105 internal positions, 14 ordinary rows, least clipped hole counts {'None': 1, "('edge', 3, 5)": 2, "('unary', 5)": 2, "('edge', 3, 7)": 2, "('unary', 7)": 2}
+Independent residue enumeration: 30 internal positions, 9 ordinary rows, least clipped hole counts {'None': 1, "('unary', 3)": 3, "('edge', 3, 5)": 2, "('unary', 5)": 2, "('edge', 5, 2)": 2}
+Independent residue enumeration: 30 internal positions, 9 ordinary rows, least clipped hole counts {'None': 1, "('unary', 5)": 3, "('edge', 5, 3)": 2, "('unary', 3)": 3, "('edge', 5, 2)": 3, "('unary', 2)": 3}
+Finite exact-size schedules: 97 size 1057 through 1077 cap 9506
+Finite exact-size schedules: 149 size 2278 through 2298 cap 22350
+Finite exact-size schedules: 251 size 6078 through 6098 cap 63252

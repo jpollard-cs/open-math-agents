@@ -1,0 +1,90 @@
+\documentclass[11pt]{article}
+\usepackage[letterpaper,margin=.84in]{geometry}
+\usepackage{amsmath,amssymb,booktabs,microtype,hyperref,xcolor,fancyhdr}
+\ifdefined\pdfmapfile\pdfmapfile{+cm.map}\pdfmapfile{+cmextra.map}\pdfmapfile{+symbols.map}\fi
+\definecolor{ink}{HTML}{193D53}\hypersetup{colorlinks=true,urlcolor=ink,linkcolor=ink,pdftitle={Prime interactions in irreducible covering sets},pdfauthor={Codex, OpenAI}}
+\pagestyle{fancy}\fancyhf{}\lhead{Erd\H os problem 1189}\rhead{Research manuscript for review}\cfoot{\thepage}
+\setlength{\headheight}{14pt}\setlength{\parindent}{0pt}\setlength{\parskip}{5pt}
+\newcommand{\head}[1]{\par\vspace{4pt}{\large\bfseries\color{ink}#1}\par}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\lp}{P^+}
+\begin{document}
+{\LARGE\bfseries\color{ink} Prime interactions in irreducible covering sets}\par
+{\large A necessary dense subgraph for a gain in reciprocal sum}\par
+{Codex (OpenAI), at Jordan Pollard's request.\hfill 27 November 2026}
+
+Let $A$ be a set of $k$ distinct integers greater than one. It covers if one residue per modulus can cover $\mathbb Z$. It is irreducible if every proper subset fails for every choice of residues. Write $M=\max A$, $L=\operatorname{lcm}(A)$, $S=\sum_{n\in A}1/n$. The original questions ask for the least $M$ and greatest $S$ at each size.
+
+Assign each $n$ a divisor $b(n)>1$, with at most $b$ moduli assigned the same $b$. Such labels always exist, for example $b(n)=n$. On the primes join $p,q$ if they both divide at least one label. Its degeneracy is the largest minimum degree of any nonempty subgraph, with isolated vertices allowed. Let $D$ be the least possible degeneracy over all assignments. Let $D_{<}$ instead minimize the maximum number of \emph{larger} neighbors of a prime. Both can be zero, as prime powers create no edges.
+
+\head{Two bounds for unrestricted irreducible sets}
+For $V=\log(2+D)+2\log\log(3k)+2$, one has
+\[
+ S\le \tfrac12\log k+
+ O\!\left(V\left[1+\log^2\!\left(2+\frac{\log k}{V}\right)\right]\right).\tag{1}
+\]
+In particular, any fixed gain $S\ge(1/2+\eps)\log k$ forces $D\ge k^{c(\eps)}$ eventually. \emph{Every} feasible choice of labels then contains a subgraph in which every participating prime has polynomially many neighbors. Stars of arbitrary size and all graphs of subpower degeneracy preserve the sharp leading coefficient $1/2$ for classes containing the earlier every-size construction.
+
+For each fixed $C>0$, among irreducible sets with
+\[
+ \log(2+D_{<})\le C\log k/\log\log k
+\]
+the minimum satisfies $M_{\min}(k)\sim k\log k$. This also holds for every intermediate class containing the earlier constructions and satisfying this bound. In particular it holds for iterated substitutions on disjoint bounded-size prime sets, once the zero-defect constructions are included (page~4). The restriction permits growing sets of interacting primes.
+
+Both obstructions depend on optimizing the choice of labels. At each size from 26 through 30 the previously exhibited extremizer admits only-prime-power labels. Page~4 gives irreducible examples where this fails for nearly all rows and one edge still suffices. A positive gain also forces complete products of two prime sets and a common cofactor set, all three of size at least $c_\eps\sqrt{\log k}$ (pages 5--6). For a fixed set of hub primes we compute both the exact leading counting constant and the reciprocal expansion through a bounded remainder in the relaxation with coverage (pages 7--12). The unrestricted optimal coefficient and minimum remain open.
+
+\newpage
+\head{1. The reciprocal bound, including arbitrary orientations}
+A graph of degeneracy $D$ has an orientation with at most $D$ outgoing edges at each vertex, by successively deleting a vertex of minimum degree. Fix an optimal labeling and this orientation. Call $n$ exceptional if $\lp(n)\le\sqrt n$. All other $n$ equal $pd$ with $1\le d<p$ and $p\mid L$. They contribute at most $\sum_{p\mid L}H_{p-1}/p$, where $H_i=\sum_{j\le i}1/j$. The Zn\'am--Simpson bound gives $\sum_{p\mid L}(p-1)\le k-1$. Up to $Y=\sqrt{k\log k}$ the prime sum is at most $\log Y+O(\log\log(3Y))$, by the classical Mertens estimates. Beyond $Y$ it is $O(k\log Y/Y^2)=O(1)$, comparing each summand to $p-1$. This gives $\frac12\log k+O(\log\log(3k))$.
+
+For $2\le t\le k$ let $E(t)$ count exceptional rows up to $t$. Put $Z=(D+2)\log^2(3k)$ and $x=\log t$. Rows whose label has two prime factors exceeding $Z$, counted with multiplicity, occupy a fraction $O(1/\log(3k))$ of $[1,t]$. Indeed repeated primes cost $\sum_{p>Z}p^{-2}\ll1/Z$. For distinct factors, orient each edge and sum $1/(pq)$ from the tail $p$; at most $D$ heads contribute, each $1/q\le1/Z$. The remaining sum is at most $(D/Z)\sum_{p\le t}1/p$. This uses no ordering of the endpoints.
+
+Otherwise write the label as $e$ or $ep$, with all primes of $e$ at most $Z$ and $p>Z$ prime. Let $n_Z=\prod_{q\le Z}q^{v_q(n)}$. For $s=1/(2\log(2Z))$ the uniform estimate
+\[
+ t^{-1}\sum_{n\le t} n_Z^s\le
+ \prod_{q\le Z}\left(1+\frac{q^s-1}{q-q^s}\right)\ll1 \tag{2}
+\]
+follows by expanding positive divisor increments $q^{js}-q^{(j-1)s}$ and bounding the frequency of multiples by $1/q^j$. For the product use $q^s-1\ll s\log q$, $q-q^s\gg q$ and $\sum_{q\le Z}\log q/q\ll\log(2Z)$. Thus $e>t^\eta$ costs proportion $O(\exp(-\eta x/(2\log(2Z))))$.
+
+With $e\le t^\eta$ and $0<\eta<1/10$, labels $e$ or $ep$ for $p\le t^{1/2-2\eta}$ contribute $O(t^{2\eta}+t^{1-2\eta})$ rows by their capacities and summing all possible $e$ and $p$. The remaining $p$ divides the exceptional $n$, hence $t^{1/2-2\eta}<p\le\sqrt t$. Its multiples cost proportion $O(\eta+1/x)$, by partial summation of $\pi(v)\ll v/\log v$ on that interval.
+
+Take $\eta=8V\log(2+x/V)/x$. When $\eta\ge1/10$ the trivial bound $E(t)\le t$ costs $O(V)$ in the integral, since then $x=O(V)$. Else the preceding bounds give
+\[
+ E(t)/t\ll (\log(3k))^{-1}+(1+x/V)^{-2}
+                  + V\log(2+x/V)/x .
+\]
+Partial summation to $k$ and integration in $x$ give the error in (1). The $k$ rows above cutoff $k$ contribute at most 1 in total. Finally $z(1+\log^2(2+1/z))\to0$ as $z\downarrow0$, proving the polynomial-degree necessity.
+
+\newpage
+\head{2. The largest modulus with ordered interactions}
+Let $C(t)$ count rows up to $t$ with a composite label, under a labeling attaining $d=D_{<}$. For every fixed $a>0$,
+\[
+ C(t)/t\ll_a t^{-1/3}+e^{-\sqrt{\log(2t)}}+
+ \exp\!\left(\frac{-a\log t}{\log(2+d)+\sqrt{\log(2t)}}\right). \tag{3}
+\]
+Set $B=(d+2)\exp(\sqrt{\log(2t)})$. If all factors of a composite label exceed $B$, it contains $p^2$ or $pq$ with $B<p<q$ and $q$ a larger neighbor of $p$. Their multiples cost proportion $\le(d+1)\sum_{n>B}n^{-2}\ll(d+1)/B$. Otherwise its least prime is at most $B$ and every one of its prime factors belongs to a set $T$ of at most $(d+1)\lfloor B\rfloor$ primes: the small primes and their larger neighbors. Labels of size $\le t^{1/3}$ contribute $O(t^{2/3})$ rows by capacity. The rest require the $T$-part of their modulus to exceed $t^{1/3}$.
+
+To bound that event let $H=(2+|T|)^2$ and $s=\min(1/2,A/\log H)$ for any fixed $A>0$. The proof of (2) applies to $T$ with constant depending only on $A$. For primes $q\le H$ use $q^s-1\ll_A s\log q$; those above $H$ add $O(|T|H^{-1/2})$ to the logarithm. Markov's inequality gives the fraction $O_A(t^{-s/3})$. Since $\log H\ll\log(2+d)+\sqrt{\log(2t)}$, taking $A$ sufficiently large in terms of $a$ proves (3); bounded $t$ and the $s=1/2$ range are absorbed into the constant.
+
+For the remaining prime labels at $t=M$, each $p$ supports at most $p$ rows. Each active $p\mid L$ is $\le\sqrt M$: within a fibre over $L/p$, a private point of a highest-$p$-power row implies at least $p$ such rows, all distinct multiples of $p^{v_p(L)}$. Hence the number of prime-labeled rows is at most $\sum_{p\le\sqrt M}p\sim M/\log M$. If $M>2k\log k$ the desired lower bound already holds. Otherwise $\log M\sim\log k$, and (3), with a sufficiently large fixed $a$ depending on $C$, gives $C(M)=o(M/\log M)$. The zero-defect constructions in the companion paper attain both leading bounds at all sufficiently large sizes using the labels $p^j$ alone.
+
+\head{Why the ordering matters for this proof}
+For a real cap $X$ take odd primes $p\le\sqrt X$, all $pd$ for $1\le d<p$, and $2pe$ for $p/2\le e<p$ with $2pe\le X$. Include the fixed cover $2,3,4,6,12$, omitting duplicates. The displayed families are distinct: $p$ is the largest prime and their cofactors are respectively below and above $p$. Label them by $p$ and $2p$; use $2$ and $4$ for the two additional rows when $X$ is large. This is a star. Partial summation gives $(1+\tfrac12\log2+o(1))X/\log X$ rows. Indeed the extras below $\sqrt{X/2}$ contribute $1/4$ in these units, and those above contribute $\int_{1/\sqrt2}^1(r^{-1}-r)\,dr$. The fixed cover is a proper subset. Thus discarding irreducibility while retaining sparse unordered interactions and coverage cannot give the stated cardinality estimate. Whether the star suffices for a genuine irreducible improvement is open here.
+
+\newpage
+\head{3. Irreducible substitutions and a one-edge family}
+Distinguish one indexed row $d$ in an irreducible multiset on an old period $L_0$. Let $b_i>1$ be an irreducible indexed multiset on a period coprime to $L_0$. Replace the distinguished row by $b_i e_i$, with $e_i\mid d$ and $\operatorname{lcm}_i e_i=d$. The resulting multiset is irreducible under arbitrary reassignment. To obtain pairwise distinct moduli, check distinctness at the end.
+
+Indeed in any assignment the old rows leave holes. Above each hole the active new rows must cover the entire new factor. By irreducibility this requires every index $i$. All old holes therefore lie in the intersection of the exterior classes modulo $e_i$, which, when nonempty, is one class modulo $d$. Conversely align all exterior residues with a chosen $d$-class and use an internal cover; CRT supplies the new residue for each row. A deletion outside the packet contracts to the old deletion. After an inside deletion the other new rows cannot fill the fibre over any old hole. This argument also works with the initial virtual row $d=1$. The accompanying Lean development proves this substitution for actual integer congruences, using the lcm divisibility property and integer Bezout coefficients for the coprime periods. Its conclusion quantifies over arbitrary subfamilies and all new assignments of residues.
+
+At each substitution use the internal modulus as label on each surviving new row. An internal modulus $b$ occurs at most $b$ times, since $b$ copies can already cover. All primes in that step are fresh and the periods persist after contraction, so labels from different steps cannot coincide. The graph is a union of graphs on the prime sets of the separate steps. This permits arbitrary local irreducible multisets within each step.
+
+For an explicit family let $p,q$ be distinct primes in $[z,2z]$ with $z$ growing. Set $t=\lceil\log_2(pq)\rceil$ and use the first $t$ primes $r_1,\ldots,r_t$ as seed, all less than $p,q$ eventually. Start with one virtual row $d=1$. At prime $r_i$ replace it by $r_i$ copies of the internal modulus $r_i$, dressing the first $r_i-1$ with distinct divisors of $d$ and the last with $d$. Continue on the latter row, now $r_i d$. There are enough divisors since $2^{i-1}\ge r_i-1$ by Bertrand's postulate and induction. Interim coincidences with the distinguished row are permitted. At the end use $pq$ copies of $pq$, with distinct seed divisors including the full seed period. All final rows are distinct by their newest prime and their cofactor. The resulting size is $k=pq+\sum_i(r_i-1)$. Every prime-power label is just a prime here, so the total such capacity is at most $p+q+\sum_i r_i=O(\sqrt k)$. Yet one edge, $pq$, suffices for all $k$ rows. Thus the proportion that cannot receive prime-power labels can tend to one even for irreducible sets of degeneracy exactly one.
+
+For a smaller instance take seed $2^3 3^2\cdot11\cdot13$ and packet $5\cdot7$. A prime-power stage uses $r-1$ copies of each $r^j$ plus a distinguished copy of the final power. Its reciprocal mass is exactly one and first-nonzero digits give coverage, hence it is internally irreducible. The constructor gives 64 distinct moduli of maximum 13,860 and period 360,360. Exact matching places 62 with prime powers and all 64 with the additional edge $5,7$. Lean checks size, distinctness, maximum, and full irreducibility of the explicit set: for every predicate on its moduli, the retained moduli admit some cover of all integers exactly when every modulus is retained.
+
+{\small\textbf{Sources and status.} \href{https://www.erdosproblems.com/1189}{Erd\H os 1189}; \href{https://doi.org/10.13140/RG.2.2.16138.63684}{E. \"Ozt\"urk, 2026} (prior upper coefficient $3/2-\log 2$); the every-size lower construction and period-budget proof in \href{https://github.com/jpollard-cs/open-math-agents/pull/1}{the companion manuscripts}. The analytic results are written proofs for review. The finite checks and kernel proof have the narrower scopes stated above.}
+\input{boxes}
+\input{hubs}
+\input{second-order}
+\end{document}

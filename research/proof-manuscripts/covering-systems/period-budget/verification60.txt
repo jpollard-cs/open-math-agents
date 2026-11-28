@@ -1,0 +1,5 @@
+size 24 cap 56 clear; cap 60 irreducible 11
+size 25 cap 56 clear; cap 60 irreducible 1
+size 26 cap 56 clear; cap 60 irreducible 0
+size 27 cap 56 clear; cap 60 irreducible 0
+All cap-60 lists at sizes 24 and higher agree exactly between the two solvers.

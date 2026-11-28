@@ -1,0 +1,6 @@
+42 distinct moduli; maximum 624; all 720720 residues covered
+Minimum ordinary holes mod 36, all rows then one deletion: [1, 7, 2, 4, 4, 2, 2]
+All 42 single deletions excluded with arbitrary reassignments by fibre contraction.
+Unique minimum vertex cover of actual prime graph: (2, 3)
+Exact rational Euler-product maximization: 1024 subsets
+Root of the necessary exponent equation (numerical): 0.112780841

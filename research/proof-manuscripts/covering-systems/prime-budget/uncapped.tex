@@ -1,0 +1,23 @@
+\newpage
+\head{5. Without a cap: the exact prime spectrum}
+There is also an exact formula for the largest possible prime factor of a modulus at prescribed cardinality, if $M$ is free. Set
+\[
+ F(v)=\min\left\{\sum_{i=1}^s a_i(q_i-1):
+ \prod_{i=1}^s(1+a_i)\ge v,\ a_1\ge\cdots\ge a_s\ge1\right\},
+\]
+where $q_i$ are the consecutive primes from 2. For every sufficiently large prime $p$, the sizes of irreducible sets having largest prime factor exactly $p$ are precisely the integers $k\ge p+F(p)$. Hence the largest possible $P$ at every sufficiently large $k$ is the largest prime $p$ with $p+F(p)\le k$.
+
+Indeed the lower bound follows from the top-digit count, the period bound and compression with the cap removed. Taking the first $\lceil\log_2 p\rceil$ primes to exponent one costs $O((\log p)^2\log\log p)$. Every prime in an optimizer is therefore below $p$ eventually. Its divisor count reaches $p$. With no bound on the sizes of the earlier divisors, the criterion on page 2 holds by the squarefree product and Bertrand argument. Increase the exponent of 2 by any nonnegative integer to add exactly that many rows; available cofactors and their count only increase. The period continues to have largest prime $p$. For all sufficiently large $k$ the displayed maximum exceeds the finite exceptional range by this very construction.
+
+The excess has a sharp leading coefficient. With $g_j=\log(1+1/j)$ and $A=\sum_{j\ge1}g_j^2$,
+\[
+                  F(v)\sim\frac{(\log v)^2\log\log v}{2A}.
+\]
+The $j$th exponent increment at prime $q$ costs $q-1$ and increases the log divisor count by $g_j$. Select all increments $q-1\le xg_j$. This is a feasible prefix in each exponent and across primes. Write $V(x)$ for its total gain and $B(x)$ for cost. The prime number theorem at each fixed $j$ gives
+\[
+ V(x)\sim A x/\log x,\qquad B(x)\sim A x^2/(2\log x).
+\]
+For $j\le\sqrt x$ the summands divided by their respective scales are $O(g_j^2)$ by Chebyshev estimates (the cutoffs are $\gg\sqrt x$). For $\sqrt x<j=O(x)$, bound counts and sums of primes by the counts and sums of integers up to $1+x/j$. These tails are respectively $O(\sqrt x+\log x)$ in gain and $O(x^{3/2})$ in cost. No larger $j$ qualifies. For a fixed budget $B(x)$ no selection can give greater gain than $V(x)$: all selected increments have gain/cost at least $1/x$ and all excluded ones have smaller ratio. Taking $x=(1\pm\eps)\log v\log\log v/A$ brackets the required cost; let $\eps$ decrease to zero. This statement concerns the necessary excess at a specified prime and does not require information about prime gaps below a given cardinality.
+
+\head{Verification and credits}
+The repository includes an exact constructor, an independent small-cap optimization using all cofactor LCMs, and Lean 4.33.1 files. At $p=11,T=16$ Lean proves that the exhibited 21 distinct moduli cover precisely when all are retained, with arbitrary reassignment. It also checks the finite exponent table excluding cofactor cost below 10. The general period lower bound and the analytic theorems in this manuscript are written proofs. AI authorship is indicated on page 1. The literature credits above apply throughout; priority and external review are pending.

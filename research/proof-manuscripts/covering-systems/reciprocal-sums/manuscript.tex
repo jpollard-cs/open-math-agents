@@ -1,0 +1,139 @@
+\documentclass[11pt]{article}
+\usepackage[letterpaper,margin=0.86in,top=0.8in,bottom=0.77in]{geometry}
+\usepackage{amsmath,amssymb,booktabs,array,xcolor,microtype,hyperref,fancyhdr}
+\ifdefined\pdfmapfile\pdfmapfile{+cm.map}\pdfmapfile{+cmextra.map}\pdfmapfile{+symbols.map}\fi
+\definecolor{ink}{HTML}{173E50}
+\definecolor{teal}{HTML}{216A70}
+\hypersetup{colorlinks=true,urlcolor=teal,linkcolor=teal,pdftitle={Irreducible covers at every cardinality},pdfauthor={Codex}}
+\pagestyle{fancy}\fancyhf{}\lhead{\small\color{ink} Erd\H{o}s problem 1189}\rhead{\small\color{ink} Research note \enspace / \enspace 27 November 2026}
+\cfoot{\thepage}\setlength{\headheight}{14pt}
+\setlength{\emergencystretch}{1.5em}\setlength{\parindent}{0pt}\setlength{\parskip}{5pt plus 0.5pt}
+\newcommand{\head}[1]{\vspace{4pt}{\large\bfseries\color{ink}#1}\par}
+\newcommand{\floor}[1]{\lfloor #1\rfloor}
+\newcommand{\lcm}{\operatorname{lcm}}
+\begin{document}
+{\LARGE\bfseries\color{ink} Irreducible covers at every cardinality}\par
+{\large Reciprocal sums and exact minimum largest moduli}\par
+{\small Codex, at the request of Jordan Pollard. Written proof for independent review.}
+
+A finite set $A$ of distinct moduli greater than 1 is \emph{irreducible} if one can cover all integers by choosing one residue for each modulus, and every proper subset fails even when all residues can be chosen anew. Write $k=|A|$, $M=\max A$, $L=\lcm A$, and
+\[
+ S(A)=\sum_{n\in A}1/n,\qquad b(L)=\sum_{p^a\parallel L}a(p-1),\qquad
+ \delta(A)=k-1-b(L).
+\]
+Here $p$ denotes a prime. The Zn\'am--Simpson lower bound gives $\delta\ge0$. Denote the largest $S(A)$ at size $k$ by $R(k)$, and its maximum among covers with $\delta=0$ by $R_0(k)$. The least possible $M$ at size $k$, without a defect restriction, is $m(k)$.
+
+\head{A lower bound at every size}
+For every sufficiently large $k$ there is an irreducible $A$ with $|A|=k$, $\delta(A)=0$, and
+\[
+ M\le(1+o(1))k\log k,\qquad
+ S(A)=\tfrac12\log k+(\tfrac12+\gamma)\log\log k+C+o(1).
+\]
+Here $\gamma$ is Euler's constant, $C$ is specified on page 4, and logs are natural.
+Moreover $R_0(k)=S(A)+o(1)$. Thus $\liminf R(k)/\log k\ge1/2$. This answers the question in Remark 6.5 of Ege \"Ozt\"urk's September 2026 preprint, which obtains the lower coefficient along a subsequence. The matching upper estimate here applies to defect zero. The sharp unrestricted coefficient and the general exact function $m(k)$ remain undetermined by this work.
+
+\head{The minimum can decrease when a class is added}
+A finite search, using irreducibility under arbitrary reassignment, gives the following exact values.
+\begin{center}
+\begin{tabular}{c|rrrrrrrrrrr}
+$k$&5&6&7&8&9&10&11&12&13&14&15\\ \midrule
+$m(k)$&12&24&36&36&30&30&36&36&36&36&45
+\end{tabular}
+\end{center}
+For example, $A=\{2,3,4,5,6,10,15,20,30\}$ achieves $m(9)=30$. Every irreducible eight-modulus set has largest member at least 36. Page 5 gives the exhaustiveness argument and reproduction details.
+
+\head{Background and scope}
+The previous project manuscript gave the $k\log k$ upper bound for $M$. The arithmetic progression construction used below is a variant of that manuscript's prime-digit construction. The reciprocal-sum analysis, the matching bound for $R_0$, and the finite search are the additions here. Earlier work of Pickhardt and the Paratelligent Research Agent reports $R(k)=\Theta(\log k)$, using a related construction. This note makes no priority claim for the underlying construction or the finite values.
+
+\newpage
+\head{1. A matching bound for the reciprocal sum}
+For each $p^a\parallel L$ represent the residue modulo $p^a$ by $a$ independent base-$p$ digits. By the Chinese remainder theorem these digits form a product of finite sets. A congruence modulo $n\mid L$ fixes exactly the digits $(p,j)$ with $p^j\mid n$; the remaining digits are free. Fix any covering assignment on $A$. Removing any congruence leaves some point uncovered by the others.
+
+Form a bipartite graph. Each digit $(p,j)$ supplies $p-1$ identical left vertices, called slots. Right vertices are congruences, and a slot is joined to each congruence that fixes its digit. Every nonempty slot set $X$ has at least $|X|+1$ neighbors. To prove this, suppose otherwise and take an inclusion-minimal counterexample. If $|X|=1$, it has exactly one neighbor since the digit is active. Otherwise removing one slot gives at least $|X|$ neighbors, so $|N(X)|=|X|$. Every proper nonempty subset has more neighbors than vertices. Hall's theorem therefore matches $X$ bijectively to $N(X)$, also in the singleton case.
+
+For each digit represented in $X$, choose a value different from each value fixed by a congruence matched to it. There are at most $p-1$ such values. These choices avoid all congruences in $N(X)$. The other congruences ignore those digits; as a proper subfamily they miss a point. Change the indicated digits at that point and it still misses the other congruences, now also all of $N(X)$. This contradicts coverage. This argument is the matching principle for minimally unsatisfiable constraints, given here in digit coordinates.
+
+Delete the right vertex for the largest modulus $M$. Hall's theorem now matches all $b(L)$ slots into the remaining moduli. For each $(p,j)$ the matched moduli are $p-1$ distinct multiples of $p^j$, with total reciprocal at most $H_{p-1}/p^j$, where $H_t=\sum_{i\le t}1/i$. With defect zero every modulus except $M$ is matched. Consequently
+\[
+ S(A)\le \frac1M+\sum_{p\mid L}\sum_{j=1}^{v_p(L)}\frac{H_{p-1}}{p^j}
+ \le \frac1M+\sum_{p\mid L}\frac{H_{p-1}}{p-1}.
+\]
+With defect $\delta>0$ there are $\delta$ further unmatched moduli and their reciprocal contribution is at most $H_{\delta+1}-1$.
+
+Put $B(z)=\sum_{p\le z}(p-1)$ and $W(z)=\sum_{p\le z}H_{p-1}/(p-1)$. Take $z$ to be the first prime with $B(z)\ge k-1$. Since $\sum_{p\mid L}(p-1)\le k-1$, a fractional knapsack bound gives $\sum_{p\mid L}H_{p-1}/(p-1)\le W(z)$. Indeed, the value per unit cost is $H_{p-1}/(p-1)^2$, decreasing in $p$ (both $H_n/n$ and $1/n$ decrease). Spending the budget on the cheapest primes first maximizes the fractional sum. This proves $R_0(k)\le W(z)+1/(k+1)$. It also gives a defect test: $S(A)\ge(1/2+\varepsilon)\log k$ for fixed $\varepsilon>0$ forces $\delta\ge k^{\varepsilon-o(1)}$, by the evaluation of $W$ on page 4.
+
+\newpage
+\head{2. Constructing exactly $k$ indispensable classes}
+Set $B_*(x)=1+b(\lcm(1,\ldots,x))$. Choose the first integer $u$ with $B_*(u)\ge k$. Its jump occurs at a prime power $t^a=u$ and equals $t-1$. Let $q$ be the largest prime at most $u$. The excess $r=B_*(u)-k$ is at most $t-2\le q-2$. Express $r$ greedily as a sum of distinct numbers $p-1$: choose the largest prime $p\le r+1$, subtract $p-1$, and repeat. Bertrand's postulate gives a prime strictly between $p$ and $2p$, so the next remainder is less than $p-1$ and at most half the old remainder. The last step can use $p=2$. We use $h=O(\log u)$ distinct primes, all below $q$.
+
+Start with $L_*=\lcm(1,\ldots,u)$ and lower the exponent of each selected prime by one, to obtain $L$. Then $1+b(L)=k$. Each lost top power $P=p^{v_p(L_*)}$ exceeds $\sqrt u$: if $p\le\sqrt u$ then $pP>u$, and otherwise $P\ge p>\sqrt u$. The largest prime $q$ retains exponent one for all large $u$.
+
+Process primes $p\mid L$ in increasing order and then their digits $j$ from low to high. Let $T_p=\prod_{r<p}r^{v_r(L)}$, with the product over primes. For each nonterminal digit choose the $p-1$ smallest positive divisors $d$ of $T_p$. Assign them bijectively to $b=1,\ldots,p-1$. The modulus is $dp^j$, and its class is given by
+\[
+ x\equiv0\pmod d,\qquad x\equiv b p^{j-1}\pmod {p^j}.
+\]
+At the terminal digit of $q$, choose $q$ divisors: first include each full prime power of $T_q$, then fill remaining slots with the smallest available divisors. Assign all $q$ digits including zero. Their cofactors have LCM $T_q$.
+
+For $p\le\sqrt u$, all of $1,\ldots,p-1$ divide $T_p$. For $p>\sqrt u$, at most $ph/\sqrt u$ integers in $[1,p-1]$ are excluded by deleted powers. Supplement the list by the even integers in $(p,p+D]$, for $D=\lceil 12(ph/\sqrt u+1)\rceil$. Uniformly $D<p$ for large $u$. Each such even candidate has prime factors smaller than $p$. A candidate failing to divide $L_*$ must itself be a prime power exceeding $u$ (the candidate is $<2u$); there is at most one such power of two in this interval. Across $[1,p+D]$ at most $2ph/\sqrt u$ candidates are lost to the deleted powers. The new even integers therefore leave at least $p$ available divisors in total. The compulsory terminal cofactors are at most $u$, and there are fewer than $q$ of them. All moduli are bounded by $(1+o(1))u^2$; the small prime stages even satisfy $dp^j\le u^{3/2}$.
+
+Distinct rows have distinct largest prime factors or exponents; within a row the cofactors differ. The first nonzero digit of any integer covers it, with all previous coordinates zero. If previous digits vanish up to the terminal digit, the terminal row covers it. For a proper divisor $D'\mid L$, at most $b(D')$ of our moduli divide $D'$: each eligible row contributes at most $p-1$, except if all terminal entries are present, which would force $D'=L$. An irredundant covering subsystem of period $D'$ needs at least $1+b(D')$ classes, by page 2 applied to that subsystem. At period $L$ it needs all $k$. This proves irreducibility after arbitrary reassignment.
+
+\newpage
+\head{3. The sum, to an additive error tending to zero}
+Without deletion or a terminal exception, a row $(p,j)$ with cofactors $1,\ldots,p-1$ contributes $H_{p-1}/p^j$. We compare the construction to the infinite geometric series of these ideal contributions for every $p\le u$, whose sum is $W(u)$.
+
+First truncate each prime at $a_p=v_p(L_*)$. For $p\le\sqrt u$ the tail per prime is $O(\log u/u)$ since $p^{a_p+1}>u$; for $p>\sqrt u$ the combined tails are $O(\sum_{n>\sqrt u}\log n/n^2)=o(1)$. Deletion removes at most $h$ further rows, each contributing $O(\log u/\sqrt u)$. Dropping the terminal row entirely costs $O(\log u/q)$.
+
+For every surviving nonterminal row all eligible $d<p$ appear among its chosen cofactors. The lost harmonic mass among $d<p$ is at most
+\[
+ \sum_{P\ {\rm deleted}}\ \sum_{d<p:\,P\mid d}\frac1d
+ \le \sum_P \frac{H_{p-1}}P \ll \frac{h\log u}{\sqrt u}.
+\]
+No other obstruction applies to $d<p$, since it originally divided $L_*$ and has all prime factors $<p$. Multiply this loss by $1/p^j$ and sum; the total weight is at most $\sum_{p\le u}1/(p-1)=O(\log\log u)$. All these errors tend to zero. Consequently $S(A)\ge W(u)-o(1)$.
+
+The prime number theorem and partial summation give $B(x)\sim x^2/(2\log x)$.
+Higher powers contribute $O(x\log x)$ to $B_*(x)-B(x)$, for example by summing over bases at most $\sqrt x$ and bounding their exponents by $\log_2 x$. Each individual threshold jump at $u$ or $z$ is $O(u)$ or $O(z)$ respectively. It follows that
+\[
+ u\sim z\sim\sqrt{k\log k}.
+\]
+In particular the maximum-modulus estimate from page 3 is $(1+o(1))k\log k$.
+Set $B_1=\lim_{x\to\infty}(\sum_{p\le x}1/p-\log\log x)$ and $B_2=\lim_{x\to\infty}(\sum_{p\le x}\log(p)/p-\log x)$. The former is Mertens' theorem; the latter follows by partial summation from the classical prime number theorem with, for example, $\vartheta(x)=x+O(x/\log^2 x)$. Since $H_{p-1}=\log p+\gamma+O(1/p)$, the series in
+\[
+ C=B_2+\gamma B_1-\gamma\log 2+
+ \sum_p\left(\frac{H_{p-1}}{p-1}-\frac{\log p+\gamma}{p}\right)
+\]
+converges absolutely. Therefore both $W(u)$ and $W(z)$ equal
+\[
+ \tfrac12\log k+(\tfrac12+\gamma)\log\log k+C+o(1).
+\]
+Combining the two sides proves the assertions on page 1.
+
+\head{A numerical check}
+At $k=100,000$ the constructor produces largest modulus $1,332,868$ and reciprocal sum $7.77830986$ (rounded). The code verifies digit assignments, distinctness, terminal LCM and zero defect. It checks every integer in a period when the period is at most 5,000. The general asymptotic is established by the estimates above.
+
+\newpage
+\head{4. Certifying the finite minima}
+Suppose $p^a\parallel L$. Some class has full $p$-power. By irredundancy its removal leaves a private point. In the fibre above this point modulo $L/p$, no class with modulus dividing $L/p$ is present. Each full-power class covers at most one of the fibre's $p$ points. At least $p$ distinct moduli are therefore multiples of $p^a$ with cofactors prime to $p$. Their largest cofactor is at least $p+1$. Thus
+\[
+ (p+1)p^a\le M.
+\]
+For $M\le35$ it forces $L\mid120$. If $5\nmid L$, there are only seven available moduli, the nonunit divisors of 24. If $5\mid L$, all five possibilities $5,10,15,20,30$ must occur. These force $60\mid L$, whence $k\ge1+b(60)=9$. This explains the obstruction for eight classes directly.
+
+For $M\le36$ this forces $L\mid360$. Enumeration needs only the 15 divisors of 360 between 2 and 36. With $M\le47$ the period still divides 360, and there are 17 candidates. For any chosen subset, coverability is a finite decision. Order the moduli increasingly, translate the first class to residue zero, and branch on every residue of each remaining modulus. A bit set tracks all uncovered points. If the sum of the maximum possible new gains of the remaining classes is less than the number of uncovered points, that branch fails. A set is irreducible precisely when it is coverable and none of its single deletions is.
+
+There is an exact reduction. For a prime power $p^a\parallel L$, call the moduli divisible by $p^a$ the top moduli. Fewer than $p$ top moduli can be discarded, as only the other moduli can cover an entire fibre of size $p$. If there are exactly $p$ top moduli $d_i$, they can be replaced by one class of modulus $D=\lcm_i(d_i/p)$, allowing repetitions in the reduced list. Indeed, any holes left in $\mathbb Z/(L/p)$ by the other classes must lie in the projection of every top class; the intersection of these projections, if nonempty, is one class modulo $D$. Conversely, from any residue modulo $D$, lift the $p$ projected classes by assigning distinct top base-$p$ digits. They cover every point over that residue. This gives an equivalence for all possible assignments. It also covers the case where the other classes already suffice.
+
+The first enumeration produced 29 irreducible sets with $M\le36$ and 741 with $M\le47$. A separate program redecided every one of the $2^{15}$ subsets at cap 36: its only prime reduction concerns the five possible multiples of 5, which together become one class modulo 12. Its remaining searches try residues modulo divisors of 72. Both enumerations gave the identical 29 sets. The unique 15-modulus example below cap 48 has moduli
+\[
+ \{3,4,5,6,8,9,10,15,18,20,24,30,36,40,45\}.
+\]
+The archive includes scripts, the two complete bounded lists, and explicit covering residues for all 29 examples at cap 36. Prior work of Agrawal et al. classified small systems by size; the finite numbers here are independent computations and may overlap earlier results.
+
+{\small\textbf{Sources.} T. F. Bloom, \href{https://www.erdosproblems.com/1189}{Erd\H{o}s Problem 1189}.
+E. \"Ozt\"urk, \href{https://www.researchgate.net/publication/413884122}{Irreducible covering systems}, Remark 6.5 (2026).
+R. Agrawal et al., \href{https://arxiv.org/abs/2208.09720}{Computations and observations on congruence covering systems}.
+O. Kullmann, \href{https://doi.org/10.3233/FI-2011-428}{Constraint satisfaction problems in clausal form I} (2011).
+R. J. Simpson, \emph{Regular coverings of the integers by arithmetic progressions}, Acta Arith. 45 (1985), 145--152.
+\href{https://erdosproblems.ai/wiki/problems/covering_systems/E1189/claims/2026_07_28_pickhardt}{Pickhardt and Paratelligent Research Agent, related 2026 manuscript}.
+\href{https://github.com/jpollard-cs/open-math-agents/tree/d174723fc6e80683cbf4d5bfe2020aa522ae32be/research/proof-manuscripts/covering-systems/fixed-cardinality}{Earlier project note on the least largest modulus}.}
+\end{document}

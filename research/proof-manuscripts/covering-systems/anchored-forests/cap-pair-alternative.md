@@ -1,0 +1,39 @@
+# If the exceptional prime pairs carry the excess at a modulus cap
+
+Codex (OpenAI), November 28, 2026. Written companion to [the batch sieve](batch-cap-sieve.md).
+
+Fix c>0, let $L=\log X$, and assume an irreducible set at cap X has $k\ge F(\sqrt X)+cX/L$. Take any fixed $t>\sqrt{c/2}$ and use the sieve at $u=t\sqrt L$. Suppose there is a choice of reservation and batch partition with $V\le e^u/L^2$. The following describes the resulting alternative to extremely large joint projections at this wider cutoff. No full-period assumption is made.
+
+There are scales P,Q,D with $P,Q=X^{1/2-o(1)}$, $D\asymp X/(PQ)$, and a constant s>0 depending only on c,t, such that
+```math
+  Q/P\ge e^{s\sqrt L},\qquad \sqrt X/Q\ge e^{s\sqrt L},
+       \qquad e^{s\sqrt L}\le D\le O(e^{2t\sqrt L}).
+```
+Write A and B for the primes of $[P,2P)$ and $[Q,2Q)$, respectively. There is a fixed list of $\gg D$ integers $d\asymp D$ such that for each d a positive fraction of $A\times B$ are edges giving actual moduli $pqd\le X$. Every such pair has a separate pool of $\gg D$ **strictly smaller** moduli $pqd'$ of the original set, disjoint from the displayed rows. The same pair uses the same pool for all its d.
+
+Temporarily omit the reserved row and all the pools. After **any** assignment on all other integer moduli, one can find $\lfloor e^{s'\sqrt L}\rfloor$ distinct projected holes, for some fixed $s'>0$, and discard at most an $e^{-s'\sqrt L}$ fraction of $A\times B$, so that on each surviving displayed pair all but an $e^{-s'\sqrt L}$ fraction of its pool distinguish *all* these holes individually modulo $pd'$. Every listed cofactor retains a positive fraction of the entire prime rectangle. In addition one can choose, before the assignment, $\gg\sqrt L$ simultaneous cofactors for which the common graph, even after this erasure, contains a complete bipartite graph with $\gg\sqrt L$ primes on each side. The prime subsets may depend on the assignment. These are actual integer cofactors and holes, without auxiliary moduli.
+
+**Finding the rectangle.** The proof of the batch sieve counts the actual set-aside rows. Under the stated bound on V, the first-type set-asides and all complete retained batches cost $O(X/L^2)$ together. Hence there are at least $(c-o(1))X/L$ actual rows with their two different large primes in $(Y,\sqrt X]$, $Y=\sqrt X e^{-t\sqrt L}$. Write these as $pqd$, $p<q$. The pair is unique and $d\le e^{2t\sqrt L}<Y$. Removing the one reserved row costs at most one.
+
+Remove pairs with $q>\sqrt X e^{-2s\sqrt L}$ or $q/p< e^{2s\sqrt L}$. The number of *all* integers they use is $O_t((s+1/\sqrt L)X/L)$, by summing $X/(pq)$ over the strips: the reciprocal sum on the whole prime interval is $O_t(1/\sqrt L)$ and on any subinterval of log-width at most $2s\sqrt L$ it is $O((s\sqrt L+1)/L)$. The latter follows by splitting into intervals of ratio two and applying the prime counting bound; constants are uniform as $s\downarrow0$. Choose s small in terms of c,t. A positive multiple of X/L remains.
+
+Split both prime ranges into dyadic bins, extending the end bins to their full dyadic intervals. For a bin pair set $D=\lceil X/(PQ)\rceil$. The encompassing box of all prime pairs and $1\le d\le D$ has cardinality $O(X/L^2)$ by prime counting. There are $O_t(L)$ bin pairs. Summing their sizes gives $O_t(X/L)$, so some box contains selected rows of density at least a fixed $\rho>0$ within it. Its endpoints satisfy the separations claimed after decreasing s. In particular $|A|\asymp P/L$, $|B|\asymp Q/L$ by the prime number theorem in full dyadic intervals, and D has the asserted size.
+
+Drop pairs with fewer than $\rho D/4$ occupied cofactors. On each remaining pair take the smallest $\lfloor\rho D/8\rfloor$ as its pool. At least $\rho |A||B|D/2$ incidences still remain as displayed candidates for all sufficiently large X. Each has $d\ge\lfloor\rho D/8\rfloor$, and every pooled cofactor is strictly smaller on that pair. At least $\rho D/4$ cofactor layers have density at least $\rho/4$ in $A\times B$; keep these layers. Pair pools can now be restricted to the union of their edges.
+
+**A simultaneous choice of holes.** Consider all pools on this union. Each pooled row tests q and the single ordinary congruence modulo $pd'$, with gcd equal to one between these moduli. There is no other q in the guard, since $d'\le D<Y$. The lcm of all the guards uses only primes at most 2P and the maximal power of each is at most X. Thus the logarithm of the number of possible guard patterns is at most $\pi(2P)L=O(P)$. Any placement with the reserved row omitted must have a hole, even allowing all other residues to change. Apply (1) of [the finite joint-guard theorem](joint-guard-distribution.md) to the arbitrary fixed complement.
+
+For the resulting common measure μ, erase the at most $O(P)$ primes q with $\sum_{e\text{ at }q}m_e>q(\log q+1)$. This discards an $O(LP/Q)$ fraction of the rectangle. On the remaining pairs write $\bar m_{pq}$ for the average of their pools' largest guard-fibre masses. Counting absent pairs as zero, their mean over the *entire* rectangle is bounded by
+```math
+   O\!\left(\frac{Q L}{D|A|}\right)
+      =O\!\left(\frac{Q^2 L^2}{X}\right).
+```
+The equality in order uses $D\asymp X/(PQ)$ and $|A|\asymp P/L$. This bound is $O(L^2e^{-2s\sqrt L})$. Sample $\lfloor e^{s\sqrt L/8}\rfloor$ independent holes from μ. On each row the probability of a collision is at most the number of sample pairs times its largest fibre mass. There is one sample for which the mean colliding fraction over all nonerased pairs, with normalization $|A||B|$, is $O(L^2 e^{-7s\sqrt L/4})$. Erase pairs whose colliding fraction exceeds $e^{-s\sqrt L/4}$. Counting these pairs and the earlier lost q vertices together loses at most $e^{-s\sqrt L/2}$ of the entire rectangle eventually. This works simultaneously in every layer. A surviving good row exists and separates the sampled points. Take any sufficiently small $s'>0$ to absorb the constants and roundings.
+
+**The same cofactors before and after reassignment.** Draw r cofactors independently and uniformly from the retained layers. If a pair appears in a fraction f of these layers, it is present in their intersection with probability $f^r$. Jensen gives expected intersection density at least $(\rho/4)^r$. The probability of a repeated draw is $O(r^2/D)$. Choose $r=\lfloor b\sqrt L\rfloor$ with b sufficiently small that $(\rho/4)^r\ge e^{-s\sqrt L/8}$. Since $D\ge e^{s\sqrt L}$, there are distinct draws with common density at least $e^{-s\sqrt L/8}/2$. Fix them before the complement assignment. The loss above, at most $e^{-s\sqrt L/2}$ of the whole rectangle, leaves density at least $e^{-s\sqrt L/7}$ eventually.
+
+Finally draw $h=\lfloor b'\sqrt L\rfloor$ independent primes on the A side uniformly. Jensen lower bounds the expected fraction of B adjacent to all h by $e^{-s h\sqrt L/7}$. Choose $b'>0$ so small that this is at least $e^{-L/8}$. The probability of repeated A draws is $O(h^2/|A|)=e^{-L/2+o(L)}$, and $|B|=e^{L/2-o(L)}$. There are h distinct A vertices with more than h common B neighbors. Selecting h of those yields the asserted product.
+
+The proof gives a dichotomy under a fixed fractional improvement in the minimum. At the smaller cutoff in the batch sieve a large-visibility bin is mandatory. At the wider cutoff, if such visibility subsides, a dense set of actual near-square prime pairs must take its place and enforce single-cofactor distinctions on common holes. It remains possible for $p$ alone to distinguish those points. Here all remaining factors $d'$ are bounded by $O(e^{2t\sqrt{\log X}})$, giving a specific two-prime reassignment problem to pursue.
+
+The density and averaging arguments are written proofs. The [finite cut and graph checks](cap-pair-check.py) test the extraction, common-layer survival and simultaneous distinction on finite models independently of the asymptotics.

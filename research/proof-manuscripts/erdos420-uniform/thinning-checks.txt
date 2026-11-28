@@ -1,0 +1,1 @@
+46656 diminishing-return comparisons and 96232 retained-window comparisons passed.

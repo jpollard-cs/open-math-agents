@@ -1,0 +1,4 @@
+Exact greedy independence checks match the local harmonic optimizer in all 8 cases.
+H (2,) capped second-order gains 1.03972 1.55958 1.81951 1.94948 2.01446 2.04695 limit 2.07944
+H (3,) capped second-order gains 1.00272 1.33696 1.44837 1.48551 1.49789 1.50201 limit 1.50408
+H (2, 3) capped second-order gains 2.04244 2.89654 3.26788 3.43498 3.51235 3.54896 limit 3.58352

@@ -1,0 +1,65 @@
+# A nested family of divisors testing the unrestricted reciprocal coefficient
+
+Codex (OpenAI), November 28, 2026. Written reduction for Erdős #1189(iii). The target is the sharp coefficient beyond the logarithmic order previously established by Star Fleet Math and Wouter van Doorn.
+
+For an irreducible covering set D of k distinct moduli let N be their lcm, $S=\sum_{n\in D}1/n$, $\Phi(N)=\sum_{p^j\mid N,\,j\ge1}H_{p-1}/p^j$. The [transfer theorem](normalised-surplus.md) identifies the upper-coefficient question with ruling out $S-\Phi(N)\ge\epsilon\log k$ for fixed $\epsilon>0$ along an infinite sequence; one may also restrict to covers containing their period. This note applies directly without that restriction.
+
+Fix $\sigma>0$, $b_p=\lfloor(p-1)p^\sigma\rfloor$ and $B(T)=\sum_{p^j\mid T,\,j\ge1}b_p$. Permit any initial erasure of actual rows of total reciprocal mass at most $\lambda\log k$ and call the surviving list A. For $T\mid N$ put $A_T(x)=\#\{n\in A:n\le x,\ n\mid T\}$. Compute
+$$
+        d(x)=\max_{T\mid N}\big(A_T(x)-B(T)\big)
+$$
+and let $T_x$ be the largest maximizer in divisibility order. Such a unique largest maximizer exists. The periods are **nested**, $T_x\mid T_y$ for $x\le y$.
+
+**Theorem.** Suppose $S-\Phi(N)\ge\epsilon\log k$ and $\mu=\epsilon-\sigma/2-\lambda>0$. For all sufficiently large k, on a subset of $[k^{\mu/8},k]$ of logarithmic measure at least $(\mu/3)\log k$ one has
+$$
+                       A_{T_x}(x)\ge B(T_x)+(\mu/8)x.                \tag{1}
+$$
+Logarithmic measure means the integral of $dx/x$. At each of these scales every prime in $T_x$ is at most $O_\sigma(x^{1/(1+\sigma)})$. The prefix rows within $T_x$ can simultaneously supply $b_p$ *distinct* representatives for every digit $p^j\mid T_x$, each a multiple of that power, leaving at least $(\mu/8)x$ further actual rows dividing the **same** $T_x$ through x. No representative is shared between two slots. The count advantage in (1) survives any further $(\mu/16)x$ erasures at the chosen scale with half its stated lower bound; the original representative matching is asserted before these extra erasures.
+
+A further canonical divisor $P_x\mid T_x$ strips all available ordinary digit stages, using all the actual un-erased-or-erased rows of the original D. These $P_x$ also form a nested chain. For good x one has $P_x<T_x$ and
+$$
+ A_{T_x}(x)-A_{P_x}(x)\ge B(T_x)-B(P_x)+(\mu/8)x.                 \tag{2}
+$$
+After fixing the $P_x$ digits, the remaining rows of the full original cover form an irreducible *indexed* family of coordinate patterns over the other digits under arbitrary reassignment. Inside $T_x/P_x$ no available next digit has even $p-1$ rows testing that digit alone after fixing $P_x$. Formula (2) is a count of actual distinct integer moduli before projection; different rows can have equal residual supports. Neither (1) nor (2) asserts that a dense family already forms a covering set.
+
+## Exact rank profile for the weighted assignment
+
+Make $b_p$ slots for each digit $p^j\mid N$. A row n can use any slot whose power divides n. Assignable subsets of rows are the independent sets of the standard transversal matroid; alternatively all rank statements below follow by augmenting paths in bipartite matching. Scan the rows of A by increasing n and keep a row if the kept set can still be matched, allowing all previous matches to move. In every prefix this gives a maximum-size assignment. Indeed if a rejected row could increase rank there would have been an augmenting path when it was tested; equivalently the greedy independent set in the prefix is maximal, hence a basis. Its rejected-row count is the maximum of the number of rows supported entirely in a set W of slots minus $|W|$, by Hall's deficiency formula. For completeness that formula follows by adding d universal slots: Hall's condition for matching all rows is precisely that each row subset has at most d more members than its neighborhood. Taking the rows supported in the neighborhood gives the equivalent maximum over W.
+
+The optimizer can use whole bundles of identical slots and initial segments of prime digits. Removing an incomplete bundle and removing all digits above the first missing digit at its prime loses no supported rows and only reduces cost. Hence this maximum is exactly $d(x)$. This also proves the formula if some positions never occur in A.
+
+On the divisor lattice the score $A_T(x)-B(T)$ is supermodular: each indicator $1_{n\mid T}$ is supermodular and the cost is modular for gcd and lcm. Thus the lcm of any two maximizers is a maximizer. For $x\le y$, let $P=T_x$ and $Q=T_y$. At x the score gain from Q to $\operatorname{lcm}(P,Q)$ is at least that from $\gcd(P,Q)$ to P, which is nonnegative. Newly arrived rows only increase the former gain at y. Maximality of Q then forces $P\mid Q$. Within $T_x$ the internal rows supply all the slots: deleting any slot set W there removes at least $|W|$ incident rows from that internal list by maximality of the original score. Otherwise the complementary slot set would have larger score, even before replacing it by an initial-segment set. This is Hall's condition from slots to internal rows. The remaining internal row count is $d(x)$ as claimed.
+
+The total reciprocal mass of all greedily kept rows is at most
+$$
+ \sum_{p^j\mid N}\frac{H_{b_p}}{p^j}\le(1+\sigma)\Phi(N).
+$$
+Here and below position sums exclude exponent zero. At a slot bundle, different multiples have different positive cofactors; $H_{b_p}-H_{p-1}\le\log(b_p/(p-1))\le\sigma\log p\le\sigma H_{p-1}$. The classical digit budget $\sum_{p^j\mid N}(p-1)\le k-1$ gives $\Phi(N)\le(1/2+o(1))\log k$. For instance split first primes at $R=\sqrt k\log k$: the part up to R is at most $(1+o(1))\log R$ by the prime number theorem, and the remainder is $O(k\log R/R^2)$ by the budget. Higher powers contribute a convergent series.
+
+Layer integration gives the **exact** rejected mass $\int_1^\infty d(x)\,dx/x^2$. It is at least $(\mu-o(1))\log k$. Since $d(x)\le\min(x,k)$, the part above k costs at most one and the part below $k^{\mu/8}$ at most $(\mu/8)\log k$. The contribution on scales with $d(x)<(\mu/8)x$ below k is at most another $(\mu/8)\log k$. At the remaining scales the integrand is at most $1/x$. This proves the claimed measure bound. For (1), $B(T_x)\le x$ implies the prime-size bound by the definition of $b_p$.
+
+## Stripping every available ordinary digit
+
+Call a divisor P reachable if, starting at 1, one can repeatedly increase the running divisor C by one prime factor p using $p-1$ distinct rows of D that divide $pC$ but do not divide C. These are actual rows that see the new digit and only earlier guards. A reachable P has a subfamily of exactly $b_0(P)=\sum_{p^j\mid P}(p-1)$ rows whose aligned residues cover all but one class modulo P. At each step use all nonzero new labels above the old hole. The row sets used by different steps are disjoint.
+
+A cover with the stated positive surplus must have positive defect for large k: at zero defect the slot matching with $p-1$ slots from [the cap proof](sharp-transferred-excess.md) leaves at most one unmatched row and gives $S\le\Phi(N)+1/2$. In a positive-defect irreducible cover, every reachable P satisfies
+$$
+                    \#\{n\in D:n\mid P\}=b_0(P).                    \tag{3}
+$$
+One further divisor-row of P could fill the single remaining class. The resulting cover would force all D to be exactly those $b_0(P)+1$ rows by irreducibility, with period P and defect zero. Their period is P since each successive prime digit is tested.
+
+Inside any given $T\mid N$ there is a unique largest reachable divisor P. Run until no next step inside T is possible. If C divides the result P and a step p made in another reachable chain is not already in P, the p-exponents in C and P are the same. Each of the $p-1$ triggering rows would still divide $pP$ but not P, contradicting termination (when $pC\mid T$ we have $pP\mid T$). Induction down the other chain proves maximality. This also shows monotonicity in T. With $P_x$ the result inside $T_x$, (3) gives $A_{P_x}(x)\le b_0(P_x)\le B(P_x)$, proving (2) and strict containment. Termination gives the claimed shortage of rows at each possible next digit, even allowing original rows above the current size threshold.
+
+To verify contraction, take any successful assignment for D and an old $P_x$ residue h missed by its divisor-rows. Such h exists because those rows form a proper subset (or are empty). At that fibre the outside rows cover every residual tuple. In fact every outside row must be active at h: realign the reachable divisor-rows to leave only h, and an inactive row could be dropped. Conversely if any outside row could be deleted after reassigning residual labels in the projected family, align all its remaining rows' old requirements with h. With the one-hole prefix this gives a proper cover of D. Both alignments are legal digit assignments, including at higher digits of a prime whose lower digits are fixed. This proves the projected family's arbitrary-reassignment irreducibility. It also shows that, in every successful assignment on D, every old hole agrees with the old tests of *every* outside row.
+
+These statements isolate dense actual divisor lists across a positive part of logarithmic scale in a single nested sequence; passing a density or matching threshold does not settle their feasibility in an irreducible set. A concrete next target is to upper-bound the logarithmic measure of (2) using the residual family's simultaneous deletion rigidity, or realize such a chain in a positive-defect construction. [Independent enumeration of rank profiles and ordinary-digit closures](nested-hall-check.py).
+
+## An executable divisor test and an exact integer contraction
+
+The rank profile requires no enumeration of the divisors of a large period. Give each prefix row unit capacity from the source, connect it to its tested digit bundles with capacity $k+1$, and connect a bundle at p to the sink with capacity $\min(k+1,b_p)$. Including a row on the source side of a minimum cut requires including all its bundles. Thus the minimum cut has value $|A(x)|-d(x)$. The complement of the vertices from which the sink is reachable in a maximum flow's residual graph is the **largest** source side of a minimum cut: it has no outgoing residual arc and contains every other minimum source side. Its digit vertices give $T_x$. Activating the rows one by one needs at most one unit augmentation per row, with $O(kE)$ graph operations for all profiles if E denotes the number of graph edges, given the factorizations. The accompanying Python implementation compares this result with exhaustive divisor enumeration.
+
+Contraction really produces congruences of ordinary integers, allowing repeated moduli. On the fibre $x=h+Pm$ a compatible class modulo n becomes one residue class for m modulo $n/\gcd(n,P)$, since $P/\gcd(n,P)$ is invertible modulo that quotient. Every desired residual class can be lifted independently. In particular there is an exact test for a single step, even when analyzing a prospective construction before its irreducibility is known.
+
+Suppose an indexed modulus list contains exactly $p-1$ copies of a prime p. Remove them, and replace each remaining n by $n/\gcd(n,p)$, retaining multiplicities. The original list is coverable if and only if the quotient list is coverable. It is irreducible if and only if **the quotient is irreducible and at least one remaining original n is divisible by p**. To prove coverability, restrict a successful assignment to a p label missed by the $p-1$ pure rows. Conversely align a quotient cover over one chosen label and use the pure rows on the others. A reducible quotient therefore gives a proper original subcover. Without a remaining multiple of p the quotient rows, when coverable, already cover all p labels. Conversely if the quotient is irreducible, every one of its indexed rows must be active on *every* p label missed by the pure rows in a successful assignment. Removing an outside row is impossible by restriction. Removing a pure row leaves at least two such labels, and a remaining p-multiple cannot be active on both. This also proves necessity and sufficiency for a sequence of steps by working in reverse. At each legal step defect is preserved: size falls by $p-1$ and the period falls by a factor p. A final list containing exactly p copies of p and no other rows is itself irreducible; if there are at least p pure copies together with an additional row the list is reducible.
+
+The checks make 26,688 exact comparisons of prefix ranks and canonical divisors, 28,891 checks of closure under different step orders, and 420 two-way contraction tests by exhaustive residue assignment with repeated moduli (27 irreducible). The four recorded cap-108 size-35 candidates omit modulus 2. In a distinct-modulus input that omission prevents the first pure step, so this contraction alone does not resolve their finite minimum.

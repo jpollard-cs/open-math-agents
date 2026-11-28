@@ -1,0 +1,23 @@
+# Large simultaneous intersections at reciprocal mass one half
+
+Codex (OpenAI), November 28, 2026. AI-authored written proof for contributor review.
+
+Let $D$ consist of $k$ distinct positive integers, each assigned an arbitrary residue $a_n$ modulo $n$. Put $S=\sum_{n\in D}1/n$, that is, the sum of the reciprocals of the moduli. Assume $S\ge(1/2-o(1))\log k$. One can extract disjoint groups of exactly $s=\lfloor k^{1/10}\rfloor$ moduli whose union carries reciprocal mass at least $(0.024-o(1))\log k$. Within each group all moduli are in one dyadic interval, all pairwise gcds equal one integer $q$, and one integer satisfies every assigned congruence in the group. The integer and $q$ may vary between groups.
+
+This applies to every choice of residues for the high-reciprocal-sum sets in Erdős–Graham #1189. No covering hypothesis enters the extraction.
+
+**Extraction.** Write $t=s\exp(\sqrt{\log k})$. Call an integer dense if the ratio of successive divisors in its increasing divisor list never exceeds $t$. In the factorization into ascending prime powers, the dense criterion is that each next prime is at most $t$ times the product of the preceding prime powers. For a nondense $n\le k$ take the first violation, write $n=qb$ where $q$ is the preceding product, and observe that every prime of $b$ exceeds $tq$. This factorization criterion and the counting theorem below come from Andreas Weingartner, [Practical numbers and the distribution of divisors](https://arxiv.org/pdf/1405.2585), equation (13) and the formula for $F(n)/n$ in section 4.
+
+In $X<n\le2X$, partition these moduli by $q$ and the residue of $a_n$ modulo $q$. In each group repeatedly remove $s$ rows with pairwise coprime $b$'s as long as possible. They have the claimed gcd. On writing $x=a+qz$ with a fixed common representative $a$ modulo $q$, each row asks for a single residue of $z$ modulo $b$. CRT gives simultaneous satisfaction.
+
+In the remainder take a maximal collection of pairwise coprime petals $b$. It has fewer than $s$ members. Every remaining petal shares a prime with a member (including the members themselves, since $b>1$). Each member has at most $\log_2(2k)$ primes. For any of those primes $p>tq$, there are at most $2X/(qp)$ multiples of $qp$ in the block. Thus a group leaves at most $2Xs\log_2(2k)/(tq^2)$ rows. Sum over at most $q$ phases and $q\le\sqrt{2X/t}$ and divide by $X$ to bound the missed reciprocal mass in the block. Over all blocks this is $O(s\log^3(2k)/t)=o(1)$. Moduli above $k$ cost at most one.
+
+**Dense integers.** Write $d(v)$ for Weingartner's dense-divisor distribution. His Theorem 3 and partial summation give the total reciprocal mass of all $t$-dense integers up to $k$ as
+$$\left(\tfrac1{10}\int_0^{10} d(v)\,dv+o(1)\right)\log k.$$
+Indeed the counting main term at $x$ is $x\eta(t)d(\log x/\log t)$ with $\eta(t)=1+O(1/\log t)$ and a uniform relative error $O(1/\log(2x))$. Integrating the error against $dx/x$ costs $O(\log\log k)$. The accompanying [integer enclosure](dense-overlap-check.cpp) proves that the coefficient above is less than $0.476$. Subtraction gives the claim.
+
+The program bounds Buchstab's function first, using $z\omega(z)=1+\int_1^{\max(1,z-1)}\omega(w)dw$ for $z\ge1$. It then encloses the integrand in Weingartner's equation (4) on each cell using the extremal arguments of $(v-u)/(1+u)$. Only whole cells inside $[0,(v-1)/2]$ contribute to the lower integral bound, and each cell meeting the interior can contribute to the upper bound. Products and divisions round outward in integer arithmetic. The accumulated upper integral at $v=10$ is compared to the rational $476/1000$ before display rounding.
+
+**What the intersection can establish about deletion.** Every subset of a single extracted group can be realized as exactly the rows hit there by an integer. One prescribes a hit or a miss in each independent petal. More quantitatively the proportion of a member's residue class missed by every other member is $\prod_{j\ne i}(1-1/b_j)\ge1-\exp(-\sqrt{\log k})/q$. Thus even a common integer on polynomially many rows can coexist with almost the entire density of each individual row private inside its group. To deduce a dispensable modulus one must control how the other groups cover such private points.
+
+The related [Erdős problem 535](https://www.erdosproblems.com/535) asks for equal pairwise gcds in sets of integers. Here compatibility of specified residues, a growing group size, and coverage of reciprocal mass are included. This is a necessary condition for #1189. Its unrestricted coefficient and sharp minimum-modulus asymptotic remain open.

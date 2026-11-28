@@ -1,0 +1,82 @@
+# Mutual dependence in a cover with one uncovered residue
+
+Codex (OpenAI), at Jordan Pollard's request. AI-authored written research for public review, November 27, 2026.
+
+Let an irreducible set of distinct moduli contain its period $L$, and let $k$ be its size. Irreducibility quantifies over all assignments on every proper subset. Put $S=\sum_{n\in D}1/n$ and $\Phi(L)=\sum_{p^j\mid L,\ j\ge1}H_{p-1}/p^j$. The [unrestricted transfer](normalised-surplus.md) makes the uniform estimate $S-\Phi(L)\le o(\log k)$ on precisely these sets sufficient for the unrestricted upper coefficient $1/2$.
+
+**Theorem.** Fix $\epsilon>0$. At sufficiently large $k$, if $S-\Phi(L)\ge\epsilon\log k$, the following holds in **every** covering assignment. One strongly connected component of the digit graph defined below has an internal graph on first digits of primes $p>k^a$ that contains a subgraph of minimum degree at least $k^a$ (after decreasing $a=a(\epsilon)>0$). Its edges can all be required to have at least $k^a$ distinct cofactor values $n/(pq)$ in actual rows testing both endpoints internally. Within this same component there are sets of at least $c\log k$ and $k^a$ primes with every cross pair such an edge. There are also two prime sets of size at least $c\sqrt{\log k}$ and a **common** set of at least $k^a$ cofactors for which every triple product is a different actual modulus at most $k$, all assigned to that component. Each prime and cofactor is at least $k^a$. Constants depend only on $\epsilon$.
+
+Thus subpower degeneracy of the internal graphs in just one successful assignment for each set suffices for coefficient at most $1/2$. Degeneracy is the largest minimum degree of a subgraph. Long directed cycles, very large trees, and arbitrarily many earlier digits tested by a row do not by themselves reach this threshold. The [many-box family](box-lower-family.md) can have polynomial box count but has a placement with only four fresh digits in each cyclic component and singleton components in its ordinary seed. The argument here uses exact local irreducibility under reassignment.
+
+## Component factorization
+
+In the Chinese remainder digit grid of $L$, call the value of each digit at the full-period row zero. Removing that row leaves precisely the zero point uncovered. An ordinary row $r$ fixes digits $F_r$ (initial segments at its prime factors), with a nonempty set $A_r\subseteq F_r$ of nonzero requirements. Draw an arrow from each $i\in A_r$ to each $j\in F_r$. All of $A_r$ belongs to one strongly connected component $C(r)$. Order the components so that every arrow out of a component goes to itself or an earlier one. The **internal support** of $r$ is $I_r=F_r\cap C(r)$. Two different digits in the same component are adjacent in its internal undirected graph if some row assigned to it tests both. Paths certifying mutual dependence may use other digits in the original graph.
+
+For a component $C$ take the indexed list of internal supports of its assigned rows. With these supports, the minimum number of uncovered tuples over **all** assignments of their local residues is exactly one. After any individual deletion it is at least two. Conversely these local conditions, for an ordered partition and a row assigned to its last tested block, suffice to construct a globally irreducible cover with a full-period terminal, provided the integer moduli and terminal are distinct.
+
+Indeed, in the specified witness, vary only the digits in $C$. Every nonzero tuple misses the terminal and must meet a row assigned to $C$. All external requirements of these rows equal zero. Thus the local list leaves only zero. Proceeding in order, the prefix through any component forces the zero tuple there and in every preceding component. If the local rows could cover their entire block, align their old tests with zero and stop at that block, obtaining a subcover without the terminal. If after deleting one row the minimum were one, independently permute labels in the block to put the surviving tuple at zero. Align the old tests as before. The earlier and later witness rows and terminal now finish a proper subcover. Each such choice gives a legitimate residue modulo its own modulus, including on successive digits at the same prime.
+
+For the converse, choose local singleton placements at zero and align the external requirements there. For an arbitrary new global assignment, every old surviving tuple has at least one extension across each block, since at most the full local list is active there. A deletion in a block creates at least two extensions there, which stay distinct through all subsequent blocks. A singleton terminal cannot repair them. Omitting the terminal also fails. This proves the equivalence.
+
+Write $P(I)=\prod_{i\in I}p_i$, counting digit positions separately. If a local support occurs $t_I$ times then $t_I<P(I)$: with $P(I)$ such rows their forbidden tuples can exhaust that support under reassignment. Every actual modulus in this group is divisible by $P(I)$. The stronger divisibility $m(I)\mid n$, where $m(I)=\prod_p p^{\max\{j:(p,j)\in I\}}$ over primes tested in $I$, will also be useful. Within a fixed component the integer $P(I)$ determines a realized $I$. At each prime its exponent counts an initial segment of that prime's positions **in the component**, even if intervening positions are external.
+
+## Where a positive surplus must be carried
+
+Discard the terminal at cost at most one and all moduli above $k$ at cost at most one (there are at most $k$ rows). All primes in $L$ are at most $k$: after the rows testing the highest digit at $p$ are removed, there is an untouched fibre requiring at least $p$ rows. This includes the case that the remaining list is empty.
+
+Take $0<\delta<1/4$, $y=k^\delta$, and $0<\alpha<1/2$. A large prime means one exceeding $y$. Moduli containing a square of a large prime cost $O((\log k)/y)$ in total, by summing reciprocals of multiples of $p^2$ through $k^2$. Write $n_{\le y}$ for the entire small-prime part. Moduli with $n_{\le y}>k^\alpha$ cost $O((\delta+1/\log k)(\log k)/\alpha)$, since
+$$
+ \sum_{n\le k^2}\frac{\log n_{\le y}}n
+ \le H_{\lfloor k^2\rfloor}\sum_{p\le y}\frac{\log p}{p-1}
+ \ll (\log k)(1+\log y).
+$$
+Here the prime sum follows by partial summation from Chebyshev's estimate.
+
+In the retained rows with **no** internal large prime we have $1<P(I)\le k^\alpha$. For a given value $r=P(I)$ there are at most $2\log_2 k$ relevant components: each must contain a visible digit of any fixed prime dividing $r$, and the corresponding prime power is at most $k^2$. There is at most one shape per component for this $r$, with fewer than $r$ rows. Their combined count is $O(k^{2\alpha}\log k)$; by distinctness the reciprocal sum is at most $2\alpha\log k+O(\log\log(3k))$.
+
+With **one** internal large prime $p$, its first digit determines its component and we have $P(I)=pr$, $r\le k^\alpha$. The total count there is at most $p\sum_{r\le k^\alpha}r\le p k^{2\alpha}$. These are distinct multiples of $p$, so their mass is at most $(H_{p-1}+2\alpha\log k+O(1))/p$. Sum over $y<p\le k$. The ideal terms cost at most $\Phi(L)$; the sum of $1/p$ is $\log(1/\delta)+o_\delta(1)$ by Mertens' theorem.
+
+Choose $\alpha=\sqrt\delta$ and then $\delta$ small enough in terms of $\epsilon$. The error just bounded is smaller than $(\epsilon/2)\log k$ for all sufficiently large $k$. Consequently at least $(\epsilon/2)\log k$ of the actual reciprocal mass lies on retained rows with **two or more internal large primes**. Large external primes in an integer dressing never supply either endpoint in this conclusion. This is the difference from finding products using only the unrestricted prime-divisor graph.
+
+## One component with many heavily represented pairs
+
+For each retained row just obtained, select one pair $p,q$ of its internal large primes. Give the pair weight $1/n$. Write $h_{pq}=\sum pq/n$ over rows selecting that pair, so $h_{pq}\le H_{k^2}$ by distinctness. All first digits lie in disjoint components. Set $M_0=1+\log(1/\delta)$, an eventual upper bound for $\sum_{y<p\le k}1/p$. Edges with $h_{pq}<\eta\log k$ contribute at most $\eta M_0^2\log k$ to the reciprocal mass. Choose $\eta>0$ so small that the remaining edges still carry at least $(\epsilon/4)\log k$. Each remaining edge has at least $\exp(\eta\log k-1)$ distinct cofactor values, by the harmonic bound. Its weight in the following graph is $1/(pq)$. The total edge weight is at least a constant $b>0$ because $H_{k^2}\le3\log k$ for large $k$.
+
+Repeatedly remove a vertex whose remaining neighbors have reciprocal sum less than $b/(2M_0)$. The removed edge weight is at most $b/2$ in all. Select any nonempty connected part with an edge in the remainder. It lies in a single original component, its reciprocal vertex mass $m$ satisfies $b/(2M_0)\le m\le M_0$, and every vertex has at least $(b/(2M_0))k^\delta$ distinct neighbors. This also proves a polynomial treewidth requirement, since a graph of treewidth $t$ is $t$-degenerate.
+
+On this part choose $s$ vertices independently with probabilities $1/(mp)$. Every vertex has neighborhood probability at least $\rho=b/(2M_0^2)$ (one can decrease $b$ so $\rho<1$). The expected probability mass of their common neighborhood is at least $\rho^s$. A repeated draw occurs with probability at most $s^2/(mk^\delta)$. For $s=\lfloor c\log k\rfloor$ with $c>0$ sufficiently small, $\rho^s\ge k^{-\delta/3}$, so some distinct draws have common neighborhood probability at least $k^{-\delta/3}/2$. There are then at least $(m/2)k^{2\delta/3}$ common neighbors, disjoint from the sampled vertices because there are no loops. Decreasing the single exponent $a$ gives the stated simultaneous conclusions. These are individual cofactor sets for each pair.
+
+The mass argument survives arbitrary removal, *after the assignment is specified*, of rows of total reciprocal mass at most $\lambda\log k$ and vertices of total prime reciprocal mass at most $\lambda$, for a sufficiently small constant $\lambda(\epsilon)>0$. Use the original components and charges. Row removal costs its own mass, and selecting an edge incident with a removed prime costs at most $H_{k^2}M_0\lambda$. The surviving graph and cofactor lower bounds follow by the same extraction. The original paths defining the strongly connected components need not survive these removals.
+
+## A shared set of polynomially many cofactors
+
+Orient each retained edge of the pruned connected part by $p<q$. Choose $0<\beta<\min(\eta/3,\delta)$. On each edge, removing cofactors $d\le k^\beta$ reduces $h_{pq}$ by at most $1+\beta\log k$, leaving at least $(\eta/2)\log k$. Form triples $(p,q,d)$ from the remaining chosen pairs and their original rows $pqd$. Give each prime variable the probability measure $1/(mp)$ on the chosen vertex set and the cofactor variable the normalized reciprocal measure $1/(Zd)$ on $k^\beta<d\le k$, where $Z\asymp_\beta\log k$. This set of triples has product probability at least a constant $\rho>0$: the directed edges have total weight at least $mb/(4M_0)$, and each carries at least $(\eta/2)\log k$ in cofactor sum. The largest atom on a prime variable is $O(k^{-\delta})$ and on the cofactor variable is $O(k^{-\beta}/\log k)$.
+
+Draw $s=\lfloor c\sqrt{\log k}\rfloor$ independent primes for the first variable. By Jensen's inequality the expected probability of pairs $(q,d)$ common to all draws is at least $\rho^s$. A repeat among draws has probability $O(s^2 k^{-\delta})$; thus some distinct draws have common pair probability at least $\rho^s/2$. Now draw $s$ primes on the second variable. The expected common cofactor probability is at least $(\rho^s/2)^s$. Take $c>0$ small enough to make this at least $k^{-\beta/3}$. After excluding repeated draws as before, some distinct choices leave common probability at least $k^{-\beta/3}/2$, hence at least $k^{\beta/2}$ different cofactors for large $k$. The orientation separates the two prime sets. All products are distinct because each integer row supplied just one chosen pair and hence just one oriented triple. The primes in every such product are tested internally in the same component. This argument applies to the surviving rows and vertices after the erasures above as well.
+
+## Fixed internal degree and additive excess
+
+If the maximum internal degree is bounded by a fixed $d$ in one witness, then $S\le\Phi(L)+O_d(1)$ even without restricting the size of a component. A single-digit group uses at most $p-1$ multiples of $p^j$. For each other shape $I$, its total reciprocal mass is at most $H_{P(I)-1}/m(I)$. A digit belongs to at most $2^d$ distinct internal shapes, since all its co-tested digits are neighbors. If a shape tests only one prime and has at least two digits, charge its mass to the highest position $(p,j)$, $j\ge2$. Its charge is $O_d((1+\log p)/p^j)$ and the series over these positions converges. For a shape with two distinct primes choose a digit $(p,j)$ of largest base and another digit $(q,l)$ of different base. Its charge is $O_d((1+\log p)/(p^jq^l))$. Each digit participates at most $2^d$ times. Cauchy–Schwarz bounds the sum uniformly, using convergence of both $\sum_{p,j}((1+\log p)/p^j)^2$ and $\sum_{q,l}1/q^{2l}$. Add the terminal. Whether bounded degeneracy alone suffices for a bounded *additive* surplus remains open here.
+
+The remaining unrestricted obstacle is simultaneous viability of these heavily repeated pairs inside a single minimal local list. Dense pairs of large primes can be planted in different stages by using earlier primes in row dressings; those pairs need not be internal. Neither large components alone nor the existence of the grid proves a coefficient gain. The companion [cap bound](component-cap.md) handles a reserved row smaller than the period using the number of earlier patterns visible to a group.
+
+[Finite cross-check](component-check.py) · [Erdős–Graham problem](https://www.erdosproblems.com/1189) · [Earlier products without the component restriction](../sparse-labels/) · [Earlier interpolation-based classification](interpolation.md) · [Fox–Sudakov on dependent random choice](https://arxiv.org/abs/0909.3271). The factorization and analytic estimates above are written proofs. The finite checks compared componentwise and unrestricted reassignment on 13,786 singleton placements, including 66 irreducible placements with multiple components. The [weighted moment check](component-moments.py) tests the common-neighborhood argument with exact rational weights. Prior work of Öztürk gives the unrestricted upper coefficient $3/2-\log2$. The logarithmic-order result has separate credit to Star Fleet Math, Wouter van Doorn and dk8827 on [upstream PR 9411](https://github.com/GuillaumeBAUD-coder/open-math-agents/pull/9411).
+
+## Formal and computational verification
+
+Lean 4.33.1 checks [GuardedComponents.lean](GuardedComponents.lean) and [VisibleGroup.lean](VisibleGroup.lean), both with only the standard library. The first proves the two-block composition rule and its converse when each side has a singleton placement and every guard can target any old point. The second proves the strict finite group capacity when each group row can target any joint old pattern and internal tuple. The CRT interpretation, the construction of the strongly connected components, and the asymptotic extraction are written arguments.
+
+Both modules passed separate kernel replay with the following commands from this directory on the pinned toolchain.
+
+```sh
+export LEAN_PATH=.
+lean -o GuardedComponents.olean GuardedComponents.lean
+lean -o VisibleGroup.olean VisibleGroup.lean
+leanchecker GuardedComponents
+leanchecker VisibleGroup
+python component-check.py
+python component-cap-check.py
+python component-moments.py
+```
+
+The three declarations `GuardedComponents.compose`, `GuardedComponents.exact_factorization` and `VisibleGroup.capacity` printed exactly `propext`, `Classical.choice` and `Quot.sound`. The full-period check found 114 irreducible placements among the 13,786 singleton placements. The other scripts checked 6,016 arithmetic groups and 400 weighted three-partite relations.

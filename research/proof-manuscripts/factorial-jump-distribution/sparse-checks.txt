@@ -1,0 +1,8 @@
+d=4: first m in search = 20
+d=5: first m in search = 65
+d=6: first m in search = None
+d=7: first m in search = 133
+d=8: first m in search = 88
+d=9: first m in search = 153
+3018 prime-triple witnesses within the finite ranges passed.
+Finite witnesses do not prove any infinitude assertion.

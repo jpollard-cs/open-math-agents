@@ -1,0 +1,2 @@
+'Erdos1189.Size31Upper.covers' depends on axioms: [propext, Quot.sound]
+'Erdos1189.Size31Upper.size_and_max' does not depend on any axioms

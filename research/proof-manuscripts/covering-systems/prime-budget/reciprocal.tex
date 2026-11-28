@@ -1,0 +1,20 @@
+\newpage
+\head{7. The reciprocal maximum at the first possible size}
+For a prescribed large prime $p$, consider all irreducible sets with $p\mid L$ at the first possible size $k=p+F(p)$. Write $S_{\rm first}(p)$ for their greatest reciprocal sum. Define $W(y)=\sum_{q\le y} H_{q-1}/(q-1)$ over primes, and $Y_p=(\log 2/A)\log p\log\log p$, with $A$ as on page 7. Then
+\[
+ S_{\rm first}(p)=W(Y_p)+o(1)
+ =\log\log p+(1+\gamma)\log\log\log p+C_0+\log(\log 2/A)+o(1),
+\]
+where $C_0=\lim_{z\to\infty}(W(z)-\log z-\gamma\log\log z)$ is the classical prime-sum constant from the companion manuscript. This is a sharp reciprocal maximum in a prescribed-prime subfamily of genuine unrestricted-residue irreducible sets. The unrestricted maximum at the same cardinality can grow on the larger scale $\log k$.
+
+\textbf{The optimizer contains all small divisors.} The lower bound on page 2 forces $L=pQ$ with $b(Q)=F(p)$, $\tau(Q)\ge p$, and zero defect. Every optimal $Q$ has consecutive prime support from 2, since compression over a skipped smaller prime strictly reduces cost. Let $l$ be its largest prime; all its primes are smaller than $p$ as on page 7. For each $q<l$ with exponent $a_q$, remove one digit of $l$. This reduces $\tau$ by at most a factor of two. Adding $a_q+1$ digits of $q$ doubles the old factor $a_q+1$, so optimum cost forces $(q-1)(a_q+1)\ge l-1$. Since $q^{a_q+1}\ge q(a_q+1)>l-1$, all integers through $l-1$ divide $Q$.
+
+\textbf{Location of the last prime.} Put $x=(\log p)\log\log p/A$. The cost of an optimum is $(1+o(1))B(x)$ and its gain $G=\log\tau(Q)$ is at least $\log p$. Relative to the threshold set of digits on page 7, its loss in the linear functional gain minus cost divided by $x$ is
+\[
+ V(x)-G+(F(p)-B(x))/x
+ =\sum_{(q,j)\text{ in exactly one set}} |g_j-(q-1)/x|
+ =o(\log p).
+\]
+Here nonnegativity and the stated upper bound give the final equality. If $l/(x\log2)$ differed from one by a fixed amount, an interval of primes of length comparable with $x$ would have its first digits on the wrong side, each a fixed distance from the threshold. The prime number theorem gives loss $\gg x/\log x\asymp\log p$. Thus $l/Y_p\to1$ uniformly in every minimizer.
+
+\textbf{Both bounds for the sum.} In the digit construction, at each stage $q^j$ with $1\le j\le a_q$, use all $d=1,\ldots,q-1$. These divide the earlier part of $Q$. Their sum over the stages is $\sum_{q\mid Q}H_{q-1}(1-q^{-a_q})/(q-1)=W(l)-o(1)$. Indeed for $q\le\sqrt l$ the first missing power is at least $l$ and the total omitted tail is $O(\log l/\sqrt l)$; above $\sqrt l$ use $\sum_{n>\sqrt l}(1+\log n)/n^2=o(1)$. For every competing cover the zero-defect digit matching bound of the companion manuscript gives at most this same unextended finite prime-digit sum, plus $H_{p-1}/p+1/M=o(1)$. Finally $W(l)-W(Y_p)=o(1)$ by the prime number theorem and $l/Y_p\to1$. The evaluation of $W$ follows by $H_{q-1}=\log q+\gamma+O(1/q)$ and the classical Mertens prime sums.

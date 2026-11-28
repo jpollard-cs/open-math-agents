@@ -1,0 +1,4 @@
+Lean 4.33.1
+'ExponentialFourNinths.exp_growth' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FactorialThinning.diminishing' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FactorialThinning.exponential_after_deletions' depends on axioms: [propext, Classical.choice, Quot.sound]

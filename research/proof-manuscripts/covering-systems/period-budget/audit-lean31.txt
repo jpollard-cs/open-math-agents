@@ -1,0 +1,4 @@
+'Erdos1189.Size31First.covers' depends on axioms: [propext, Quot.sound]
+'Erdos1189.Size31First.size_and_max' does not depend on any axioms
+'Erdos1189.Size31Second.covers' depends on axioms: [propext, Quot.sound]
+'Erdos1189.Size31Second.size_and_max' does not depend on any axioms

@@ -1,0 +1,6 @@
+1 removable None irreducible total 0
+2 removable 80 irreducible total 0
+3 removable None irreducible total 0
+5 removable 63 irreducible total 0
+7 removable 80 irreducible total 0
+27 removable None irreducible total 1

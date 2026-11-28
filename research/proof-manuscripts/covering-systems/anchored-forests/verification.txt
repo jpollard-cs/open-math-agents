@@ -1,0 +1,14 @@
+Lean (version 4.33.1, x86_64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)
+'ForestFibre.joinValid' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ForestFibre.root_compulsory' depends on axioms: [propext, Classical.choice, Quot.sound]
+replaying ForestFibre
+'StarCoordinates.compulsory' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Integer29.before' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Integer29.after_deletion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Integer29.covering' depends on axioms: [propext, Quot.sound]
+'Integer29.size' does not depend on any axioms
+'Integer29.distinct' does not depend on any axioms
+'Integer29.maximum' depends on axioms: [propext, Quot.sound]
+replaying Integer29
+replaying StarCoordinates
+replaying ForestFibre

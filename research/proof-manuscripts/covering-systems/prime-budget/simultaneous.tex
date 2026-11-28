@@ -1,0 +1,28 @@
+\newpage
+\head{8. Many indispensable prime sections in one cover}
+The cofactor period can serve multiple prescribed primes simultaneously. Suppose $Q_0$ is a base as in the proof of (1), with at least $P$ divisors through $T=\lfloor X/P\rfloor$ and all its prime bases below the prescribed primes. Append distinct prescribed primes $p_1<\dots<p_s=P$ with $P\le T$ to exponent one. At each nonterminal prescribed prime choose $p_i-1$ earlier divisors from the base. Reserve $P$ for the terminal packet, including all mandatory prime powers of the resulting earlier period. They are at most $T$ and fewer than $P$ in number, since their bases are different primes less than $P$. Thus the terminal set can include them and still have $P$ distinct cofactors through $T$. Primes introduced for cardinality padding may be processed in increasing order together with the prescribed primes. Each new prime above the base cutoff has the needed earlier divisors in $Q_0$. The proof on page 2 gives arbitrary-reassignment irreducibility of the entire set. Its size is one plus the sum of all digit costs.
+
+\textbf{Complete finite-dimensional profile at quadratic caps.} For $M\le\lambda k^2$, sort the distinct period primes in decreasing order, using zeros after exhaustion. For every fixed $s$, the possible limiting lists of the first $s$ primes divided by $k$, attainable along every sufficiently large exact size, are exactly
+\[
+ t_1\ge\cdots\ge t_s\ge0,\qquad
+ \sum_i t_i\le1,\qquad t_1^2\le(1-\log2)\lambda .
+\]
+Necessity follows from page 1 and the additive period budget. For sufficiency first take strict budget and cap inequalities, and at least one positive $t_i$. Choose distinct primes $p_i\sim t_i k$ for the positive entries, also in case of ties by the prime number theorem. Use the base, cutoff, and cofactor allowance of the proof of (1) at the largest such prime (one can take $T=\lceil gP\rceil$ there). The total cost already assigned is $k\sum_i t_i+o(k)$. Fill the positive remainder by the same complete optional costs from primes $o(k)$, disjoint from all prescribed primes. No padding prime is macroscopic. Boundary points, including the zero vector, follow by a diagonal sequence of attainable strict interior approximants, choosing the approximation index to tend to infinity slowly with $k$. In particular the largest possible $s$th prime divided by $k$ tends to $\min(1/s,\sqrt{\lambda(1-\log2)})$.
+
+\textbf{Number of large primes at an intermediate power cap.} For $X=k^\sigma$, $1<\sigma<2$, and $0<t<\sqrt{1-\log\sigma}$, the greatest possible number of distinct period primes $\ge t\sqrt X$ is $(1+o(1))k/(t\sqrt X)$. Above that threshold there are eventually none (no assertion here at equality). The upper count is the period budget. For the lower, prescribe $\lfloor(1-\eps)k/(t\sqrt X)\rfloor$ primes in $[t\sqrt X,(t+\delta)\sqrt X]$ for fixed sufficiently small $\delta>0$. There are enough since $X/(k\log X)\to\infty$. Their sum is below $(1-\eps/2)k$ if $\delta$ is small. Use page 8's base with $T=\lfloor X/P\rfloor$, choosing a fixed exponent $\beta'<1/\sigma$ with $\rho(1/\beta')>(t+\delta)^2$. The base costs $o(k)$; exact-size padding uses primes $O(\sqrt{k\log k}+y)=o(\sqrt X)$ and avoids all prescribed primes. Uniform smooth abundance follows by monotonicity at the worst endpoint. Let $\eps\downarrow0$.
+
+\newpage
+\head{The sharp count at caps near the known constructions}
+Fix $\lambda>1$, let $X=\lambda k\log k$, and fix $0<t<1$. Define $N_t(A)$ to be the number of distinct primes dividing the period that exceed $t\sqrt X$. Then
+\[
+ \max_{|A|=k,\,M\le X}N_t(A)
+ \sim 2\left(\min\{1,\sqrt{t^2+1/\lambda}\}-t\right)
+                      \frac{\sqrt X}{\log X}.
+\]
+Unlike the power-cap case, a narrow interval at the bottom of the admissible range can have too few primes. Both availability and total cost enter the constant.
+
+\textbf{Necessity.} For fixed $0<a<b\le1$, the number of primes in $(a\sqrt X,b\sqrt X]$ is $(2(b-a)+o(1))\sqrt X/\log X$, and their total digit cost is $(b^2-a^2+o(1))X/\log X$. All active primes are at most $\sqrt X$. For a fixed count, the lowest-cost choice uses the smallest primes above $t\sqrt X$. The period inequality bounds their total cost by $k=(1/\lambda+o(1))X/\log X$. The two prime estimates give the claimed upper bound.
+
+\textbf{Sufficiency.} Write $z_*=\min(1,\sqrt{t^2+1/\lambda})$. Choose $\max(t,1/\sqrt\lambda)<z<z_*$, then prescribe \emph{all} primes in $(t\sqrt X,z\sqrt X]$. Their largest $P\sim z\sqrt X$ satisfies $T=\lfloor X/P\rfloor\ge P$ for large $k$. Choose $\beta'<1$ with $\rho(1/\beta')>z^2$. The previous truncated-power base at $y=T^{\beta'}=o(\sqrt X)$ costs $o(k)$ and gives at least $P$ available cofactors. The assigned cost from the prescribed primes is $(z^2-t^2+o(1))X/\log X<k$. To fill the remaining cardinality use the optional slots below $t\sqrt X$, omitting the old primes in $(\sqrt T,y]$ when necessary. Their total available cost is $(t^2+o(1))X/\log X$ since $y^2=o(k)$. This strictly exceeds the needed remainder because $z^2>1/\lambda$. The subset-sum argument across the omitted interval is the one on page 8. Thus exact size $k$ is attained. Every added prime is below $P$, and the shared-period construction on page 10 gives $M\le X$. Now let $z\uparrow z_*$.
+
+For instance when $\lambda=2$ and $t=1/2$, the asymptotic maximum is $(\sqrt3-1)\sqrt X/\log X$. These examples show that many large primes can be simultaneously indispensable at the scales of interest to the minimum-modulus problem. A bound requiring their small cofactor periods to be disjoint would fail.

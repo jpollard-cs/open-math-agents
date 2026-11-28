@@ -1,0 +1,31 @@
+\newpage
+\head{4. Complete products of primes and cofactors}
+There is a concrete consequence for the moduli themselves. Fix $\eps>0$. If an irreducible $k$-set has $S\ge(1/2+\eps)\log k$, then for all sufficiently large $k$ it contains distinct products
+\[
+ \{pqd:p\in U,\ q\in W,\ d\in B\},\qquad
+ |U|,|W|,|B|\ge c_\eps\sqrt{\log k}.
+\]
+Here $U,W$ consist entirely of primes, each in its own dyadic interval; $B$ consists of positive integers. Every product $n$ is at most $k$ and satisfies $\lp(n)\le\sqrt n$. All three factors are $\ge k^{c_\eps}$ and $q/p\ge k^{c_\eps}$. For \emph{every} feasible labeling the box can be chosen with $pq\mid b(n)$ throughout. There are such boxes in $\gg_\eps(\log k)^3$ distinct triples of dyadic scales for $n,p,q$, using disjoint sets of moduli. Constants in this section may depend on $\eps$.
+
+\emph{Finding enough rows.} The nonexceptional rows contribute at most $\frac12\log k+O(\log\log k)$ by page 2. Discard $n>k$ at cost at most 1. Put $Z=k^\delta$, where $\delta>0$ is a sufficiently small constant in terms of $\eps$. Among the exceptional rows, those whose label has at most one prime factor above $Z$ counted with multiplicity cost at most
+\[
+ O\!\left((1+\log(2Z))\,[1+\log^2(2+\log k/(1+\log(2Z)))]\right).
+\]
+This is exactly page 2's $e,ep$ calculation with $V=1+\log(2Z)$; the oriented-edge term is absent. Rows with a squared prime $p>Z$ dividing the label contribute $\ll(1+\log k)\sum_{p>Z}p^{-2}=o(1)$. Deleting also $n<k^{\min(\eps/8,1/8)}$ costs at most $(\eps/8)\log k+O(1)$. By first choosing $\delta$ small, the remaining mass is at least $\eps\log k/2$ for large $k$. Assign each remaining row \emph{one} pair of distinct primes $Z<p<q$ dividing its label; the choice can be arbitrary. For each row $q\le\sqrt n$.
+
+\emph{Finding dense boxes of available triples.} At least $c\log k$ dyadic bands $[T,2T)$ each have $\ge cT$ remaining rows, by their reciprocal mass and the bound of $T$ rows per band. For a fixed such $T$, sort the assigned pairs into dyadic prime bins $[P,2P)$, $[Q,2Q)$ with $P\le Q$. There are $O((\log k)^2)$ bin pairs. Each accounts for at most $C_\delta T/(\log k)^2$ rows: there are at most $C_\delta P Q/(\log k)^2$ prime pairs by Chebyshev and at most $2T/(P Q)$ multiples per pair. Bins meeting the endpoints are included; $P,Q\ge k^\delta/2$ and $P Q<2T$ whenever occupied. Consequently $\gg_\eps(\log k)^2$ bin pairs each have $\gg_\eps T/(\log k)^2$ assigned rows (discard bins below a small constant times the mean).
+
+For each $P$ we may also discard $Q/P<k^\beta$ and $T/(P Q)<k^\beta$. These two strips together contain $O(\beta(\log k)^2+\log k)$ occupied bin pairs. For sufficiently small fixed $\beta>0$ there remain $\gg_\eps(\log k)^2$ dense pairs. The primes in each full bin and all integers in $[T/(4PQ),2T/(PQ)]$ form three vertex sets of size $\ge k^{c}$ by the prime number theorem and the width of the cofactor interval. Their product of cardinalities is at most $C_\delta T/(\log k)^2$. The assigned triples $(p,q,n/(pq))$ thus have density bounded below by a positive constant, say $\alpha$, in this Cartesian product.
+
+\newpage
+\head{Extracting a complete subproduct}
+For completeness the quantitative dense-hypergraph calculation is given here. Let $X,Y,Z'$ be the three vertex sets, all of size $\ge k^c$. At least an $\alpha/2$ fraction of pairs $(y,z)$ have at least $\alpha|X|/2$ neighbors in $X$. A uniformly random set of $r$ distinct vertices of $X$ lies in each such neighborhood with probability at least $(\alpha/4)^r$, provided $r\le\alpha|X|/4$. Hence some $r$ vertices have a common bipartite graph on $Y,Z'$ of density
+\[
+ \lambda\ge (\alpha/2)(\alpha/4)^r .
+\]
+At least $\lambda|Z'|/2$ vertices of $Z'$ see at least $\lambda |Y|/2$ vertices of $Y$ in this graph. The same argument gives $r$ vertices in $Y$ with at least $(\lambda |Z'|/2)(\lambda/4)^r$ common neighbors, provided $r\le\lambda |Y|/4$. Both this condition and the requirement of at least $r$ neighbors hold for $r=\lfloor c'\sqrt{\log k}\rfloor$ with $c'>0$ sufficiently small in terms of $c,\alpha$. These vertex sets give the asserted complete product. No two triples can yield the same modulus because a modulus was assigned only one pair. The same assignment prevents repetitions between the different triples of dyadic scales.
+
+This last extraction is the classical dense complete multipartite hypergraph argument; compare \href{https://renyi.hu/~p_erdos/1964-13.pdf}{Erd\H os, 1964}. The exponent $1/2$ is the limit of an argument from positive triple density alone: a random constant-density triple system on three parts of size $k$ has expected number of balanced boxes of side $r$ at most $k^{3r}\alpha^{r^3}$, tending to zero for $r>C_\alpha\sqrt{\log k}$. Its density concentrates. This observation gives no upper bound on the boxes of an actual irreducible cover.
+
+\head{Where the unrestricted problem remains}
+The product structure connects a proposed gain in reciprocal mass with a testable pattern in the same cover. It does not yet contradict irreducibility. In particular, an isolated displayed box can always miss a point, whatever residues are assigned: at each $p\in U$ avoid the at most $|W|\,|B|$ residues specified by the box, then combine the choices by CRT. Here $p\ge k^c$ whereas we can keep the two sides of size $O(\sqrt{\log k})$. Any argument using a box to show a row is removable must exploit rows outside it or a different feature of irreducibility. A concrete remaining question is whether the other rows can provide the required prime fibres simultaneously across a positive proportion of the three-dimensional scale ranges.

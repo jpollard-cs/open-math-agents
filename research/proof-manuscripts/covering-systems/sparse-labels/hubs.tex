@@ -1,0 +1,40 @@
+\newpage
+\head{5. Exact counting cost of finitely many shared primes}
+Fix a finite set of primes $H$ and put $v=\prod_{h\in H}(1-1/h)$. Consider sets of distinct integers $2\le n\le X$ with all prime divisors $\le\sqrt X$ and some feasible assignment of labels in which every label involves at most one prime outside $H$. Thus $H$ is a vertex cover of the label graph. Let $K_H(X)$ be the largest size of such a set. Then
+\[
+ K_H(X)\sim C_H\frac X{\log X},\qquad
+ C_H=1-\log v+2\sum_{h\in H}\frac{\log h}{h-1}.\tag{4}
+\]
+The same constant holds on imposing coverability. It gives $M\ge(1/C_H-o(1))k\log k$ for genuine irreducible sets with this restriction. Attainment with irreducibility for nonempty $H$ remains open. At $H=\{2\}$ the exact coefficient in (4) is $1+3\log 2$, improving the elementary lower example on page 3. This quantifies the information lost by using just the label graph, distinctness, the active-prime bound, and coverability.
+
+\emph{Upper bound.} Let $\mathcal T$ be the positive integers supported on $H$, including 1. A label $b$ occurs at most $\min(b,X/b)$ times. Pure labels in $\mathcal T$ contribute $O_H(\sqrt X(1+\log X)^{|H|})$. Labels $s p^a$ with $s\in\mathcal T$, $p\notin H$, $a\ge2$ contribute at most
+\[
+ O_H((1+\log X)^{|H|+1})\sum_{p\le\sqrt X}\min(\sqrt X,X/p^2)
+ = O_H(X^{3/4}(1+\log X)^{|H|+1}).
+\]
+For fixed $p$ all remaining labels are $s p$. Separate the moduli by their full $H$-part $t$. When $t\le y=\sqrt{v X}/p$, all possible labels have $s\le y$, yielding capacity $\sum_{s\le y,\,s\in\mathcal T}sp$. For $t>y$ the moduli are multiples of $pt$ whose quotient is coprime to $H$, hence number at most $vX/(pt)+O_H(1)$ for each $t\le X$, by inclusion-exclusion. After summing the rounding errors over $p,t$ we get $O_H(\sqrt X(1+\log X)^{|H|})$. The resulting upper bound up to $o(X/\log X)$ is
+\[
+ \sum_{s\in\mathcal T}\sum_{p\le\sqrt X}\min(sp,vX/(sp)).
+\]
+For fixed $s$, split the prime sum at $\sqrt{vX}/s$. By the prime number theorem and partial summation its coefficient in units $X/\log X$ tends to
+\[
+ \frac vs\left(1+\log(s^2/v)\right).\tag{5}
+\]
+For $s\le X^{1/4}$ the normalized sum is $O_H((1+\log s)/s)$: up to the cutoff apply $\sum_{p\le z}p\ll z^2/\log(2z)$, and beyond it sum $1/p$ in dyadic intervals, all above a constant times $X^{1/4}$. For $s>X^{1/4}$ use the unnormalized bound $O(X\log\log(3X)/s)$ and $\sum_{s>X^{1/4},\,s\in\mathcal T}1/s\le X^{-1/8}\sum_{s\in\mathcal T}s^{-1/2}$. These justify summing (5). Since $v/s$ is a probability measure on $\mathcal T$ with independent geometric prime exponents of means $1/(h-1)$, its expectation of $\log s$ is $\sum_{h\in H}\log h/(h-1)$. This proves the upper coefficient in (4).
+
+\newpage
+\head{Constructions attaining the counting coefficient}
+Fix $K$ and $a\in(0,1)$, take $s\in\mathcal T$, $s\le K$, and primes $a\sqrt X\le p\le\sqrt X$ outside $H$. Use up to $sp$ distinct integers $n=spe\le X$ with $e$ coprime to all of $H$ and every prime dividing $e$ strictly smaller than $p$. Assign the label $sp$. The full $H$-part identifies $s$ and the largest prime outside $H$ identifies $p$, so the choices cannot collide across rows. The number of eligible $e$ equals
+\[
+ vX/(sp)+O_{H,K,a}(1+p/\log p).
+\]
+Indeed $e\le a^{-2}p/s$, and the rejected integers containing a prime $\ge p$ have the form $jb$ with $j\le a^{-2}$ and $b$ prime of size $O_a(p)$. The total error in the count is $o(X/\log X)$. As $a\downarrow0$ and then $K\to\infty$, these finite truncations attain (4). For large $X$ the constructed moduli all exceed 12. Add $2,3,4,6,12$, labeled respectively by $2,3,4,3,4$, to include a fixed cover; no established label capacity is exceeded. This supplies the matching lower bound with coverage.
+
+For nonempty $H$ the construction can also obey the necessary Zn\'am--Simpson period budget. In the fixed truncation, primes occur only through $\sqrt X$, with first-power budget at most $(1+o(1))X/\log X$. Repeated powers outside $H$ come from $e=O_a(\sqrt X)$ and their extra budget totals $O_a(\sqrt X\log X)$, by summing over primes $O_a(X^{1/4})$; powers in $H$ are bounded by $K$. Since $C_H>1$ we may take truncations of coefficient strictly above one and arbitrarily close to $C_H$. For $H=\varnothing$ the earlier irreducible constructions already attain coefficient one at leading order (and satisfy the budget).
+
+\head{A remaining question with one central prime}
+For the single central prime 2, (4) locates the unrestricted irreducibility issue between the sharp arithmetic coefficient $1+3\log 2$ and the achieved irreducible coefficient one, in units $X/\log X$ for counts. Can an irreducible family use the same binary coordinate at many odd primes to raise the coefficient above one? Projecting onto the two parity classes exposes the difficulty. Even rows can be reassigned between the classes, whereas every odd row contributes to both. A proposed construction must survive arbitrary redistribution after every deletion. The examples attaining (4) have a five-row proper cover, so they give no irreducible improvement.
+
+There is an exact finite identity behind the cutoff. For a fixed exterior prime $p$, allow all $pm$ with $m\le N$, disregarding other candidate primes. If $u_s$ counts $m$ with exact $H$-part $s$, the placement maximum is $\sum_s\min(ps,u_s)$. The lower bound uses the exact part as label cofactor. For the upper bound, $u_s$ counts integers up to $N/s$ coprime to $H$, hence decreases with $s$, whereas $ps$ increases. Up to their crossing all labels available to a row of exact part $s$ have cofactor at most $s$, so use the total capacity on that initial segment. On its complement count the rows. This includes the cases of an empty initial segment or an exact tie.
+
+The included program independently compares direct bipartite placement with the cutoff calculation for small caps. It also counts the labeled construction at larger cutoffs. These are finite checks of the optimization mechanism. The limit (4) follows from the written argument.

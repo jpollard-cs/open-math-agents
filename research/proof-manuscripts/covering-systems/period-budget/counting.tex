@@ -1,0 +1,26 @@
+\subsection*{Optimizing the largest divisor gives different thresholds}
+Let $N_k(x)$ maximize the number of nonunit divisors at most $x$ among periods of budget at most $k-1$. The threshold $T$ is again the $k$th nonunit $q$-smooth integer. Uniformly when $x/k$ stays in a fixed compact subinterval of $(0,\infty)$,
+\[
+ \Psi(x,q)-1-N_k(x)\sim\frac{9x}{4q^{2/3}\log q},
+ \qquad
+ D(k)-T\sim\frac{9T}{4\rho q^{2/3}\log q}.
+\]
+Moreover for every fixed $j\ge1$, every compressed period achieving the minimum largest divisor $D(k)$ has $w_j\sim q^{2/(j+1)}$. In particular the periods optimizing the largest divisor and those optimizing the reciprocal sum are distinct for all sufficiently large $k$, even at the level of the number of squared primes.
+
+\begin{proof}
+Compression still applies, since the smaller divisors resulting from its injection remain below the cutoff. Repeat the upper construction of Theorem 2 with parameter $w=cq^{2/3}$. The loss per removed top prime is at most $\lfloor x/p\rfloor\sim x/q$. The square tail contributes at most
+\[
+ x\sum_{p>w}p^{-2}=(3/(2c)+o(1))xq^{-2/3}/\log q.
+\]
+The higher-power tail costs $O(x/q)$ as above. Thus the upper bound for the loss in units $xq^{-2/3}/\log q$ is $3c^2/4+3/(2c)+o(1)$.
+
+Conversely missing primes $p>q/2$ each eliminate $\lfloor x/p\rfloor\asymp x/q$ smooth integers and their lists of multiples are disjoint. The upper loss implies $r=O(q^{1/3}/\log q)$, hence every missing prime is $(1+o(1))q$. The budget again gives $w_2=O(q^{2/3})$. If $w_2/q^{2/3}\to c>0$, count disjoint multiples of the missing top primes and the missing squares in $w_2<p\le Hq^{2/3}$ for fixed $H>c$. All their cofactors are below $q$. For these squares, $\lfloor x/p^2\rfloor\sim x/p^2$ uniformly, and summing their reciprocal squares gives a lower contribution $3(1/c-1/H)/2+o(1)$ in the same units. If $c=0$, taking any fixed positive lower cutoff $\varepsilon q^{2/3}$ instead gives an arbitrarily large lower contribution as $\varepsilon\downarrow0$. As before the budget forces the missing-prime contribution to be at least $3c^2/4-o(1)$. Sending $H\to\infty$ gives the matching lower bound. Its unique minimum is $9/4$ at $c=1$, giving the count estimate and the square threshold. All estimates are uniform in the stated range of $x/k$.
+
+To invert the count, use Younis's unconditional short-interval theorem \cite[Theorem 1.1]{younis}. For $h$ a fixed positive constant times $Tq^{-2/3}/\log q=T^{2/3+o(1)}$, it gives
+\[
+ \Psi(T+h,q)-\Psi(T,q)=(\rho+o(1))h.
+\]
+The theorem applies with, for example, $\theta=3/5>17/30$; $h\ge T^{3/5}$ eventually, $q=T^{1/2+o(1)}$ exceeds the required subexponential smoothness threshold, and $\Psi(T,q)/T\to\rho$. Take $h=(1\pm\varepsilon)9T/(4\rho q^{2/3}\log q)$. Since $\Psi(T,q)-1=k$, the two optimized counts at $T+h$ straddle $k$. Sending $\varepsilon$ to zero proves the formula for $D(k)-T$.
+
+For clarity, the exchange argument for higher powers also applies directly to counts. Every optimizing compressed lattice eventually contains every fixed prime power: missing $p^a$ for a fixed $p^a$ excludes all $p^a m$ with $m\le x/p^a$ smooth, of which there are $(\rho+o(1))x/p^a$, contradicting the $o(x)$ total loss. Consequently missing powers among present primes have total reciprocal mass $o(1)$, by domination by $\sum_p p^{-2}$, as do the absent primes through $q$. The proportion of unavailable cofactors up to any growing $v<q$ is $o(1)$ by the union bound on multiples. For $p$ of order $q^{2/(j+1)}$, changing $p^j$ therefore changes the count by $(1+o(1))x/p^j$. That quantity divided by its digit cost is $(1+o(1))x/p^{j+1}$. The two interval exchanges in the preceding proof apply verbatim with threshold $t_j=q^{2/(j+1)}$ and common marginal value $x/q^2$. Their candidates have disjoint affected supports and do not change cofactor eligibility below $q$. This proves the count thresholds. Finally $N_k(D(k)-1)<k$ and $N_k(D(k))\le N_k(D(k)-1)+1$, so at $D(k)$ any minimizing period attains the optimal count exactly. Compression of an arbitrary period preserves its exponent multiset. Therefore disagreement between the two compressed square thresholds prevents even an uncompressed period from optimizing both objectives.
+\end{proof}

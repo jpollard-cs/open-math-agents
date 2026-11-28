@@ -1,0 +1,10 @@
+1526 finite placement optima verified against maximum matching and the exact cut.
+H=(), cap 10000, construction before fixed cover 1032, normalized 0.9505, limit 1.0000
+H=(), cap 50000, construction before fixed cover 4633, normalized 1.0026, limit 1.0000
+H=(), cap 250000, construction before fixed cover 21508, normalized 1.0693, limit 1.0000
+H=(2,), cap 10000, construction before fixed cover 2600, normalized 2.3947, limit 3.0794
+H=(2,), cap 50000, construction before fixed cover 12760, normalized 2.7612, limit 3.0794
+H=(2,), cap 250000, construction before fixed cover 60316, normalized 2.9987, limit 3.0794
+H=(2, 3), cap 10000, construction before fixed cover 2966, normalized 2.7318, limit 4.5835
+H=(2, 3), cap 50000, construction before fixed cover 15406, normalized 3.3338, limit 4.5835
+H=(2, 3), cap 250000, construction before fixed cover 76038, normalized 3.7804, limit 4.5835

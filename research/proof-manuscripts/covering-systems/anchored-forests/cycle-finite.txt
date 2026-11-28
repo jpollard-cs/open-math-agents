@@ -1,0 +1,7 @@
+1024 arbitrary binary assignments; minimum holes [3, 3, 3, 3, 2, 1] unique-hole assignments 32
+d=2: 25 two-link profiles, 24 with a singleton fibre, 8 at the missing-pair bound
+d=3: 2116 two-link profiles, 1935 with a singleton fibre, 54 at the missing-pair bound
+d=4: 485809 two-link profiles, 299680 with a singleton fibre, 128 at the missing-pair bound
+independent full reciprocal check of 12 disjoint diamonds through 300: 0.0005872768204352414
+[[37, 41, 43, 47], [53, 59, 61, 67], [71, 73, 79, 83], [89, 97, 101, 103], [107, 109, 113, 127], [131, 137, 139, 149], [151, 157, 163, 167], [173, 179, 181, 191], [193, 197, 199, 211], [223, 227, 229, 233], [239, 241, 251, 257], [263, 269, 271, 277]]
+independent lower bound 704744497146696330988 / 1000000000000000000000000 using 2395 disjoint quartets
