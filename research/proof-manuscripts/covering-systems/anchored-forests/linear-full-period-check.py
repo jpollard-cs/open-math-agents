@@ -147,6 +147,35 @@ def lift_rows(old, holes, n, L, tests):
     return rows
 
 
+def seven_sections():
+    # Pin the admissible class to zero modulo 20 by translation. Enumerate
+    # inclusion-minimal low holes directly on Z/60, before taking seven lifts.
+    holes = [(1 << 60) - 1]
+    for d in (2, 3, 4, 5, 6, 10, 15):
+        candidates = sorted({h & ~m for h in holes for m in masks(d, 60)},
+                            key=int.bit_count)
+        holes = []
+        for c in candidates:
+            if not any((c & h) == h for h in holes):
+                holes.append(c)
+    allowed = masks(20, 60)[0]
+    best = 8
+    for h in holes:
+        assert h & ~allowed
+        # Every 7-section needs one of seven rows to cover an outside hole.
+        # The seven rows therefore own separate sections, in arbitrary order.
+        nonempty = 0
+        for d in (3, 4, 5, 12, 15, 20, 30):
+            residuals = [h & ~m for m in masks(d, 60)]
+            if not any((v & ~allowed) == 0 for v in residuals):
+                break
+            nonempty += 0 not in residuals
+        else:
+            best = min(best, nonempty)
+    assert best == 4
+    print("inclusion-minimal low masks and minimum occupied seven-sections:", len(holes), best)
+
+
 def integer_checks():
     ds = (2, 3, 4, 5, 6, 10, 15, 20, 30)
     assert verify_rows(assignment(ds)) == 60 and 60 not in ds
@@ -172,4 +201,5 @@ def integer_checks():
 
 if __name__ == "__main__":
     integer_checks()
+    seven_sections()
     print("admissible family and chain tests:", abstract_checks())
