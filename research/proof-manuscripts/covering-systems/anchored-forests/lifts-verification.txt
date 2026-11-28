@@ -1,0 +1,6 @@
+'CoverLifts.complete' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CoverLifts.repairedValid' depends on axioms: [propext]
+'CoverLifts.originalOnlyMisses' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CoverLifts.originalMissesAllEight' does not depend on any axioms
+'CoverLifts.guardPacking' depends on axioms: [propext]
+'CoverLifts.thirteenComplete' depends on axioms: [propext, Classical.choice, Quot.sound]
