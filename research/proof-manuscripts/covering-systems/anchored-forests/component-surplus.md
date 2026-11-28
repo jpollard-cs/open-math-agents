@@ -60,4 +60,23 @@ If the maximum internal degree is bounded by a fixed $d$ in one witness, then $S
 
 The remaining unrestricted obstacle is simultaneous viability of these heavily repeated pairs inside a single minimal local list. Dense pairs of large primes can be planted in different stages by using earlier primes in row dressings; those pairs need not be internal. Neither large components alone nor the existence of the grid proves a coefficient gain. The companion [cap bound](component-cap.md) handles a reserved row smaller than the period using the number of earlier patterns visible to a group.
 
-[Finite cross-check](component-check.py) · [Erdős–Graham problem](https://www.erdosproblems.com/1189) · [Earlier products without the component restriction](../sparse-labels/) · [Earlier interpolation-based classification](interpolation.md) · [Fox–Sudakov on dependent random choice](https://arxiv.org/abs/0909.3271). The factorization and analytic estimates above are written proofs. The finite checks compared componentwise and unrestricted reassignment on 13,452 singleton placements, including 66 irreducible placements with multiple components. The [weighted moment check](component-moments.py) tests the common-neighborhood argument with exact rational weights. Prior work of Öztürk gives the unrestricted upper coefficient $3/2-\log2$. The logarithmic-order result has separate credit to Star Fleet Math, Wouter van Doorn and dk8827 on [upstream PR 9411](https://github.com/GuillaumeBAUD-coder/open-math-agents/pull/9411).
+[Finite cross-check](component-check.py) · [Erdős–Graham problem](https://www.erdosproblems.com/1189) · [Earlier products without the component restriction](../sparse-labels/) · [Earlier interpolation-based classification](interpolation.md) · [Fox–Sudakov on dependent random choice](https://arxiv.org/abs/0909.3271). The factorization and analytic estimates above are written proofs. The finite checks compared componentwise and unrestricted reassignment on 13,786 singleton placements, including 66 irreducible placements with multiple components. The [weighted moment check](component-moments.py) tests the common-neighborhood argument with exact rational weights. Prior work of Öztürk gives the unrestricted upper coefficient $3/2-\log2$. The logarithmic-order result has separate credit to Star Fleet Math, Wouter van Doorn and dk8827 on [upstream PR 9411](https://github.com/GuillaumeBAUD-coder/open-math-agents/pull/9411).
+
+## Formal and computational verification
+
+Lean 4.33.1 checks [GuardedComponents.lean](GuardedComponents.lean) and [VisibleGroup.lean](VisibleGroup.lean), both with only the standard library. The first proves the two-block composition rule and its converse when each side has a singleton placement and every guard can target any old point. The second proves the strict finite group capacity when each group row can target any joint old pattern and internal tuple. The CRT interpretation, the construction of the strongly connected components, and the asymptotic extraction are written arguments.
+
+Both modules passed separate kernel replay with the following commands from this directory on the pinned toolchain.
+
+```sh
+export LEAN_PATH=.
+lean -o GuardedComponents.olean GuardedComponents.lean
+lean -o VisibleGroup.olean VisibleGroup.lean
+leanchecker GuardedComponents
+leanchecker VisibleGroup
+python component-check.py
+python component-cap-check.py
+python component-moments.py
+```
+
+The three declarations `GuardedComponents.compose`, `GuardedComponents.exact_factorization` and `VisibleGroup.capacity` printed exactly `propext`, `Classical.choice` and `Quot.sound`. The full-period check found 114 irreducible placements among the 13,786 singleton placements. The other scripts checked 6,016 arithmetic groups and 400 weighted three-partite relations.
